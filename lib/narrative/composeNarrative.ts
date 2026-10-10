@@ -12,6 +12,7 @@ import {
 } from "./select";
 import { joinSentences, firstSentence, limitSentences } from "./text";
 import { CONTENT_VERSION } from "@/lib/config/versions";
+import { selectShareQuote } from "@/lib/sharing/selectShareQuote";
 
 export interface ComposeInput {
   match: MatchResult;
@@ -74,7 +75,7 @@ export function composeNarrative(input: ComposeInput): ComposedNarrative {
   const narrativeParallels = parallels.map((p) => ({
     userChoiceSummary: parallelToUserSummary(p, ctx.answerKeys),
     canonicalBeat: p.canonicalFact,
-    resonance: joinSentences([p.userInterpretation, p.canonicalFact, p.parallelExplanation], 8),
+    resonance: limitSentences(p.parallelExplanation, 4),
   }));
 
   const definingTraits = topDims.map((d) => d.label);
@@ -110,7 +111,7 @@ export function composeNarrative(input: ComposeInput): ComposedNarrative {
     shadowWithin: weakness.text,
     greatestStrength: strength.text,
     destiny: limitSentences(conclusion.text, 4),
-    shareQuote: firstSentence(conclusion.text),
+    shareQuote: selectShareQuote(champion.id, ctx.seed),
     definingTraits,
   };
 

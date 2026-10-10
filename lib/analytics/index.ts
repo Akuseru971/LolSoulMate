@@ -7,8 +7,24 @@ export type AnalyticsEvent =
   | "quiz_abandoned"
   | "result_view"
   | "result_view_restored"
+  | "result_revealed"
+  | "narrative_read_started"
+  | "share_studio_opened"
+  | "share_template_selected"
+  | "share_format_selected"
+  | "share_png_attempt"
+  | "share_png_success"
+  | "share_png_failed"
+  | "native_share_attempt"
+  | "native_share_success"
+  | "native_share_failed"
+  | "native_share_canceled"
+  | "share_link_copied"
+  | "share_link_copy_failed"
   | "share_clicked"
   | "share_image_download"
+  | "shared_result_opened"
+  | "shared_result_quiz_start"
   | "restart"
   | "kofi_clicked";
 
@@ -33,7 +49,6 @@ export function trackEvent(event: AnalyticsEvent, payload?: Payload): void {
   }
 }
 
-/** Hook wrapper for components that need consent-gated analytics later. */
 export function useTrackEvent() {
   return { trackEvent };
 }

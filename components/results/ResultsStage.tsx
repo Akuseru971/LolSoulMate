@@ -1,14 +1,20 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { useCallback, useRef, useState, lazy, Suspense } from "react";
+import { useReducedMotion } from "framer-motion";
 import type { MatchResult } from "@/lib/matching/engine";
 import type { NarrativeResponse } from "@/lib/validation/schemas";
 import { en } from "@/lib/i18n/en";
-import { ShareActions } from "@/components/sharing/ShareActions";
 import { siteConfig } from "@/lib/config";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, RefreshCw } from "lucide-react";
+import { ChampionReveal } from "./ChampionReveal";
+import { AlternativeMatches } from "./AlternativeMatches";
+import type { ShareStudioData } from "@/components/sharing/ShareStudio";
+import { trackEvent } from "@/lib/analytics";
+
+const ShareStudio = lazy(() =>
+  import("@/components/sharing/ShareStudio").then((m) => ({ default: m.ShareStudio })),
+);
 
 export function ResultsStage({
   match,
@@ -20,136 +26,120 @@ export function ResultsStage({
   onRestart: () => void;
 }) {
   const reduce = useReducedMotion();
-  const [skippedReveal, setSkippedReveal] = useState(false);
+  const [revealDone, setRevealDone] = useState(!!reduce);
+  const [studioOpen, setStudioOpen] = useState(false);
+  const narrativeRef = useRef<HTMLElement>(null);
+  const revealTracked = useRef(false);
   const { champion, compatibility } = match.primary;
 
-  const showReveal = !skippedReveal && !reduce;
+  const studioData: ShareStudioData = {
+    championId: champion.id,
+    championName: champion.name,
+    championTitle: champion.title,
+    region: champion.region,
+    imageUrl: champion.imageUrl,
+    compatibility,
+    traits: narrative.definingTraits,
+    quote: narrative.shareQuote,
+    traitDimensions: match.topDimensions.slice(0, 3).map((d) => d.dimension),
+  };
+
+  function scrollToNarrative() {
+    trackEvent("narrative_read_started");
+    narrativeRef.current?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  }
+
+  function openStudio() {
+    setStudioOpen(true);
+  }
+
+  const handleRevealComplete = useCallback(() => {
+    setRevealDone(true);
+    if (!revealTracked.current) {
+      revealTracked.current = true;
+      trackEvent("result_revealed", { championId: champion.id });
+    }
+  }, [champion.id]);
 
   return (
-    <section className="mx-auto w-full max-w-2xl px-4 py-8 pb-32 sm:pb-24">
-      {showReveal && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="relative mb-12 overflow-hidden rounded-sm"
-        >
-          <div className="relative aspect-[4/5] max-h-[420px] w-full sm:max-h-[480px]">
-            <Image
-              src={champion.imageUrl}
-              alt=""
-              fill
-              sizes="(max-width: 768px) 100vw, 672px"
-              className="object-cover object-top"
-              priority
-              unoptimized
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050608] via-[#050608]/40 to-transparent" />
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 px-1 pb-2 pt-16">
-            <p className="text-[11px] uppercase tracking-[0.3em] text-amber-200/75">
-              {en.results.revealKicker}
-            </p>
-            <h2 className="mt-2 font-serif text-4xl text-white">{champion.name}</h2>
-            <p className="mt-2 text-sm text-white/55">
-              {champion.region} · {champion.title}
-            </p>
-            <button
-              type="button"
-              className="mt-4 min-h-[44px] text-xs text-white/50 underline"
-              onClick={() => setSkippedReveal(true)}
-            >
-              Skip reveal
-            </button>
-          </div>
-        </motion.div>
-      )}
+    <section className="mx-auto w-full max-w-2xl px-4 py-6 pb-32 sm:pb-24">
+      <ChampionReveal
+        champion={champion}
+        compatibility={compatibility}
+        oneLiner={narrative.reveal.oneLiner}
+        revealComplete={revealDone}
+        onRevealComplete={handleRevealComplete}
+        onSkip={handleRevealComplete}
+        onReadStory={scrollToNarrative}
+        onOpenStudio={openStudio}
+      />
 
-      {(!showReveal || skippedReveal || reduce) && (
-        <header className="mb-10 border-b border-white/10 pb-8">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-amber-200/75">
-            {en.results.revealKicker}
-          </p>
-          <h2 className="mt-2 font-serif text-4xl text-white">{champion.name}</h2>
-          <p className="mt-1 text-sm text-white/55">
-            {champion.region} · {champion.title}
-          </p>
-        </header>
-      )}
-
-      <p className="font-serif text-xl leading-relaxed text-amber-50/95">
-        {narrative.reveal.oneLiner}
-      </p>
-      <p className="mt-3 text-sm text-white/45">
-        {en.results.compatibilityLabel}:{" "}
-        <span className="font-serif text-lg text-amber-200/90">{compatibility}%</span>
-        <span className="ml-2 text-white/35">{en.results.compatibilityNote}</span>
-      </p>
-
-      <article className="mt-14 space-y-14 text-[1.05rem] leading-[1.75] text-white/78">
+      <article
+        ref={narrativeRef}
+        className="mt-6 space-y-16 text-[1.05rem] leading-[1.8] text-white/78 scroll-mt-6"
+      >
         <section>
           <h3 className="font-serif text-2xl text-amber-100/95">{en.results.connection}</h3>
-          <p className="mt-5">{narrative.sharedSoul}</p>
+          <p className="mt-6">{narrative.sharedSoul}</p>
+          <p className="mt-4 text-sm text-white/40">{en.results.compatibilityNote}</p>
         </section>
 
         {narrative.parallels.length > 0 && (
           <section>
             <h3 className="font-serif text-2xl text-amber-100/95">{en.results.parallels}</h3>
-            <div className="mt-6 space-y-8">
+            <div className="mt-8 space-y-10">
               {narrative.parallels.map((p, i) => (
-                <p key={i} className="border-l border-amber-500/25 pl-5">
-                  {p.resonance}
-                </p>
+                <div key={i} className="space-y-3">
+                  <p className="text-sm text-amber-200/75">{p.userChoiceSummary}</p>
+                  <p className="text-sm italic text-white/50">{p.canonicalBeat}</p>
+                  <p className="border-l border-amber-500/20 pl-4 leading-relaxed">
+                    {p.resonance}
+                  </p>
+                </div>
               ))}
             </div>
           </section>
         )}
 
-        <section>
-          <h3 className="font-serif text-2xl text-amber-100/95">{en.results.strength}</h3>
-          <p className="mt-5">{narrative.greatestStrength}</p>
+        <section className="grid gap-10 sm:grid-cols-1">
+          <div className="rounded-sm bg-white/[0.02] px-1 py-2">
+            <h3 className="font-serif text-xl text-amber-100/95">{en.results.strength}</h3>
+            <p className="mt-4">{narrative.greatestStrength}</p>
+          </div>
+          <div className="rounded-sm px-1 py-2">
+            <h3 className="font-serif text-xl text-white/70">{en.results.shadow}</h3>
+            <p className="mt-4 text-white/65">{narrative.shadowWithin}</p>
+          </div>
         </section>
 
-        <section>
-          <h3 className="font-serif text-2xl text-amber-100/95">{en.results.shadow}</h3>
-          <p className="mt-5">{narrative.shadowWithin}</p>
-        </section>
-
-        <section>
+        <section className="border-t border-amber-500/15 pt-12">
           <h3 className="font-serif text-2xl text-amber-100/95">{en.results.closing}</h3>
-          <p className="mt-5 font-serif text-lg text-amber-50/90">{narrative.destiny}</p>
+          <p className="mt-8 font-serif text-[1.35rem] leading-[1.65] text-amber-50/92">
+            {narrative.destiny}
+          </p>
         </section>
       </article>
 
-      {match.alternatives.length > 0 && (
-        <aside className="mt-14 border-t border-white/10 pt-8">
-          <h4 className="text-xs uppercase tracking-[0.25em] text-white/45">
-            {en.results.alsoClose}
-          </h4>
-          <ul className="mt-4 space-y-2 text-sm text-white/65">
-            {match.alternatives.map((alt) => (
-              <li key={alt.championId}>
-                {alt.champion.name} ({alt.compatibility}%)
-              </li>
-            ))}
-          </ul>
-        </aside>
-      )}
+      <AlternativeMatches match={match} />
 
-      <div className="mt-16 border-t border-white/10 pt-10">
+      <div className="mt-16 border-t border-white/10 pt-10 text-center">
         <h4 className="font-serif text-xl text-amber-100/90">{en.results.shareHeading}</h4>
-        <ShareActions
-          card={{
-            championName: champion.name,
-            imageUrl: champion.imageUrl,
-            compatibility,
-            traits: narrative.definingTraits,
-            quote: narrative.shareQuote,
-          }}
-          championId={champion.id}
-          traitDimensions={match.topDimensions.slice(0, 3).map((d) => d.dimension)}
-          shareQuote={narrative.shareQuote}
-          onRestart={onRestart}
-        />
+        <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+          <button
+            type="button"
+            onClick={openStudio}
+            className="min-h-[44px] border-b border-amber-400/40 pb-1 font-serif text-amber-100"
+          >
+            Save your portrait
+          </button>
+          <button
+            type="button"
+            onClick={onRestart}
+            className="inline-flex min-h-[44px] items-center gap-2 text-sm text-white/45 hover:text-white/70"
+          >
+            <RefreshCw className="h-4 w-4" /> Restart
+          </button>
+        </div>
       </div>
 
       <footer className="mt-16 text-center">
@@ -161,6 +151,7 @@ export function ResultsStage({
             target="_blank"
             rel="noopener noreferrer"
             className="mt-5 inline-flex min-h-[44px] items-center gap-2 text-sm text-amber-200/85 underline-offset-2 hover:underline"
+            onClick={() => trackEvent("kofi_clicked")}
           >
             {en.results.kofiCta} <ExternalLink className="h-3.5 w-3.5" />
           </a>
@@ -170,6 +161,10 @@ export function ResultsStage({
           affiliated with Riot Games
         </p>
       </footer>
+
+      <Suspense fallback={null}>
+        <ShareStudio open={studioOpen} onClose={() => setStudioOpen(false)} data={studioData} />
+      </Suspense>
     </section>
   );
 }
