@@ -50,36 +50,26 @@ export function zodiacFromDate(month: number, day: number): ZodiacSign | null {
   return null;
 }
 
-/** Symbolic storytelling nudge only — max 10% influence via engine blend. */
 export function zodiacDimensionNudge(
   sign: ZodiacSign,
 ): Partial<Record<PersonalityDimension, number>> {
-  const map: Record<ZodiacSign, Partial<Record<PersonalityDimension, number>>> =
-    {
-      aries: { ambition: 0.7, impulsivity: 0.65, leadershipTendency: 0.6 },
-      taurus: { loyalty: 0.7, discipline: 0.65, resilience: 0.6 },
-      gemini: { independence: 0.65, emotionalOpenness: 0.6, impulsivity: 0.55 },
-      cancer: { empathy: 0.75, protectiveInstinct: 0.7, loyalty: 0.65 },
-      leo: {
-        desireForRecognition: 0.7,
-        leadershipTendency: 0.65,
-        resilience: 0.6,
-      },
-      virgo: { discipline: 0.75, pragmatism: 0.7, idealism: 0.45 },
-      libra: { empathy: 0.65, idealism: 0.6, moralFlexibility: 0.5 },
-      scorpio: {
-        resilience: 0.7,
-        loyalty: 0.65,
-        relationshipWithDestiny: 0.6,
-      },
-      sagittarius: {
-        independence: 0.7,
-        idealism: 0.65,
-        relationshipWithDestiny: 0.55,
-      },
-      capricorn: { ambition: 0.7, discipline: 0.7, pragmatism: 0.65 },
-      aquarius: { independence: 0.75, idealism: 0.65, empathy: 0.55 },
-      pisces: { empathy: 0.7, emotionalOpenness: 0.75, idealism: 0.6 },
-    };
+  const map: Record<ZodiacSign, Partial<Record<PersonalityDimension, number>>> = {
+    aries: { ambition: 0.7, impulsivity: 0.65, courage: 0.6 },
+    taurus: { loyalty: 0.7, discipline: 0.65, resilience: 0.6 },
+    gemini: { independence: 0.65, socialConnection: 0.6, impulsivity: 0.55 },
+    cancer: { empathy: 0.75, protectiveInstinct: 0.7, emotionalSensitivity: 0.65 },
+    leo: { needForRecognition: 0.7, courage: 0.65, relationshipWithAuthority: 0.6 },
+    virgo: { discipline: 0.75, pragmatism: 0.7, idealism: 0.45 },
+    libra: { empathy: 0.65, idealism: 0.6, socialConnection: 0.55 },
+    scorpio: { resilience: 0.7, loyalty: 0.65, emotionalSensitivity: 0.6 },
+    sagittarius: {
+      independence: 0.7,
+      desireForFreedom: 0.7,
+      relationshipWithDestiny: 0.55,
+    },
+    capricorn: { ambition: 0.7, discipline: 0.7, relationshipWithAuthority: 0.65 },
+    aquarius: { independence: 0.75, idealism: 0.65, desireForFreedom: 0.6 },
+    pisces: { empathy: 0.7, emotionalSensitivity: 0.75, idealism: 0.6 },
+  };
   return map[sign];
 }

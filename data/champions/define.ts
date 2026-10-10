@@ -1,6 +1,6 @@
 import type { PersonalityVector } from "@/lib/matching/dimensions";
 import { PERSONALITY_DIMENSIONS } from "@/lib/matching/dimensions";
-import type { ChampionProfile } from "./types";
+import type { ChampionCoverage, ChampionProfile } from "./types";
 import { championSplashUrl } from "./splash";
 
 function hashSpread(id: string, dim: string): number {
@@ -15,8 +15,9 @@ function hashSpread(id: string, dim: string): number {
 export function defineChampion(
   partial: Omit<
     ChampionProfile,
-    "imageUrl" | "vector" | "loreHooks"
+    "imageUrl" | "vector" | "loreHooks" | "coverage"
   > & {
+    coverage?: ChampionCoverage;
     vector: Partial<PersonalityVector>;
     ddragonKey?: string;
     loreHooks: ChampionProfile["loreHooks"];
@@ -31,6 +32,7 @@ export function defineChampion(
   const key = ddragonKey ?? partial.id;
   return {
     ...rest,
+    coverage: partial.coverage ?? "vector-only",
     imageUrl: championSplashUrl(key),
     vector,
   };

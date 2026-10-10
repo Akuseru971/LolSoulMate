@@ -1,5 +1,8 @@
 import type { PersonalityVector } from "@/lib/matching/dimensions";
 
+/** `narrative-complete` = matchable with full modular narrative; `vector-only` = pending narrative expansion. */
+export type ChampionCoverage = "narrative-complete" | "vector-only" | "pending-verification";
+
 export interface ChampionProfile {
   id: string;
   name: string;
@@ -26,4 +29,5 @@ export interface ChampionProfile {
     theme: string;
     canonicalBeat: string;
   }[];
+  coverage: ChampionCoverage;
 }

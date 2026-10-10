@@ -8,8 +8,8 @@
 
 - Next.js (App Router) · TypeScript · Tailwind CSS v4
 - Framer Motion · Lucide React · Zod
-- Vitest (matching & journey unit tests) · Playwright (e2e smoke)
-- Optional OpenAI narrative layer with deterministic fallback
+- **Zero-cost deterministic engine** — matching + modular narratives (no paid AI APIs)
+- Vitest · Playwright e2e
 - Vercel-ready deployment
 
 ## Local development
@@ -22,92 +22,66 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+Dev narrative inspector: [http://localhost:3000/dev/narrative-preview](http://localhost:3000/dev/narrative-preview) (not linked in UI).
+
 ## Scripts
 
 | Command | Description |
 |---------|-------------|
 | `npm run dev` | Start dev server |
 | `npm run build` | Production build |
-| `npm run start` | Run production server |
-| `npm run lint` | ESLint |
-| `npm run test` | Vitest unit tests |
-| `npm run test:e2e` | Playwright e2e (starts dev server) |
+| `npm run test` | Vitest (matching, narrative validation, 120-profile simulation) |
+| `npm run test:e2e` | Playwright smoke |
 
 ## Configuration
 
-See `.env.example` for:
+See `.env.example` — site URL, Ko-fi, AdSense, optional `ENABLE_DEV_TOOLS`.
 
-- `NEXT_PUBLIC_SITE_URL` — canonical URL for share links
-- `NEXT_PUBLIC_KOFI_URL` — optional creator support link
-- `NEXT_PUBLIC_ADSENSE_*` — AdSense publisher & slot (disabled until set + consent)
-- `OPENAI_API_KEY` / `OPENAI_MODEL` — optional personalized narrative
-- `AI_DAILY_REQUEST_CAP` — server-side AI budget guard
+**No OpenAI or AI API keys are required.**
+
+## Zero-cost engine
+
+See [docs/ZERO_COST_ENGINE.md](docs/ZERO_COST_ENGINE.md).
+
+1. **20 psychological dimensions** scored from questionnaire answers (zodiac ≤5% symbolic blend).
+2. **Champion similarity** via weighted cosine distance on lore-derived vectors.
+3. **Modular narratives** from prewritten fragments per champion (deterministic selection seeded by answer IDs).
+
+Quiz matching and narrative composition run **in the browser** after static assets load. The only server route used for results is optional share-link minting (`/api/share`) — no inference.
+
+## Champion roster status
+
+| Status | Meaning |
+|--------|---------|
+| `narrative-complete` | Matchable + full fragment library (minimum counts validated in tests) |
+| `vector-only` | Lore vector present; narrative expansion pending |
+| `pending-verification` | Placeholder — not used for matching |
+
+Regenerate narrative packs: `node scripts/generate-narrative-packs.mjs`
+
+At time of last update: **15 narrative-complete**, **~33 vector-only** profiles in repo (48 total with Kindred). Expand with verified Universe lore only.
 
 ## Architecture
 
 ```
-app/                 # App Router (single primary route + share + APIs)
-components/          # UI stages, quiz, results, ads, sharing
-data/champions/      # Lore-informed champion profiles & vectors
-data/questions.ts    # 20-question questionnaire
-lib/matching/        # Weighted personality model & matcher
-lib/lore/            # Deterministic narrative fallback
-lib/ai/              # OpenAI JSON narrative (server-only)
-lib/privacy/         # Rate limits & ephemeral share tokens
-tests/               # Vitest
-e2e/                 # Playwright
+app/                      # SPA journey + dev preview + share API
+components/               # UI (unchanged experience)
+data/champions/           # Profiles + coverage flags
+data/narratives/packs/    # Fragment libraries
+data/questions.ts         # 20 questions → dimension weights
+lib/matching/             # Personality vectors + matcher
+lib/narrative/            # Selection, composition, validation
+tests/                    # Matching, narrative, simulation
 ```
 
-### Matching model
+## AdSense & Ko-fi
 
-- **16** personality dimensions (ambition, empathy, loyalty, …)
-- Each answer applies weighted dimension deltas; scores normalize to `[0, 1]`
-- Champions carry lore-derived trait vectors (not gameplay roles)
-- Compatibility = entertainment similarity score (cosine-style weighted distance)
-- **~90%** questionnaire / **≤10%** optional zodiac symbolic blend
+Unchanged: consent-gated AdSense placeholders, optional Ko-fi after results. Never paywall the quiz.
 
-### Narrative
+## Riot compliance
 
-1. Matcher **fixes** the champion.
-2. OpenAI (if configured) explains the match in structured JSON (Zod validated).
-3. Otherwise `buildFallbackNarrative()` produces lore-grounded copy from answers + champion hooks.
-
-## AdSense integration
-
-- Component: `components/ads/AdSenseUnit.tsx`
-- Scripts load only when cookie consent allows ads **and** env IDs are set
-- Placeholder UI when unconfigured; no artificial delays; no ad-gated results
-- See Google AdSense program policies and Riot monetization rules before launch
-
-## Ko-fi
-
-Optional `NEXT_PUBLIC_KOFI_URL` renders a support CTA after results. **Never** withholds quiz or analysis.
-
-## Riot compliance checklist (pre-launch)
-
-- [ ] Register application on Riot Developer Portal
-- [ ] Use permitted asset sources (e.g. Data Dragon splashes) per current policies
-- [ ] Display unofficial fan disclaimer (included on landing & footer)
-- [ ] Do not use unauthorized Riot logos or imply sponsorship
-- [ ] Review fan content / commercial guidelines for ads & donations
-- [ ] Keep champion bios aligned with Universe lore; expand profiles deliberately
-
-## Champion database
-
-Initial set: **47** manually vectorized profiles with expansion scaffolding. Full roster coverage is a ongoing lore-validation effort—do not fabricate missing entries.
-
-## Deploy on Vercel
-
-1. Import repository
-2. Set environment variables from `.env.example`
-3. Deploy — default Next.js settings apply
-
-## Privacy
-
-- Quiz progress: `localStorage` only
-- Share links: opaque tokens with **no** questionnaire answers or birth dates in URLs
-- Narrative API: one request per completed quiz; rate limited; no birth-date logging
+See checklist in footer/README — fan disclaimer, permitted assets (Data Dragon splashes), no implied sponsorship.
 
 ## License
 
-Fan project for educational/portfolio use. League of Legends and all related properties are trademarks of Riot Games, Inc.
+Fan project. League of Legends © Riot Games, Inc.

@@ -14,26 +14,6 @@ export const quizAnswerSchema = z.object({
   answerId: z.string().min(1).max(8),
 });
 
-export const narrativeRequestSchema = z.object({
-  championId: z.string().min(1).max(64),
-  compatibility: z.number().min(0).max(100),
-  nickname: z.string().trim().max(40).optional(),
-  zodiac: z.enum(ZODIAC_SIGNS).optional(),
-  personalityKeywords: z.string().trim().max(200).optional(),
-  answers: z.array(quizAnswerSchema).min(20).max(20),
-  topDimensions: z
-    .array(
-      z.object({
-        dimension: z.string(),
-        score: z.number(),
-      }),
-    )
-    .max(8)
-    .optional(),
-});
-
-export type NarrativeRequest = z.infer<typeof narrativeRequestSchema>;
-
 export const narrativeResponseSchema = z.object({
   reveal: z.object({
     championName: z.string(),

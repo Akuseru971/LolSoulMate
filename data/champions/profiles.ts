@@ -3,6 +3,29 @@ import type { ChampionProfile } from "./types";
 
 export const CHAMPIONS: ChampionProfile[] = [
   defineChampion({
+    id: "kindred",
+    name: "Kindred",
+    region: "Runeterra",
+    title: "The Eternal Hunters",
+    loreSummary: "Twin manifestations of death—Lamb and Wolf—who visit every mortal at life's end.",
+    ddragonKey: "Kindred",
+    coverage: "narrative-complete",
+    traits: ["Duality", "Inevitability", "Mercy and pursuit"],
+    motivations: ["Fulfill the covenant of mortality"],
+    values: ["Acceptance of life's end"],
+    strengths: ["Cosmic clarity", "Patience"],
+    flaws: ["Detachment from mortal grief"],
+    emotionalVulnerabilities: ["Mortals who deny death"],
+    powerRelationship: "Embodies inevitability rather than seeking power.",
+    peopleRelationship: "Appears to all; bonds only through the moment of passing.",
+    moralDilemmas: ["Mercy versus the hunt"],
+    internalContradictions: ["Lamb and Wolf as one covenant, two natures"],
+    developmentThemes: ["Mortality as truth, not punishment"],
+    loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
+    vector: { relationshipWithDestiny: 0.95, idealism: 0.55, emotionalSensitivity: 0.45, independence: 0.7, pragmatism: 0.65, moralFlexibility: 0.35, resilience: 0.8, empathy: 0.5, courage: 0.55, socialConnection: 0.12 },
+    loreHooks: [{"theme":"Mortality","canonicalBeat":"Kindred offer release to those who accept Lamb; Wolf hunts those who flee death."}],
+  }),
+  defineChampion({
     id: "ahri",
     name: "Ahri",
     region: "Ionia",
@@ -21,7 +44,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { empathy:0.55,idealism:0.45,moralFlexibility:0.6,emotionalOpenness:0.65,desireForRecognition:0.5,independence:0.7 },
+    vector: { empathy: 0.55, idealism: 0.45, moralFlexibility: 0.6, emotionalSensitivity: 0.65, needForRecognition: 0.5, independence: 0.7, socialConnection: 0.14, desireForFreedom: 0.24, courage: 0.07 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Ahri's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -43,7 +66,8 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { independence:0.85,impulsivity:0.65,idealism:0.6,loyalty:0.55,moralFlexibility:0.55,discipline:0.6 },
+    vector: { independence: 0.85, impulsivity: 0.65, idealism: 0.6, loyalty: 0.55, moralFlexibility: 0.55, discipline: 0.6, desireForFreedom: 0.3, courage: 0.09 },
+    coverage: "narrative-complete",
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Akali's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -65,7 +89,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { leadershipTendency:0.75,idealism:0.7,empathy:0.65,discipline:0.6,ambition:0.55,resilience:0.65 },
+    vector: { relationshipWithAuthority: 0.75, idealism: 0.7, empathy: 0.65, discipline: 0.6, ambition: 0.55, resilience: 0.65, courage: 0.37, socialConnection: 0.16 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Ashe's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -87,7 +111,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { ambition:0.9,desireForRecognition:0.85,leadershipTendency:0.8,idealism:0.55,needForControl:0.85,resilience:0.7 },
+    vector: { ambition: 0.9, needForRecognition: 0.85, relationshipWithAuthority: 0.8, idealism: 0.55, desireForPower: 0.85, resilience: 0.7, courage: 0.36 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Azir's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -109,7 +133,8 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { empathy:0.9,protectiveInstinct:0.95,loyalty:0.85,resilience:0.8,moralFlexibility:0.25,emotionalOpenness:0.75 },
+    vector: { empathy: 0.9, protectiveInstinct: 0.95, loyalty: 0.85, resilience: 0.8, moralFlexibility: 0.25, emotionalSensitivity: 0.75, socialConnection: 0.23, capacityForSacrifice: 0.19 },
+    coverage: "narrative-complete",
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Braum's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -131,7 +156,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { discipline:0.8,idealism:0.65,pragmatism:0.6,needForControl:0.7,empathy:0.55,moralFlexibility:0.35 },
+    vector: { discipline: 0.8, idealism: 0.65, pragmatism: 0.6, desireForPower: 0.7, empathy: 0.55, moralFlexibility: 0.35, socialConnection: 0.14, courage: 0.1 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Caitlyn's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -153,7 +178,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { ambition:0.85,discipline:0.8,pragmatism:0.75,moralFlexibility:0.55,leadershipTendency:0.7,resilience:0.75 },
+    vector: { ambition: 0.85, discipline: 0.8, pragmatism: 0.75, moralFlexibility: 0.55, relationshipWithAuthority: 0.7, resilience: 0.75, courage: 0.24 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Darius's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -175,7 +200,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { independence:0.8,idealism:0.65,impulsivity:0.55,resilience:0.7,relationshipWithDestiny:0.75,loyalty:0.5 },
+    vector: { independence: 0.8, idealism: 0.65, impulsivity: 0.55, resilience: 0.7, relationshipWithDestiny: 0.75, loyalty: 0.5, desireForFreedom: 0.28, courage: 0.1 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Diana's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -197,7 +222,8 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { protectiveInstinct:0.85,idealism:0.7,impulsivity:0.55,empathy:0.75,resilience:0.65,independence:0.6 },
+    vector: { protectiveInstinct: 0.85, idealism: 0.7, impulsivity: 0.55, empathy: 0.75, resilience: 0.65, independence: 0.6, socialConnection: 0.19, capacityForSacrifice: 0.17, desireForFreedom: 0.21, courage: 0.11 },
+    coverage: "narrative-complete",
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Ekko's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -219,7 +245,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { desireForRecognition:0.75,impulsivity:0.7,independence:0.8,emotionalOpenness:0.65,ambition:0.55,idealism:0.45 },
+    vector: { needForRecognition: 0.75, impulsivity: 0.7, independence: 0.8, emotionalSensitivity: 0.65, ambition: 0.55, idealism: 0.45, desireForFreedom: 0.28, courage: 0.07 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Ezreal's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -241,7 +267,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { independence:0.85,discipline:0.85,desireForRecognition:0.7,moralFlexibility:0.3,leadershipTendency:0.55,resilience:0.7 },
+    vector: { independence: 0.85, discipline: 0.85, needForRecognition: 0.7, moralFlexibility: 0.3, relationshipWithAuthority: 0.55, resilience: 0.7, courage: 0.19, desireForFreedom: 0.3 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Fiora's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -263,7 +289,8 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { loyalty:0.9,discipline:0.85,protectiveInstinct:0.75,idealism:0.6,moralFlexibility:0.25,resilience:0.75 },
+    vector: { loyalty: 0.9, discipline: 0.85, protectiveInstinct: 0.75, idealism: 0.6, moralFlexibility: 0.25, resilience: 0.75, capacityForSacrifice: 0.15, courage: 0.09 },
+    coverage: "narrative-complete",
     loreHooks: [{"theme":"Duty","canonicalBeat":"Serves Demacia as Crown Guard despite personal cost and forbidden love."}],
   }),
   defineChampion({
@@ -285,7 +312,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { idealism:0.7,empathy:0.75,resilience:0.65,independence:0.55,protectiveInstinct:0.6,emotionalOpenness:0.7 },
+    vector: { idealism: 0.7, empathy: 0.75, resilience: 0.65, independence: 0.55, protectiveInstinct: 0.6, emotionalSensitivity: 0.7, socialConnection: 0.19, capacityForSacrifice: 0.12, desireForFreedom: 0.19, courage: 0.11 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Gwen's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -307,7 +334,8 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { resilience:0.85,loyalty:0.8,protectiveInstinct:0.85,discipline:0.7,idealism:0.65,leadershipTendency:0.65 },
+    vector: { resilience: 0.85, loyalty: 0.8, protectiveInstinct: 0.85, discipline: 0.7, idealism: 0.65, relationshipWithAuthority: 0.65, courage: 0.32, capacityForSacrifice: 0.17 },
+    coverage: "narrative-complete",
     loreHooks: [{"theme":"Homeland","canonicalBeat":"Led Ionian resistance after Noxus invaded and devastated her homeland."},{"theme":"Discipline","canonicalBeat":"Trained in ancient dance-of-blades traditions that turned grief into focus."}],
   }),
   defineChampion({
@@ -329,7 +357,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { empathy:0.7,independence:0.75,idealism:0.55,moralFlexibility:0.5,emotionalOpenness:0.5,relationshipWithDestiny:0.65 },
+    vector: { empathy: 0.7, independence: 0.75, idealism: 0.55, moralFlexibility: 0.5, emotionalSensitivity: 0.5, relationshipWithDestiny: 0.65, socialConnection: 0.18, desireForFreedom: 0.26, courage: 0.08 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Janna's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -351,7 +379,8 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { needForControl:0.95,discipline:0.85,moralFlexibility:0.9,empathy:0.15,idealism:0.4,desireForRecognition:0.8 },
+    vector: { desireForPower: 0.95, discipline: 0.85, moralFlexibility: 0.9, empathy: 0.15, idealism: 0.4, needForRecognition: 0.8, socialConnection: 0.04, courage: 0.06 },
+    coverage: "narrative-complete",
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Jhin's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -373,7 +402,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { impulsivity:0.95,emotionalOpenness:0.7,independence:0.8,moralFlexibility:0.65,resilience:0.55,desireForRecognition:0.65 },
+    vector: { impulsivity: 0.95, emotionalSensitivity: 0.7, independence: 0.8, moralFlexibility: 0.65, resilience: 0.55, needForRecognition: 0.65, desireForFreedom: 0.28 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Jinx's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -395,7 +424,8 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { leadershipTendency:0.8,idealism:0.85,empathy:0.8,discipline:0.65,resilience:0.75,relationshipWithDestiny:0.8 },
+    vector: { relationshipWithAuthority: 0.8, idealism: 0.85, empathy: 0.8, discipline: 0.65, resilience: 0.75, relationshipWithDestiny: 0.8, courage: 0.41, socialConnection: 0.2 },
+    coverage: "narrative-complete",
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Karma's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -417,7 +447,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { ambition:0.75,moralFlexibility:0.7,impulsivity:0.6,discipline:0.55,independence:0.7,relationshipWithDestiny:0.65 },
+    vector: { ambition: 0.75, moralFlexibility: 0.7, impulsivity: 0.6, discipline: 0.55, independence: 0.7, relationshipWithDestiny: 0.65, desireForFreedom: 0.24 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Kayn's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -439,7 +469,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { needForControl:0.85,moralFlexibility:0.9,pragmatism:0.85,empathy:0.25,ambition:0.8,independence:0.75 },
+    vector: { desireForPower: 0.85, moralFlexibility: 0.9, pragmatism: 0.85, empathy: 0.25, ambition: 0.8, independence: 0.75, socialConnection: 0.06, desireForFreedom: 0.26 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"LeBlanc's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -461,7 +491,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { discipline:0.9,resilience:0.85,idealism:0.7,moralFlexibility:0.35,protectiveInstinct:0.75,leadershipTendency:0.6 },
+    vector: { discipline: 0.9, resilience: 0.85, idealism: 0.7, moralFlexibility: 0.35, protectiveInstinct: 0.75, relationshipWithAuthority: 0.6, courage: 0.32, capacityForSacrifice: 0.15 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Lee Sin's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -483,7 +513,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { loyalty:0.85,discipline:0.85,protectiveInstinct:0.8,idealism:0.75,moralFlexibility:0.25,relationshipWithDestiny:0.7 },
+    vector: { loyalty: 0.85, discipline: 0.85, protectiveInstinct: 0.8, idealism: 0.75, moralFlexibility: 0.25, relationshipWithDestiny: 0.7, capacityForSacrifice: 0.16, courage: 0.11 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Leona's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -505,7 +535,8 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { idealism:0.8,empathy:0.75,resilience:0.65,moralFlexibility:0.45,emotionalOpenness:0.7,loyalty:0.6 },
+    vector: { idealism: 0.8, empathy: 0.75, resilience: 0.65, moralFlexibility: 0.45, emotionalSensitivity: 0.7, loyalty: 0.6, socialConnection: 0.19, courage: 0.12 },
+    coverage: "narrative-complete",
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Lux's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -527,7 +558,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { ambition:0.8,desireForRecognition:0.75,pragmatism:0.7,moralFlexibility:0.6,resilience:0.7,leadershipTendency:0.65 },
+    vector: { ambition: 0.8, needForRecognition: 0.75, pragmatism: 0.7, moralFlexibility: 0.6, resilience: 0.7, relationshipWithAuthority: 0.65, courage: 0.23 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Miss Fortune's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -549,7 +580,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { empathy:0.8,idealism:0.7,moralFlexibility:0.55,independence:0.75,resilience:0.7,protectiveInstinct:0.75 },
+    vector: { empathy: 0.8, idealism: 0.7, moralFlexibility: 0.55, independence: 0.75, resilience: 0.7, protectiveInstinct: 0.75, socialConnection: 0.2, capacityForSacrifice: 0.15, desireForFreedom: 0.26, courage: 0.11 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Morgana's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -571,7 +602,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { protectiveInstinct:0.85,idealism:0.75,empathy:0.8,resilience:0.65,leadershipTendency:0.55,independence:0.6 },
+    vector: { protectiveInstinct: 0.85, idealism: 0.75, empathy: 0.8, resilience: 0.65, relationshipWithAuthority: 0.55, independence: 0.6, courage: 0.31, socialConnection: 0.2, capacityForSacrifice: 0.17, desireForFreedom: 0.21 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Nami's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -593,7 +624,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { discipline:0.85,pragmatism:0.7,loyalty:0.75,resilience:0.8,relationshipWithDestiny:0.75,empathy:0.55 },
+    vector: { discipline: 0.85, pragmatism: 0.7, loyalty: 0.75, resilience: 0.8, relationshipWithDestiny: 0.75, empathy: 0.55, socialConnection: 0.14 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Nasus's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -615,7 +646,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { emotionalOpenness:0.65,idealism:0.6,empathy:0.55,discipline:0.7,resilience:0.6,independence:0.5 },
+    vector: { emotionalSensitivity: 0.65, idealism: 0.6, empathy: 0.55, discipline: 0.7, resilience: 0.6, independence: 0.5, socialConnection: 0.14, desireForFreedom: 0.18, courage: 0.09 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Orianna's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -637,7 +668,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { moralFlexibility:0.75,impulsivity:0.7,resilience:0.65,idealism:0.45,desireForRecognition:0.5,relationshipWithDestiny:0.6 },
+    vector: { moralFlexibility: 0.75, impulsivity: 0.7, resilience: 0.65, idealism: 0.45, needForRecognition: 0.5, relationshipWithDestiny: 0.6, courage: 0.07 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Pyke's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -659,7 +690,8 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { resilience:0.85,independence:0.75,idealism:0.55,moralFlexibility:0.45,discipline:0.65,emotionalOpenness:0.55 },
+    vector: { resilience: 0.85, independence: 0.75, idealism: 0.55, moralFlexibility: 0.45, discipline: 0.65, emotionalSensitivity: 0.55, desireForFreedom: 0.26, courage: 0.08 },
+    coverage: "narrative-complete",
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Riven's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -681,7 +713,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { discipline:0.8,resilience:0.85,relationshipWithDestiny:0.85,pragmatism:0.75,empathy:0.5,independence:0.7 },
+    vector: { discipline: 0.8, resilience: 0.85, relationshipWithDestiny: 0.85, pragmatism: 0.75, empathy: 0.5, independence: 0.7, socialConnection: 0.13, desireForFreedom: 0.24 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Ryze's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -703,7 +735,8 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { resilience:0.9,protectiveInstinct:0.85,idealism:0.75,loyalty:0.8,emotionalOpenness:0.65,independence:0.6 },
+    vector: { resilience: 0.9, protectiveInstinct: 0.85, idealism: 0.75, loyalty: 0.8, emotionalSensitivity: 0.65, independence: 0.6, capacityForSacrifice: 0.17, desireForFreedom: 0.21, courage: 0.11 },
+    coverage: "narrative-complete",
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Senna's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -725,7 +758,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { protectiveInstinct:0.8,desireForRecognition:0.7,resilience:0.75,loyalty:0.7,impulsivity:0.55,leadershipTendency:0.65 },
+    vector: { protectiveInstinct: 0.8, needForRecognition: 0.7, resilience: 0.75, loyalty: 0.7, impulsivity: 0.55, relationshipWithAuthority: 0.65, courage: 0.23, capacityForSacrifice: 0.16 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Sett's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -747,7 +780,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { discipline:0.85,moralFlexibility:0.4,leadershipTendency:0.7,empathy:0.55,resilience:0.75,needForControl:0.6 },
+    vector: { discipline: 0.85, moralFlexibility: 0.4, relationshipWithAuthority: 0.7, empathy: 0.55, resilience: 0.75, desireForPower: 0.6, courage: 0.24, socialConnection: 0.14 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Shen's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -769,7 +802,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { empathy:0.85,emotionalOpenness:0.8,idealism:0.65,resilience:0.6,independence:0.55,loyalty:0.65 },
+    vector: { empathy: 0.85, emotionalSensitivity: 0.8, idealism: 0.65, resilience: 0.6, independence: 0.55, loyalty: 0.65, socialConnection: 0.21, desireForFreedom: 0.19, courage: 0.1 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Sona's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -791,7 +824,8 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { pragmatism:0.9,leadershipTendency:0.85,ambition:0.75,moralFlexibility:0.7,resilience:0.8,needForControl:0.75 },
+    vector: { pragmatism: 0.9, relationshipWithAuthority: 0.85, ambition: 0.75, moralFlexibility: 0.7, resilience: 0.8, desireForPower: 0.75, courage: 0.3 },
+    coverage: "narrative-complete",
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Swain's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -813,7 +847,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { idealism:0.65,impulsivity:0.7,resilience:0.75,moralFlexibility:0.65,independence:0.8,desireForRecognition:0.6 },
+    vector: { idealism: 0.65, impulsivity: 0.7, resilience: 0.75, moralFlexibility: 0.65, independence: 0.8, needForRecognition: 0.6, desireForFreedom: 0.28, courage: 0.1 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Sylas's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -835,7 +869,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { idealism:0.7,independence:0.75,resilience:0.65,empathy:0.65,relationshipWithDestiny:0.6,emotionalOpenness:0.6 },
+    vector: { idealism: 0.7, independence: 0.75, resilience: 0.65, empathy: 0.65, relationshipWithDestiny: 0.6, emotionalSensitivity: 0.6, socialConnection: 0.16, desireForFreedom: 0.26, courage: 0.11 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Taliyah's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -857,7 +891,8 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { needForControl:0.95,moralFlexibility:0.95,empathy:0.1,desireForRecognition:0.55,discipline:0.6,resilience:0.7 },
+    vector: { desireForPower: 0.95, moralFlexibility: 0.95, empathy: 0.1, needForRecognition: 0.55, discipline: 0.6, resilience: 0.7, socialConnection: 0.03 },
+    coverage: "narrative-complete",
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Thresh's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -879,7 +914,8 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { needForControl:0.85,emotionalOpenness:0.5,moralFlexibility:0.7,relationshipWithDestiny:0.65,resilience:0.55,impulsivity:0.65 },
+    vector: { desireForPower: 0.85, emotionalSensitivity: 0.5, moralFlexibility: 0.7, relationshipWithDestiny: 0.65, resilience: 0.55, impulsivity: 0.65 },
+    coverage: "narrative-complete",
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Viego's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -901,7 +937,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { protectiveInstinct:0.8,impulsivity:0.65,loyalty:0.75,resilience:0.8,moralFlexibility:0.45,emotionalOpenness:0.55 },
+    vector: { protectiveInstinct: 0.8, impulsivity: 0.65, loyalty: 0.75, resilience: 0.8, moralFlexibility: 0.45, emotionalSensitivity: 0.55, capacityForSacrifice: 0.16 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Vi's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -923,7 +959,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { pragmatism:0.85,idealism:0.55,discipline:0.8,ambition:0.75,moralFlexibility:0.5,empathy:0.45 },
+    vector: { pragmatism: 0.85, idealism: 0.55, discipline: 0.8, ambition: 0.75, moralFlexibility: 0.5, empathy: 0.45, socialConnection: 0.11, courage: 0.08 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Viktor's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -945,7 +981,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { impulsivity:0.75,resilience:0.7,moralFlexibility:0.55,protectiveInstinct:0.5,emotionalOpenness:0.4,relationshipWithDestiny:0.55 },
+    vector: { impulsivity: 0.75, resilience: 0.7, moralFlexibility: 0.55, protectiveInstinct: 0.5, emotionalSensitivity: 0.4, relationshipWithDestiny: 0.55, capacityForSacrifice: 0.1 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Warwick's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -967,7 +1003,8 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { independence:0.75,resilience:0.8,idealism:0.55,emotionalOpenness:0.45,relationshipWithDestiny:0.7,discipline:0.6 },
+    vector: { independence: 0.75, resilience: 0.8, idealism: 0.55, emotionalSensitivity: 0.45, relationshipWithDestiny: 0.7, discipline: 0.6, desireForFreedom: 0.26, courage: 0.08 },
+    coverage: "narrative-complete",
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Yasuo's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -989,7 +1026,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { discipline:0.75,loyalty:0.75,resilience:0.8,relationshipWithDestiny:0.75,idealism:0.6,moralFlexibility:0.4 },
+    vector: { discipline: 0.75, loyalty: 0.75, resilience: 0.8, relationshipWithDestiny: 0.75, idealism: 0.6, moralFlexibility: 0.4, courage: 0.09 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Yone's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -1011,7 +1048,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { discipline:0.8,ambition:0.75,moralFlexibility:0.65,needForControl:0.75,independence:0.7,pragmatism:0.65 },
+    vector: { discipline: 0.8, ambition: 0.75, moralFlexibility: 0.65, desireForPower: 0.75, independence: 0.7, pragmatism: 0.65, desireForFreedom: 0.24 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Zed's canonical story on Universe/League of Legends lore."}],
   }),
   defineChampion({
@@ -1033,7 +1070,7 @@ export const CHAMPIONS: ChampionProfile[] = [
     internalContradictions: ["Tension between public role and private truth"],
     developmentThemes: ["Growth and conflict from Universe lore"],
     loreSources: ["League of Legends Universe (universe.leagueoflegends.com)"],
-    vector: { resilience:0.85,moralFlexibility:0.8,relationshipWithDestiny:0.7,impulsivity:0.6,idealism:0.35,desireForRecognition:0.55 },
+    vector: { resilience: 0.85, moralFlexibility: 0.8, relationshipWithDestiny: 0.7, impulsivity: 0.6, idealism: 0.35, needForRecognition: 0.55, courage: 0.05 },
     loreHooks: [{"theme":"Conviction","canonicalBeat":"Aatrox's canonical story on Universe/League of Legends lore."}],
   }),
 ];

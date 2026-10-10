@@ -140,6 +140,20 @@ export function ResultsStage({
         </section>
       </article>
 
+      {(match.primarySimilarities.length > 0 || match.primaryContradictions.length > 0) && (
+        <GlassPanel className="mt-8 p-5">
+          <h4 className="text-sm uppercase tracking-widest text-white/50">
+            Personality resonance
+          </h4>
+          <p className="mt-2 text-sm text-white/70">
+            Strongest alignments: {match.primarySimilarities.join(" · ")}
+          </p>
+          <p className="mt-2 text-sm text-white/55">
+            Creative tensions: {match.primaryContradictions.join(" · ")}
+          </p>
+        </GlassPanel>
+      )}
+
       {match.alternatives.length > 0 && (
         <GlassPanel className="mt-10 p-5">
           <h4 className="text-sm uppercase tracking-widest text-white/50">

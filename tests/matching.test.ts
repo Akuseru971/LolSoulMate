@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { CHAMPIONS } from "@/data/champions";
+import { getMatchableChampions } from "@/data/champions/matchable";
+
+const CHAMPIONS = getMatchableChampions();
 import { QUESTIONS } from "@/data/questions";
 import {
   fingerprintMatchInput,
@@ -49,7 +51,7 @@ describe("matching engine", () => {
   it("breaks ties deterministically by champion id", () => {
     const result = matchChampions(CHAMPIONS, { answers: allFirstAnswers() });
     expect(result.primary.championId).toBeTruthy();
-    expect(result.alternatives).toHaveLength(2);
+    expect(result.alternatives).toHaveLength(3);
   });
 
   it("different answer patterns can yield different primaries", () => {

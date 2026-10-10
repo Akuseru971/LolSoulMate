@@ -1,4 +1,4 @@
-import { CHAMPIONS } from "@/data/champions";
+import { getMatchableChampions } from "@/data/champions/matchable";
 import { QUESTIONS } from "@/data/questions";
 import { matchChampions, type QuizAnswerSelection } from "@/lib/matching/engine";
 import type { ZodiacSign } from "@/lib/zodiac";
@@ -22,5 +22,5 @@ export function computeMatch(
   zodiac?: ZodiacSign | null,
 ) {
   const selections = buildAnswerSelections(answers);
-  return matchChampions(CHAMPIONS, { answers: selections, zodiac });
+  return matchChampions(getMatchableChampions(), { answers: selections, zodiac });
 }

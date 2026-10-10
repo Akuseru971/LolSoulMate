@@ -46,8 +46,7 @@ export function AnalyzingStage({ onSkipAnimation }: { onSkipAnimation?: () => vo
           Runeterra is a world of overlapping destinies—Demacia&apos;s oaths, Ionia&apos;s
           balance, the Shadow Isles&apos; grief. Your answers are compared against
           canonical champion personalities from official Universe lore, not gameplay
-          roles. This fan project celebrates storytelling; it does not predict your
-          future.
+          roles. Your result is computed locally in your browser—no AI API calls.
         </p>
         <AdSenseUnit className="mt-4" />
       </GlassPanel>

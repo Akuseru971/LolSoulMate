@@ -23,7 +23,7 @@ import {
 import { computeMatch } from "@/lib/quiz/matchFromProgress";
 import type { MatchResult } from "@/lib/matching/engine";
 import type { NarrativeResponse } from "@/lib/validation/schemas";
-import { buildFallbackNarrative } from "@/lib/lore/fallbackNarrative";
+import { composeNarrative } from "@/lib/narrative/composeNarrative";
 
 const emptyForm: PersonalFormState = {
   nickname: "",
@@ -62,7 +62,7 @@ export function SoulJourney() {
   }, []);
 
   const runAnalysis = useCallback(
-    async (snapshot: StoredProgress) => {
+    (snapshot: StoredProgress) => {
       if (analysisLock.current) return;
       analysisLock.current = true;
 
@@ -75,38 +75,22 @@ export function SoulJourney() {
         answerId: snapshot.answers[q.id] ?? q.answers[0].id,
       }));
 
-      const fallback = buildFallbackNarrative({
-        champion: result.primary.champion,
-        compatibility: result.primary.compatibility,
-        nickname: form.nickname || snapshot.nickname,
-        zodiac: z,
-        answers: answersPayload,
-        userVector: result.userVector,
-      });
-
       try {
-        const res = await fetch("/api/narrative", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            championId: result.primary.championId,
-            compatibility: result.primary.compatibility,
-            nickname: form.nickname || snapshot.nickname,
-            zodiac: z,
-            personalityKeywords:
-              form.personalityKeywords || snapshot.personalityKeywords,
-            answers: answersPayload,
-          }),
+        const { narrative: composed } = composeNarrative({
+          match: result,
+          answers: answersPayload,
+          nickname: form.nickname || snapshot.nickname,
         });
-        if (!res.ok) throw new Error("Narrative request failed");
-        const data = (await res.json()) as { narrative: NarrativeResponse };
-        setNarrative(data.narrative);
-      } catch {
-        setNarrative(fallback);
+        setNarrative(composed);
+      } catch (e) {
+        setError(
+          e instanceof Error ? e.message : "Unable to compose narrative locally.",
+        );
+        analysisLock.current = false;
+        return;
       }
 
-      const done = { ...snapshot, stage: "results" as JourneyStage };
-      persist(done);
+      persist({ ...snapshot, stage: "results" });
     },
     [form, persist],
   );
@@ -124,7 +108,7 @@ export function SoulJourney() {
   function startAnalyzing(snapshot: StoredProgress) {
     const analyzing = { ...snapshot, stage: "analyzing" as JourneyStage };
     persist(analyzing);
-    void runAnalysis(analyzing);
+    runAnalysis(analyzing);
   }
 
   return (
