@@ -1,0 +1,2190 @@
+[
+  {
+    "id": "irelia",
+    "loreEventIds": [
+      "ionian_resistance",
+      "ionian_balance"
+    ],
+    "intros": [
+      "Irelia moves through memory like a dance: each blade a note, each loss a step she refuses to forget.",
+      "Your answers carry the Ionian thread of duty that outlasts comfort, the kind that turns grief into posture.",
+      "There is a dancer's patience in you: not performance for applause, but form that holds when the world breaks.",
+      "Ionia asks its defenders to weigh beauty against invasion; you seem to understand that weight.",
+      "Where others chase conquest, you lean toward homeland as a promise kept in the body."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You hold to duty when the easier path would be to look away.",
+        "canonicalFact": "After Noxus shattered her village, Irelia rallied Ionian resistance with floating blades and unbroken focus.",
+        "parallelExplanation": "Her war was literal; yours may be private. The parallel is steadiness under loss, not shared violence.",
+        "tag": "duty"
+      },
+      {
+        "userInterpretation": "You protect culture and people as if they were extensions of your own breath.",
+        "canonicalFact": "She learned the dances of Ionia before she learned war, and never separated the two.",
+        "parallelExplanation": "Art and defense intertwine for her; for you, care may show as loyalty to what must survive.",
+        "loreEventId": "ionian_balance"
+      },
+      {
+        "userInterpretation": "Discipline steadies you when emotion would scatter your choices.",
+        "canonicalFact": "Irelia's training turned panic into motion, grief into precise defiance on the front lines.",
+        "parallelExplanation": "You need not wield steel to recognize how structure can carry a heart through crisis."
+      },
+      {
+        "userInterpretation": "Idealism survives in you even when pragmatists call it naive.",
+        "canonicalFact": "She fought for an Ionia that could remain itself, not merely win.",
+        "parallelExplanation": "That stubborn hope mirrors a temperament that chooses meaning before convenience."
+      },
+      {
+        "userInterpretation": "Independence keeps you from surrendering your judgment to crowds or commanders.",
+        "canonicalFact": "Irelia became a symbol because she acted when institutions faltered.",
+        "parallelExplanation": "Leadership found her through conviction, not through seeking a title."
+      },
+      {
+        "userInterpretation": "You feel responsibility for others' safety as a quiet constant.",
+        "canonicalFact": "Survivors of the invasion looked to her not only for victory, but for continuity.",
+        "parallelExplanation": "Protective instinct aligns with her role as living reminder of home."
+      },
+      {
+        "userInterpretation": "You sense destiny as obligation rather than romance.",
+        "canonicalFact": "The Spirit of Ionia stirred in her, binding personal fate to the land's survival.",
+        "parallelExplanation": "Cosmic scale is hers; your scale may be smaller, but the sense of call can rhyme.",
+        "loreEventId": "ionian_balance"
+      },
+      {
+        "userInterpretation": "You weigh outcomes when mercy and victory disagree.",
+        "canonicalFact": "Resistance leaders debated tactics while Irelia held the line between vengeance and restoration.",
+        "parallelExplanation": "Her choices were strategic; yours may be relational. Both require clear eyes."
+      },
+      {
+        "userInterpretation": "Recognition matters less to you than integrity of action.",
+        "canonicalFact": "She accepted fame as a burden when it helped unite fractured provinces.",
+        "parallelExplanation": "Visibility served purpose for her; you may prefer impact without spotlight."
+      },
+      {
+        "userInterpretation": "Courage for you is sustained effort, not a single dramatic leap.",
+        "canonicalFact": "Years of war tested her endurance as much as her skill.",
+        "parallelExplanation": "Resilience over time is the shared chord, not any one battlefield moment."
+      }
+    ],
+    "strengths": [
+      "You endure pressure without abandoning the people or principles you chose.",
+      "Your loyalty can turn a scattered community into something that feels defendable.",
+      "You translate emotion into action instead of letting it dissolve into paralysis.",
+      "You honor tradition while still adapting when survival demands it.",
+      "You offer others a model of dignity under occupation, loss, or doubt."
+    ],
+    "weaknesses": [
+      "Grief can tighten your grip until flexibility feels like betrayal.",
+      "You may judge yourself harshly when protection falls short of perfect.",
+      "Idealism sometimes delays the compromise that would reduce immediate harm.",
+      "The weight of symbolhood can isolate you from ordinary rest.",
+      "Anger at injustice may flash hot before your discipline catches it."
+    ],
+    "conclusions": [
+      "Carry Irelia's lesson: home is a practice renewed each day, not a memory sealed in glass.",
+      "Let your duty breathe; rigidity breaks dancers as surely as enemies do.",
+      "When you lead, invite others to share the weight so you remain human.",
+      "Measure victory by what survives culturally, not only by what is defeated.",
+      "Your steadiness can be Ionian balance in miniature: motion held by purpose."
+    ]
+  },
+  {
+    "id": "jhin",
+    "loreEventIds": [
+      "ionian_balance"
+    ],
+    "intros": [
+      "Jhin hears the world as composition: breath, gunshot, silence, each placed with cruel intention.",
+      "Your pattern suggests appetite for precision, the need for acts to mean something beyond noise.",
+      "In Ionian balance, he is the fracture: art twisted until it worships the final breath.",
+      "You may not share his violence, yet you recognize craft that treats consequence as canvas.",
+      "Perfection can seduce any soul; Jhin simply refuses every limit on that seduction."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You want your choices to land with deliberate shape, not accidental clutter.",
+        "canonicalFact": "Jhin plans killings as four-act performances, down to light, color, and timing.",
+        "parallelExplanation": "His stage is murder; yours may be work or words. The rhyme is aesthetic control, not cruelty.",
+        "tag": "art"
+      },
+      {
+        "userInterpretation": "You dislike mess, whether in plans, relationships, or unfinished business.",
+        "canonicalFact": "He altered crime scenes to satisfy an internal critic that never applauds.",
+        "parallelExplanation": "Obsession with order can mirror his, without sharing his harm."
+      },
+      {
+        "userInterpretation": "Recognition matters when it confirms mastery, not when it flatters ego alone.",
+        "canonicalFact": "Jhin leaves signatures so Runeterra must acknowledge the artist behind the horror.",
+        "parallelExplanation": "You may seek witness to craft; he demands it through fear."
+      },
+      {
+        "userInterpretation": "You analyze emotion from a slight distance, as material to refine.",
+        "canonicalFact": "He studied victims' faces for the exact moment beauty peaked in ruin.",
+        "parallelExplanation": "Emotional distance can serve art or empathy; for him it served neither mercy."
+      },
+      {
+        "userInterpretation": "Rules feel like suggestions when they dull excellence.",
+        "canonicalFact": "Ionia's council imprisoned him for murders dressed as theater, yet he returned unchanged.",
+        "parallelExplanation": "Defiance of constraint links temperaments; only his expression was lethal.",
+        "loreEventId": "ionian_balance"
+      },
+      {
+        "userInterpretation": "Patience is a weapon you are willing to hone.",
+        "canonicalFact": "He waited years between performances if the composition required it.",
+        "parallelExplanation": "Delayed gratification in craft is shared; his patience served death."
+      },
+      {
+        "userInterpretation": "You believe detail separates amateurs from masters.",
+        "canonicalFact": "Jhin crafts custom ammunition and stagecraft for each target.",
+        "parallelExplanation": "Meticulousness aligns; intent diverges utterly."
+      },
+      {
+        "userInterpretation": "You can detach from social warmth when focus demands it.",
+        "canonicalFact": "He treats allies as props if they improve the tableau.",
+        "parallelExplanation": "Instrumental relationships are his sin; your detachment may protect concentration."
+      },
+      {
+        "userInterpretation": "Moral flexibility appears when ideals obstruct the finished piece.",
+        "canonicalFact": "He rationalizes slaughter as higher beauty that mortals cannot judge.",
+        "parallelExplanation": "You may bend ethics in smaller arenas; he made bending a religion."
+      },
+      {
+        "userInterpretation": "Silence after effort feels as important as the effort itself.",
+        "canonicalFact": "His fourth shot is reserved for the concluding stillness of a 'masterwork'.",
+        "parallelExplanation": "Cadence and closure matter to you both; his closure ends lives."
+      }
+    ],
+    "strengths": [
+      "You notice patterns others miss and can refine them relentlessly.",
+      "Your standards push work from competent toward memorable.",
+      "You tolerate solitude when creation requires uninterrupted time.",
+      "You treat constraints as prompts rather than defeats.",
+      "You can narrate your own actions with unsettling clarity."
+    ],
+    "weaknesses": [
+      "Perfectionism can stall compassion or collaboration.",
+      "You may aestheticize pain, yours or others', instead of healing it.",
+      "Critique turns inward until nothing satisfies.",
+      "Detachment can read as coldness even when you mean focus.",
+      "Impulse lurks beneath control when someone disrupts your design."
+    ],
+    "conclusions": [
+      "Let craft serve connection, not spectacle alone.",
+      "Jhin warns what happens when art refuses moral weight.",
+      "Finish pieces, then release them; not every flaw requires blood.",
+      "Invite feedback before the 'final shot' of a decision.",
+      "Precision can honor life when it protects rather than performs ending."
+    ]
+  },
+  {
+    "id": "kindred",
+    "loreEventIds": [
+      "kindred_mercy"
+    ],
+    "intros": [
+      "Kindred walk every path twice: Lamb's touch, Wolf's chase, one covenant with ending.",
+      "Your answers echo mortality's tension, whether you flee it, greet it, or weigh it for others.",
+      "They are not cruel; they are inevitable made visible, a duality older than any nation.",
+      "To meet Kindred in story is to ask how you live beside the fact of finitude.",
+      "Wolf laughs at denial; Lamb offers gentleness when denial finally breaks."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You accept endings as part of love, not betrayal of it.",
+        "canonicalFact": "Lamb marks those ready to rest; Wolf hunts those who run from their last page.",
+        "parallelExplanation": "You need not face literal hunters to share the question of acceptance.",
+        "tag": "mortality"
+      },
+      {
+        "userInterpretation": "You offer calm presence when others panic about loss.",
+        "canonicalFact": "Kindred appear differently to each soul, often shaped by culture and fear.",
+        "parallelExplanation": "Mercy in your tone can mirror Lamb even without divine form.",
+        "loreEventId": "kindred_mercy"
+      },
+      {
+        "userInterpretation": "You sometimes chase what you know you cannot keep forever.",
+        "canonicalFact": "Wolf's run is endless because mortals invent new escapes from truth.",
+        "parallelExplanation": "Denial is human; his pursuit is myth made flesh."
+      },
+      {
+        "userInterpretation": "Balance between gentleness and firmness guides your hardest conversations.",
+        "canonicalFact": "Kindred never disagree on the outcome, only on the path taken to reach it.",
+        "parallelExplanation": "Dual methods, single respect for ending: that tension may live in you."
+      },
+      {
+        "userInterpretation": "You feel destiny as a thread that tightens with age and consequence.",
+        "canonicalFact": "Every Runeterran legend eventually hears footsteps that match their stride.",
+        "parallelExplanation": "Awareness of limits can deepen your choices rather than paralyze them."
+      },
+      {
+        "userInterpretation": "Community rituals around loss matter deeply to you.",
+        "canonicalFact": "Freljord tales teach children Kindred's names so fear becomes familiarity.",
+        "parallelExplanation": "Story as comfort aligns with Ionian and Freljord wisdom alike."
+      },
+      {
+        "userInterpretation": "You protect the living while honoring what the dead leave behind.",
+        "canonicalFact": "Kindred do not hate life; they complete its arc.",
+        "parallelExplanation": "Caretaking beside grief is shared ground without claiming their cosmic role."
+      },
+      {
+        "userInterpretation": "Pragmatism helps you speak plainly about risks others dodge.",
+        "canonicalFact": "Wolf's honesty is brutal because euphemism wastes the final moments.",
+        "parallelExplanation": "Clarity is kinship; cruelty is not required."
+      },
+      {
+        "userInterpretation": "You forgive yourself slowly when change feels like small deaths.",
+        "canonicalFact": "Lamb waits when souls need one more breath to say goodbye.",
+        "parallelExplanation": "Patience with transition rhymes with her grace, not Wolf's hunger."
+      },
+      {
+        "userInterpretation": "Freedom, to you, includes choosing how you meet unavoidable change.",
+        "canonicalFact": "Those who accept Lamb's hand walk without being torn.",
+        "parallelExplanation": "Agency at the threshold is the moral lesson mortals can carry."
+      }
+    ],
+    "strengths": [
+      "You normalize conversations others fear, reducing shame around loss.",
+      "You hold space for both grief and continuation at once.",
+      "You perceive cycles where others see only chaos.",
+      "You remain steady when panic would scatter a room.",
+      "You translate abstract fate into language people can breathe."
+    ],
+    "weaknesses": [
+      "Fixating on endings can dim present joy.",
+      "You may seem distant when others want purely optimistic comfort.",
+      "Wolf's impatience can echo in you as bluntness that wounds.",
+      "Acceptance can be mistaken for resignation by hopeful friends.",
+      "You carry others' fears until your own rest thins."
+    ],
+    "conclusions": [
+      "Walk with Lamb's patience when someone needs a soft exit from denial.",
+      "Let Wolf's honesty sharpen plans, not relationships.",
+      "Mortality makes moments precious; hoard them actively.",
+      "Teach what you know of endings as invitation, not threat.",
+      "Kindred remind you: how you finish a chapter defines its music."
+    ]
+  },
+  {
+    "id": "viego",
+    "loreEventIds": [
+      "shadow_isles_ruin"
+    ],
+    "intros": [
+      "Viego wears grief like armor, a king who chose mist over mourning's end.",
+      "Your pattern touches obsession: love remembered past reason, past repair.",
+      "The Ruination began in a heart that could not release a single name.",
+      "Shadow Isles warn what possession does to purpose and to the living.",
+      "You need not share his crown to recognize hunger that outlasts the meal."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "Loss can fix your gaze on what was, blurring what still is.",
+        "canonicalFact": "Viego unleashed the Black Mist trying to restore Isolde, reshaping the Blessed Isles.",
+        "parallelExplanation": "His grief became catastrophe; yours may stay private. The parallel is refusal to let go.",
+        "tag": "grief"
+      },
+      {
+        "userInterpretation": "You attach identity to devotion, even when devotion harms you.",
+        "canonicalFact": "He defined himself as husband and king before all other duties.",
+        "parallelExplanation": "Role fusion is his ruin; you may feel it in smaller loyalties."
+      },
+      {
+        "userInterpretation": "Power tempts you when it promises to undo a mistake.",
+        "canonicalFact": "Viego sought arcane tools and armies to reverse death itself.",
+        "parallelExplanation": "Wish to rewrite the past is human; his scale was continental."
+      },
+      {
+        "userInterpretation": "You struggle to trust others with what you cherish most.",
+        "canonicalFact": "He hoarded sorrow and sovereignty until allies became extensions of will.",
+        "parallelExplanation": "Control born of fear rhymes without requiring mist or blades."
+      },
+      {
+        "userInterpretation": "Emotional sensitivity makes endings feel like theft.",
+        "canonicalFact": "Isolde's death cracked his judgment; the mist spread from that fracture.",
+        "parallelExplanation": "Intensity of feeling aligns; world-breaking response does not."
+      },
+      {
+        "userInterpretation": "You replay moments, seeking a different outcome in memory.",
+        "canonicalFact": "Viego relives his last hours with Isolde in waking obsession.",
+        "parallelExplanation": "Mental rehearsal is shared; his became a kingdom's curse."
+      },
+      {
+        "userInterpretation": "Authority feels empty when the person you built it for is gone.",
+        "canonicalFact": "Camavor's conquests fed a hollow throne after loss.",
+        "parallelExplanation": "Achievement without beloved witness is a theme you may know."
+      },
+      {
+        "userInterpretation": "You may isolate rather than risk new attachment.",
+        "canonicalFact": "Centuries in isolation deepened his distortion on the Shadow Isles.",
+        "parallelExplanation": "Withdrawal protects and imprisons; his cell was spectral."
+      },
+      {
+        "userInterpretation": "Justice and mercy collapse when pain demands a single target.",
+        "canonicalFact": "He blamed the world for a wound that began inside his refusal to heal.",
+        "parallelExplanation": "Externalizing grief is his lesson, not your sentence."
+      },
+      {
+        "userInterpretation": "Hope, for you, sometimes looks like reunion against all evidence.",
+        "canonicalFact": "Ruination persisted because he called it love.",
+        "parallelExplanation": "Hope misnamed can poison; naming yours honestly matters."
+      }
+    ],
+    "strengths": [
+      "You love with memorable depth that can anchor others.",
+      "You persist through despair longer than many would attempt.",
+      "You recognize emotional truth beneath polite denial.",
+      "You can mobilize resources when someone you love needs them.",
+      "Your loyalty, when healthy, feels unshakable."
+    ],
+    "weaknesses": [
+      "Grief can become identity if never mourned fully.",
+      "Possessiveness disguises itself as devotion.",
+      "You may neglect the living while serving memory.",
+      "Isolation amplifies distorted narratives.",
+      "Anger at fate can spill onto innocent bystanders."
+    ],
+    "conclusions": [
+      "Let endings be real; love can continue without undoing death.",
+      "Viego shows the cost of mistaking control for devotion.",
+      "Invite witnesses you trust to speak when obsession narrows vision.",
+      "Build purpose that includes the present, not only the lost.",
+      "Your heart's size is gift; aim it toward life still breathing."
+    ]
+  },
+  {
+    "id": "swain",
+    "loreEventIds": [
+      "noxian_conquest"
+    ],
+    "intros": [
+      "Swain reads war as ledger and poem: sacrifice counted, victory justified.",
+      "What reads in your pattern is strategic patience, vision that tolerates ugly arithmetic.",
+      "Noxus forged him in belief that strength must govern a chaotic world.",
+      "The demon in his arm is secret kept for empire, not confession for comfort.",
+      "You need not wear the tricorn to think several moves past the obvious."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You plan with cool head when others react from pride.",
+        "canonicalFact": "Swain rose after defeat, uniting Noxian factions under long-view strategy.",
+        "parallelExplanation": "His battlefield is politics; yours may be work or family. Shared: foresight.",
+        "tag": "strategy"
+      },
+      {
+        "userInterpretation": "You accept necessary cost if the outcome protects many.",
+        "canonicalFact": "He sent legions knowing casualties would be vast yet purposeful.",
+        "parallelExplanation": "Moral weight of tradeoffs rhymes; you are not ordering invasions."
+      },
+      {
+        "userInterpretation": "Power is tool, not trophy, in your calculus.",
+        "canonicalFact": "Swain wields the Darkin secret to steer Noxus rather than glorify himself.",
+        "parallelExplanation": "Instrumental strength aligns without demonic bargain."
+      },
+      {
+        "userInterpretation": "You read rivals' emotions as data.",
+        "canonicalFact": "He exploited Ionian divisions and Demacian rigidity alike.",
+        "parallelExplanation": "Empathy used analytically is kinship at safer scale."
+      },
+      {
+        "userInterpretation": "Authority should serve continuity, not vanity.",
+        "canonicalFact": "He rejected short reigns of spectacle for durable conquest doctrine.",
+        "parallelExplanation": "Institutional thinking links you; cruelty is his optional method."
+      },
+      {
+        "userInterpretation": "Betrayal teaches you patterns more than it breaks you.",
+        "canonicalFact": "Swain survived assassination and returned with sharper networks.",
+        "parallelExplanation": "Resilience after treachery is shared temperament."
+      },
+      {
+        "userInterpretation": "You hide vulnerability until it becomes leverage.",
+        "canonicalFact": "Few know the demon arm's true bargain or limits.",
+        "parallelExplanation": "Selective disclosure is strategy, not mandatory occult pact."
+      },
+      {
+        "userInterpretation": "Destiny feels like burden you choose to carry for others.",
+        "canonicalFact": "Visions of Noxus's future guided his coldest decisions.",
+        "parallelExplanation": "Visionary duty at personal cost is the chord."
+      },
+      {
+        "userInterpretation": "Recognition matters when it stabilizes coalition.",
+        "canonicalFact": "He cultivates loyalty through merit and fear in measured doses.",
+        "parallelExplanation": "Social credit as glue is familiar to leaders."
+      },
+      {
+        "userInterpretation": "Impulse is suspect; you prefer designs that survive surprise.",
+        "canonicalFact": "Swain rarely strikes without scouts, spies, and secondary plans.",
+        "parallelExplanation": "Discipline in planning aligns across scales."
+      }
+    ],
+    "strengths": [
+      "You see systems and can improve them under pressure.",
+      "You remain functional when emotions run high around you.",
+      "You learn from defeat without romanticizing it.",
+      "You coordinate people with different motives toward one aim.",
+      "You tolerate ambiguity while still deciding."
+    ],
+    "weaknesses": [
+      "Cost-benefit thinking can bruise tender hearts.",
+      "Secrets erode trust even when kept for good reasons.",
+      "You may defer feeling until it erupts unexpectedly.",
+      "Others can feel managed rather than loved.",
+      "Ambition risks mistaking expansion for health."
+    ],
+    "conclusions": [
+      "Let strategy serve life, not only map lines.",
+      "Swain proves mind without mercy becomes its own tyrant.",
+      "Share enough truth that allies choose you freely.",
+      "Count the human line items, not only troop numbers.",
+      "Power maintained wisely knows when not to conquer."
+    ]
+  },
+  {
+    "id": "braum",
+    "loreEventIds": [
+      "freljord_unity"
+    ],
+    "intros": [
+      "Braum laughs like sunlight on snow: broad, improbable, warming frozen places.",
+      "Your pattern carries protective warmth, the instinct to stand between harm and home.",
+      "He carries a door because doors mean shelter; Freljord remembers who opens them.",
+      "Strength for Braum is service, not boast, though boisterous joy follows anyway.",
+      "You may never punch a dragon, yet you know what it means to guard a threshold."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You step forward when others hesitate to shield someone vulnerable.",
+        "canonicalFact": "Braum defended frozen villages, myth and muscle alike.",
+        "parallelExplanation": "Heroic scale differs; protective reflex aligns.",
+        "tag": "warmth"
+      },
+      {
+        "userInterpretation": "Community ties matter more than solitary glory.",
+        "canonicalFact": "He travels between tribes, knitting trust with stories and deeds.",
+        "parallelExplanation": "Social connection as duty is shared ground."
+      },
+      {
+        "userInterpretation": "You believe kindness can disarm conflict before fists must.",
+        "canonicalFact": "Braum talks first, fights last, smiles throughout.",
+        "parallelExplanation": "De-escalation temperament mirrors his, without required superhuman punch."
+      },
+      {
+        "userInterpretation": "Loyalty is shown in showing up, again and again.",
+        "canonicalFact": "He kept promises across blizzards and decades.",
+        "parallelExplanation": "Reliability is his legend and may be yours."
+      },
+      {
+        "userInterpretation": "You collect stories and share them to teach courage.",
+        "canonicalFact": "Freljord children grow on tales of Braum's heart.",
+        "parallelExplanation": "Narrative as care links storyteller souls."
+      },
+      {
+        "userInterpretation": "Discipline lives in training so others need not suffer your unpreparedness.",
+        "canonicalFact": "His strength is practiced, not accidental.",
+        "parallelExplanation": "Prepared protector is a role you may inhabit."
+      },
+      {
+        "userInterpretation": "You forgive quickly when apology is sincere.",
+        "canonicalFact": "Braum welcomes redeemed rivals at hearth fires.",
+        "parallelExplanation": "Mercy after conflict is Freljord unity in miniature."
+      },
+      {
+        "userInterpretation": "Freedom means no one freezes alone at the edge of camp.",
+        "canonicalFact": "He broke ice and isolation alike for strangers.",
+        "parallelExplanation": "Inclusion as liberty rhymes warmly."
+      },
+      {
+        "userInterpretation": "You fear failing someone who counted on your strength.",
+        "canonicalFact": "Legends say he once held a mountain pass until reinforcements arrived.",
+        "parallelExplanation": "Fear of letting down dependents is human parallel."
+      },
+      {
+        "userInterpretation": "Hope looks like shared food, shared fire, shared plan.",
+        "canonicalFact": "Braum's journeys leave supplies and repaired doors behind.",
+        "parallelExplanation": "Practical hope aligns with your answers about small kindnesses."
+      }
+    ],
+    "strengths": [
+      "People feel safer when you enter a room.",
+      "You translate strength into hospitality.",
+      "You bridge factions with humor and steady presence.",
+      "You model courage that invites others to stand taller.",
+      "You remember names, losses, and favorite songs."
+    ],
+    "weaknesses": [
+      "You may overextend until your own rest cracks.",
+      "Optimism can underestimate real predators.",
+      "You absorb others' pain without always naming yours.",
+      "Boisterous mask hides fatigue from those you protect.",
+      "You struggle to ask for help, preferring to be the help."
+    ],
+    "conclusions": [
+      "Keep the door open, including for your own needs.",
+      "Braum shows strength as invitation, not domination.",
+      "Let warmth be strategy, not performance alone.",
+      "Repair what you can; not every fight needs your fist.",
+      "Freljord unity begins at one hearth; tend yours."
+    ]
+  },
+  {
+    "id": "yasuo",
+    "loreEventIds": [
+      "ionian_balance"
+    ],
+    "intros": [
+      "Yasuo moves with wind and regret, each strike a question he cannot outrun.",
+      "Your answers touch independence wounded by honor codes and misunderstanding.",
+      "Ionia taught him technique; tragedy taught him exile.",
+      "He seeks absolution without always knowing who must grant it.",
+      "The blade is steady; it is the story around it that shakes."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You carry blame that may not belong entirely to you.",
+        "canonicalFact": "Yasuo was accused of killing his master and wandered hunted.",
+        "parallelExplanation": "Misassigned guilt is his plot; you may feel echoes in private history.",
+        "tag": "exile"
+      },
+      {
+        "userInterpretation": "Freedom matters more after someone else defined your fate.",
+        "canonicalFact": "He refused execution and chose road over ritual submission.",
+        "parallelExplanation": "Autonomy reclaimed aligns; his path was fugitive."
+      },
+      {
+        "userInterpretation": "Discipline in craft steadies chaos inside.",
+        "canonicalFact": "Wind technique demands breath control and relentless practice.",
+        "parallelExplanation": "Mastery as meditation is shared chord."
+      },
+      {
+        "userInterpretation": "You confront allies when truth demands it, even alone.",
+        "canonicalFact": "Yasuo clashed with Ionian elders and later with his brother's legacy.",
+        "parallelExplanation": "Face-to-face reckoning temperament matches his."
+      },
+      {
+        "userInterpretation": "Impulse strikes when insult lands on old wounds.",
+        "canonicalFact": "Pride and grief made his younger years volatile.",
+        "parallelExplanation": "Hot moments do not make you his crimes."
+      },
+      {
+        "userInterpretation": "You believe destiny can be defied by skill and choice.",
+        "canonicalFact": "He challenged supposed fate after Swain's machinations in Ionia.",
+        "parallelExplanation": "Agency against prophecy rhymes thematically."
+      },
+      {
+        "userInterpretation": "Protective instinct appears for strangers who mirror past failures.",
+        "canonicalFact": "He intervenes for the unjustly accused on the road.",
+        "parallelExplanation": "Redemption through protection is his arc's hope."
+      },
+      {
+        "userInterpretation": "Solitude recharges yet deepens brooding.",
+        "canonicalFact": "Years of travel honed skill while feeding melancholy.",
+        "parallelExplanation": "Introverted recovery is familiar to many."
+      },
+      {
+        "userInterpretation": "Mercy competes with desire for clean judgment.",
+        "canonicalFact": "He spared some pursuers, cut down others who left no choice.",
+        "parallelExplanation": "Moral tension without equating you to his killings."
+      },
+      {
+        "userInterpretation": "Legacy you want is truth told, not legend polished.",
+        "canonicalFact": "Yasuo seeks to clear his name before he can rest.",
+        "parallelExplanation": "Honest narrative as goal aligns with quiz legacy answers."
+      }
+    ],
+    "strengths": [
+      "You adapt quickly and learn from motion.",
+      "You defend the accused when evidence feels thin.",
+      "Your resilience survives social exile.",
+      "You channel emotion into focused skill.",
+      "You pursue reconciliation when pride allows."
+    ],
+    "weaknesses": [
+      "Brooding can delay necessary apologies.",
+      "Pride masquerades as honor.",
+      "You may push allies away preemptively.",
+      "Anger at injustice becomes self-punishment.",
+      "Rest feels undeserved while names stay stained."
+    ],
+    "conclusions": [
+      "Yasuo's wind reminds you: forward motion can be penance and healing.",
+      "Seek witnesses who will hear your full story.",
+      "Skill without forgiveness keeps wounds open.",
+      "Brotherhood may return when blame loosens.",
+      "Let independence serve truth, not isolation alone."
+    ]
+  },
+  {
+    "id": "lux",
+    "loreEventIds": [
+      "demacia_mage_secrets"
+    ],
+    "intros": [
+      "Lux keeps light inside a kingdom that fears it, smile as camouflage, beam as truth.",
+      "Your pattern glows with idealism tested by rules that would deny part of who you are.",
+      "Demacia asks conformity; she answers with hidden help and stubborn hope.",
+      "Magic in her hands wants to heal, reveal, and sometimes rebel politely.",
+      "You need not be a Crownguard to know the fatigue of appearing harmless."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You hide strength until someone needs it urgently.",
+        "canonicalFact": "Lux concealed her talents while serving Demacia publicly.",
+        "parallelExplanation": "Secrecy for survival aligns; her secret was arcane.",
+        "tag": "light"
+      },
+      {
+        "userInterpretation": "Rules feel unjust when they harm innocents.",
+        "canonicalFact": "Demacian law hunts mages; she broke it to save lives.",
+        "parallelExplanation": "Civil disobedience temperament rhymes without shared battles."
+      },
+      {
+        "userInterpretation": "You want recognition for good done, not for rebellion alone.",
+        "canonicalFact": "She seeks acceptance from family and nation alike.",
+        "parallelExplanation": "Need to be seen as worthy is human parallel."
+      },
+      {
+        "userInterpretation": "Optimism persists even after witnessing prejudice.",
+        "canonicalFact": "Lux still believes Demacia can become better.",
+        "parallelExplanation": "Hope inside systems is shared theme."
+      },
+      {
+        "userInterpretation": "You choose mercy when law demands hardness.",
+        "canonicalFact": "Her light binds and shields more often than it burns.",
+        "parallelExplanation": "Protective mercy aligns with quiz mercy answers."
+      },
+      {
+        "userInterpretation": "Family loyalty complicates moral clarity.",
+        "canonicalFact": "Garen and her parents embody the code she quietly defies.",
+        "parallelExplanation": "Split loyalties mirror many secret selves."
+      },
+      {
+        "userInterpretation": "You educate yourself when institutions refuse truth.",
+        "canonicalFact": "Lux studied magic in hiding, risking discovery.",
+        "parallelExplanation": "Self-directed learning links curious souls."
+      },
+      {
+        "userInterpretation": "Courage looks like speaking up with a shaking voice.",
+        "canonicalFact": "She exposed corruption when silence would be safer.",
+        "parallelExplanation": "Brave speech under risk is shared."
+      },
+      {
+        "userInterpretation": "You fear becoming the monster others imagine.",
+        "canonicalFact": "Demacia paints mages as threats; she fights that narrative daily.",
+        "parallelExplanation": "Internalized stigma is parallel, not prophecy."
+      },
+      {
+        "userInterpretation": "Legacy means leaving Demacia kinder, not only freer for you.",
+        "canonicalFact": "She dreams of a nation where light needs no disguise.",
+        "parallelExplanation": "Reformist legacy aligns with idealist answers."
+      }
+    ],
+    "strengths": [
+      "You illuminate confusion without always burning bridges.",
+      "You maintain warmth under surveillance or judgment.",
+      "You innovate kind solutions under constraint.",
+      "You rally others with hope grounded in action.",
+      "You notice suffering others trained themselves to ignore."
+    ],
+    "weaknesses": [
+      "Secrecy exhausts and isolates.",
+      "People-pleasing delays necessary confrontation.",
+      "Optimism can underestimate entrenched fear.",
+      "You may minimize your power to keep peace.",
+      "Family expectations weigh like armor you did not choose."
+    ],
+    "conclusions": [
+      "Lux asks you to let light be honest when safety allows.",
+      "Reveal strategically; truth needs allies.",
+      "Kindness is not weakness in Demacia or anywhere.",
+      "Teach what you know; ignorance fuels cruelty.",
+      "Your glow can reform systems, not only escape them."
+    ]
+  },
+  {
+    "id": "garen",
+    "loreEventIds": [
+      "demacia_mage_secrets"
+    ],
+    "intros": [
+      "Garen stands where Demacia stands: straight-backed, vow-heavy, silence about doubt.",
+      "What reads in your pattern is disciplined loyalty to ideals even when life complicates them.",
+      "He loves family and nation with the same guarded intensity.",
+      "Magic secrets in his house test vows he repeats but rarely interrogates.",
+      "Courage for him is showing up again, banner high, questions buried."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "Duty anchors you when fear would scatter resolve.",
+        "canonicalFact": "Garen leads Dauntless Vanguard charges for Demacia's code.",
+        "parallelExplanation": "Institutional duty aligns; his expression is martial.",
+        "tag": "vow"
+      },
+      {
+        "userInterpretation": "You protect institutions because they protect people you love.",
+        "canonicalFact": "He believes Demacia's laws shield the vulnerable.",
+        "parallelExplanation": "Faith in order as shield is shared temperament."
+      },
+      {
+        "userInterpretation": "You struggle to name emotional nuance aloud.",
+        "canonicalFact": "Garen speaks in certainties, especially around Lux and magic.",
+        "parallelExplanation": "Emotional reticence links; his stakes are national."
+      },
+      {
+        "userInterpretation": "You confront threats directly rather than intrigue.",
+        "canonicalFact": "He prefers the front line to court games.",
+        "parallelExplanation": "Straightforward conflict style aligns."
+      },
+      {
+        "userInterpretation": "Mercy exists but must fit within honor's frame.",
+        "canonicalFact": "He spares the worthy foe when Demacia allows.",
+        "parallelExplanation": "Bounded mercy mirrors structured moral codes."
+      },
+      {
+        "userInterpretation": "You fear failing those who see you as exemplar.",
+        "canonicalFact": "Crownguard name carries expectation on every march.",
+        "parallelExplanation": "Recognition as burden is parallel."
+      },
+      {
+        "userInterpretation": "Family loyalty overrides comfort.",
+        "canonicalFact": "He defends Lux even when her secret terrifies him.",
+        "parallelExplanation": "Protective sibling bond aligns with loyalty answers."
+      },
+      {
+        "userInterpretation": "You distrust power that lacks visible accountability.",
+        "canonicalFact": "Demacia's fear of mages shapes his suspicion.",
+        "parallelExplanation": "Skepticism of hidden power is thematic link."
+      },
+      {
+        "userInterpretation": "Resilience is routine: train, march, repeat.",
+        "canonicalFact": "Years of service forged him into living symbol.",
+        "parallelExplanation": "Discipline as identity rhymes."
+      },
+      {
+        "userInterpretation": "You want legacy of steadfastness, not novelty.",
+        "canonicalFact": "Garen seeks to be remembered as true Demacian.",
+        "parallelExplanation": "Legacy of integrity aligns with quiz option on staying true."
+      }
+    ],
+    "strengths": [
+      "Others trust you in crisis because you do not waver lightly.",
+      "You model courage that is repeatable, not flashy.",
+      "You shield weaker allies without condescension.",
+      "You translate ideals into daily habit.",
+      "You keep promises when cost is visible."
+    ],
+    "weaknesses": [
+      "Rigid codes blind you to necessary change.",
+      "Emotional silence strains intimate bonds.",
+      "You may confuse loyalty with uncritical support.",
+      "Prejudice inherited feels like truth until examined.",
+      "Doubt unspoken becomes isolation."
+    ],
+    "conclusions": [
+      "Garen's strength grows when vows include honest questions.",
+      "Protect people, not only banners.",
+      "Let family secrets become trust, not silence.",
+      "Mercy can be Demacian when law learns to see.",
+      "Stand straight, but not so stiff you cannot turn toward light."
+    ]
+  },
+  {
+    "id": "akali",
+    "loreEventIds": [
+      "ionian_balance",
+      "ionian_resistance"
+    ],
+    "intros": [
+      "Akali moves through smoke and conviction, kinkou training bent toward street-level justice.",
+      "Your pattern favors independence that still serves a larger balance.",
+      "She left rigid doctrine to protect Ionia where elders could not reach.",
+      "Names change; responsibility remains, tattooed in motion.",
+      "You need not vanish into shadow to know rebellion can be care."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You break rules when rules fail the vulnerable.",
+        "canonicalFact": "Akali split from traditional kinkou to act autonomously.",
+        "parallelExplanation": "Institutional critique aligns; her tools are lethal.",
+        "tag": "shadow"
+      },
+      {
+        "userInterpretation": "Discipline lives in body memory even when ideology shifts.",
+        "canonicalFact": "Years of temple training shape every leap and strike.",
+        "parallelExplanation": "Embodied discipline is shared."
+      },
+      {
+        "userInterpretation": "You want freedom with purpose, not chaos.",
+        "canonicalFact": "She still speaks of balance, just on her terms.",
+        "parallelExplanation": "Purposeful independence rhymes."
+      },
+      {
+        "userInterpretation": "Recognition from peers matters less than results.",
+        "canonicalFact": "Shen and Kennen disapproved; she continued anyway.",
+        "parallelExplanation": "Outcome-focused autonomy aligns."
+      },
+      {
+        "userInterpretation": "You act fast when hesitation costs lives.",
+        "canonicalFact": "Akali intercepts threats in alleys before councils meet.",
+        "parallelExplanation": "Impulsive rescue impulse parallels without equating violence."
+      },
+      {
+        "userInterpretation": "Community protection beats abstract purity.",
+        "canonicalFact": "She defends Ionian neighborhoods from Noxians and criminals.",
+        "parallelExplanation": "Ground-level care links to protective answers."
+      },
+      {
+        "userInterpretation": "Identity evolves; you refuse frozen labels.",
+        "canonicalFact": "She shed the title of Fist to define Rogue Assassin.",
+        "parallelExplanation": "Self-naming journey is human parallel."
+      },
+      {
+        "userInterpretation": "You trust instincts honed by repetition.",
+        "canonicalFact": "Her fighting style merges tradition with improvisation.",
+        "parallelExplanation": "Craft plus instinct aligns."
+      },
+      {
+        "userInterpretation": "Loyalty remains to people, not always to office.",
+        "canonicalFact": "She still guards Ionia though methods diverge.",
+        "parallelExplanation": "Loyalty to land over title rhymes."
+      },
+      {
+        "userInterpretation": "You carry anger at injustice as fuel, not identity.",
+        "canonicalFact": "Noxian invasion scars inform her urgency.",
+        "parallelExplanation": "Anger directed toward protection is shared lesson."
+      }
+    ],
+    "strengths": [
+      "You adapt doctrine to reality without losing skill.",
+      "You protect marginalized spaces others ignore.",
+      "You move decisively when plans would arrive too late.",
+      "You inspire others to claim agency.",
+      "You blend tradition with innovation naturally."
+    ],
+    "weaknesses": [
+      "Going alone increases risk and burnout.",
+      "Defiance can dismiss wise counsel.",
+      "Anger may outrun strategy.",
+      "You hide tenderness behind swagger.",
+      "Recognition withheld breeds resentment."
+    ],
+    "conclusions": [
+      "Akali shows balance can walk in sneakers and smoke.",
+      "Invite allies without surrendering conscience.",
+      "Train still; freedom needs form.",
+      "Let rebellion serve neighbors, not ego.",
+      "Ionia lives in acts, not only in temples."
+    ]
+  },
+  {
+    "id": "thresh",
+    "loreEventIds": [
+      "shadow_isles_ruin"
+    ],
+    "intros": [
+      "Thresh collects souls the way others collect debts: patiently, personally, with relish.",
+      "Your answers touch strategic cruelty, or the fear of those who wield it.",
+      "Once human, now warden of agony on the Shadow Isles, he tests resolve.",
+      "Lantern light promises escape, then teaches the price of hope misplaced.",
+      "You are not him; yet you may recognize gamesmanship that watches suffering closely."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You observe suffering to learn what people will trade.",
+        "canonicalFact": "Thresh torments souls to break them slowly in the Mist.",
+        "parallelExplanation": "Psychological insight aligns; his use is torture.",
+        "tag": "warden"
+      },
+      {
+        "userInterpretation": "Control matters more than quick victory.",
+        "canonicalFact": "He prolongs hunts to savor fear.",
+        "parallelExplanation": "Patience as dominance is his sin; you may apply patience elsewhere."
+      },
+      {
+        "userInterpretation": "Promises are leverage when others are desperate.",
+        "canonicalFact": "His lantern offers false salvation to the lost.",
+        "parallelExplanation": "Understanding desperation is not exploiting it."
+      },
+      {
+        "userInterpretation": "You remember slights and store them carefully.",
+        "canonicalFact": "Thresh's cruelty grew from mortal resentment amplified by Ruination.",
+        "parallelExplanation": "Long memory can warn, not only haunt."
+      },
+      {
+        "userInterpretation": "Authority without empathy becomes theater.",
+        "canonicalFact": "He styles himself judge of the condemned.",
+        "parallelExplanation": "Performative power is cautionary mirror."
+      },
+      {
+        "userInterpretation": "You analyze moral flexibility in yourself and others.",
+        "canonicalFact": "He rationalizes pain as education.",
+        "parallelExplanation": "Self-awareness of ethics differs from his predation."
+      },
+      {
+        "userInterpretation": "Isolation suits tasks others find unbearable.",
+        "canonicalFact": "Centuries alone in the Mist refined his craft.",
+        "parallelExplanation": "Tolerance for solitude aligns safely."
+      },
+      {
+        "userInterpretation": "You fear being trapped by past choices.",
+        "canonicalFact": "Souls in his lantern cannot leave until he wills it.",
+        "parallelExplanation": "Fear of entrapment rhymes without soul cages."
+      },
+      {
+        "userInterpretation": "Power tempts when it promises safety from vulnerability.",
+        "canonicalFact": "Undeath freed him from mortal limits and conscience.",
+        "parallelExplanation": "Temptation noted; his surrender was total."
+      },
+      {
+        "userInterpretation": "Legacy of fear can outlive legacy of love.",
+        "canonicalFact": "Sailors warn of Thresh long after his human name faded.",
+        "parallelExplanation": "Reputation's shadow is lesson, not aspiration."
+      }
+    ],
+    "strengths": [
+      "You read motives under panic.",
+      "You endure grim work without sentimental collapse.",
+      "You set boundaries others cannot cross easily.",
+      "You strategize long interactions.",
+      "You recognize when hope is being weaponized."
+    ],
+    "weaknesses": [
+      "Detachment can slide into enjoyment of others' pain.",
+      "Control obsession limits trust.",
+      "Grudges become hobbies.",
+      "You may withhold mercy to feel secure.",
+      "Cynicism masks unprocessed hurt."
+    ],
+    "conclusions": [
+      "Thresh warns: never trade your soul for temporary relief.",
+      "Use insight to free, not to bind.",
+      "Let the lantern be metaphor for honesty, not bait.",
+      "Mercy breaks cycles he perpetuates.",
+      "Choose legacy that releases, not collects."
+    ]
+  },
+  {
+    "id": "karma",
+    "loreEventIds": [
+      "ionian_balance",
+      "ionian_resistance"
+    ],
+    "intros": [
+      "Karma carries Ionian memory in many lives, wisdom pressed into present crisis.",
+      "Your pattern suggests idealism disciplined by spiritual practice.",
+      "She speaks for balance while war burns orchards and temples.",
+      "Power returns each incarnation; responsibility returns with it.",
+      "You need not remember past lives to weigh duty against compassion."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You feel called to mediate when factions sharpen blades.",
+        "canonicalFact": "Karma guided Ionians during Noxian invasion and after.",
+        "parallelExplanation": "Peacemaking temperament aligns; her stage was continental.",
+        "tag": "wisdom"
+      },
+      {
+        "userInterpretation": "You integrate intuition with deliberate ethics.",
+        "canonicalFact": "Her mantra channels spirit without abandoning judgment.",
+        "parallelExplanation": "Spiritual pragmatism rhymes."
+      },
+      {
+        "userInterpretation": "Sacrifice is acceptable when it prevents wider harm.",
+        "canonicalFact": "She accepted personal cost to shield villages.",
+        "parallelExplanation": "Protective sacrifice theme links."
+      },
+      {
+        "userInterpretation": "You believe people can change with guidance.",
+        "canonicalFact": "Karma offers paths back to balance for the lost.",
+        "parallelExplanation": "Redemptive idealism aligns."
+      },
+      {
+        "userInterpretation": "Destiny feels like thread connecting choices across years.",
+        "canonicalFact": "The Mantle of Spirit passes between incarnations.",
+        "parallelExplanation": "Sense of continuity aligns metaphorically."
+      },
+      {
+        "userInterpretation": "You resist cynicism even after betrayal.",
+        "canonicalFact": "Noxian tactics tested her faith repeatedly.",
+        "parallelExplanation": "Resilient hope is shared."
+      },
+      {
+        "userInterpretation": "Teaching satisfies you as much as winning.",
+        "canonicalFact": "Karma instructs disciples in harmony and defiance.",
+        "parallelExplanation": "Pedagogical impulse links."
+      },
+      {
+        "userInterpretation": "You pause before acting, listening inward.",
+        "canonicalFact": "Mantra meditation precedes her interventions.",
+        "parallelExplanation": "Reflective discipline aligns."
+      },
+      {
+        "userInterpretation": "Community healing matters after conflict.",
+        "canonicalFact": "She rebuilt spiritual ties shattered by occupation.",
+        "parallelExplanation": "Post-crisis care rhymes."
+      },
+      {
+        "userInterpretation": "Authority should serve balance, not ego.",
+        "canonicalFact": "She refuses tyranny even when empowered.",
+        "parallelExplanation": "Servant leadership aligns."
+      }
+    ],
+    "strengths": [
+      "You calm rooms without erasing truth.",
+      "You hold long perspective in short emergencies.",
+      "You mentor others into courage.",
+      "You bridge spiritual and practical language.",
+      "You model forgiveness with boundaries."
+    ],
+    "weaknesses": [
+      "Idealism delays hard exclusions of toxic actors.",
+      "You carry collective grief personally.",
+      "Patience can look like passivity.",
+      "You expect yourself to be timeless sage.",
+      "Incarnation myth pressure feels lonely."
+    ],
+    "conclusions": [
+      "Karma invites you to breathe before you bless or battle.",
+      "Balance includes your rest, not only others' peace.",
+      "Let wisdom speak plainly, not only in riddles.",
+      "War ends; orchards need planters.",
+      "Your incarnation is this life; use it fully."
+    ]
+  },
+  {
+    "id": "riven",
+    "loreEventIds": [
+      "noxian_conquest",
+      "ionian_resistance"
+    ],
+    "intros": [
+      "Riven carries a broken blade and a nation she can no longer praise without choking.",
+      "Your answers touch fracture between loyalty and conscience after harm done.",
+      "Noxus forged her; Ionia broke her certainties.",
+      "She seeks atonement without easy script, exile as classroom.",
+      "You need not have wielded rune steel to know shame that outlasts victory."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You question causes you once defended loudly.",
+        "canonicalFact": "Riven abandoned Noxus after seeing invasion's cost.",
+        "parallelExplanation": "Moral awakening aligns; her past was soldiering.",
+        "tag": "atonement"
+      },
+      {
+        "userInterpretation": "Discipline remains even when purpose crumbles.",
+        "canonicalFact": "She trains alone, maintaining form without banner.",
+        "parallelExplanation": "Embodied discipline persists."
+      },
+      {
+        "userInterpretation": "You prefer direct repair to abstract apology.",
+        "canonicalFact": "Riven seeks ways to undo rune blade's lingering harm.",
+        "parallelExplanation": "Action-oriented remorse rhymes."
+      },
+      {
+        "userInterpretation": "Independence feels like punishment and freedom both.",
+        "canonicalFact": "Exile freed her from commands she hated.",
+        "parallelExplanation": "Self-imposed distance aligns."
+      },
+      {
+        "userInterpretation": "Anger at self can outlast anger at enemies.",
+        "canonicalFact": "She shattered her sword rather than serve Noxus again.",
+        "parallelExplanation": "Internalized blame is parallel."
+      },
+      {
+        "userInterpretation": "You protect the vulnerable to balance old harm.",
+        "canonicalFact": "Riven intervenes for Ionians when she can.",
+        "parallelExplanation": "Redemptive protection links."
+      },
+      {
+        "userInterpretation": "Trust is rebuilt slowly with those you hurt.",
+        "canonicalFact": "Ionian villagers met her with fear and tentative acceptance.",
+        "parallelExplanation": "Earned trust theme aligns."
+      },
+      {
+        "userInterpretation": "You fear becoming tool again.",
+        "canonicalFact": "Noxus treated her as weapon before person.",
+        "parallelExplanation": "Fear of instrumentalization is human."
+      },
+      {
+        "userInterpretation": "Strength without meaning feels hollow.",
+        "canonicalFact": "Her rune blade once defined her; now she redefines strength.",
+        "parallelExplanation": "Identity after role loss rhymes."
+      },
+      {
+        "userInterpretation": "Hope looks like a life where name is not synonym for destruction.",
+        "canonicalFact": "Riven wants a future unowned by warlords.",
+        "parallelExplanation": "Hope for renamed self aligns."
+      }
+    ],
+    "strengths": [
+      "You face guilt without denying facts.",
+      "You retain skill while changing allegiance.",
+      "You empathize with other exiles.",
+      "You accept discomfort of unfinished amends.",
+      "You fight only when cause clears your throat."
+    ],
+    "weaknesses": [
+      "Self-punishment can replace useful repair.",
+      "Shame isolates you from guidance.",
+      "You may assume others will never forgive.",
+      "Anger flashes at reminders of old uniform.",
+      "Identity vacuum invites reckless tests."
+    ],
+    "conclusions": [
+      "Riven shows broken blades can still cut chains, not throats.",
+      "Let atonement be daily, not theatrical.",
+      "Accept help from those you protect.",
+      "Name harm plainly; then listen.",
+      "Noxus is a chapter, not your epitaph."
+    ]
+  },
+  {
+    "id": "ekko",
+    "loreEventIds": [
+      "zaun_progress"
+    ],
+    "intros": [
+      "Ekko bends seconds in Zaun's alleys where tomorrow must be stolen back from neglect.",
+      "Your pattern mixes ingenuity, loyalty to friends, and defiance of fatalism.",
+      "He rebuilds possibility with scrap, clocks, and stubborn joy.",
+      "Progress in Zaun means protecting kids who never asked to be collateral.",
+      "You need not rewind time to fight for futures others write off."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You innovate when systems fail your community.",
+        "canonicalFact": "Ekko's Z-Drive and Firelights challenge Piltover's indifference.",
+        "parallelExplanation": "Grassroots invention aligns; his tech is miraculous.",
+        "tag": "time"
+      },
+      {
+        "userInterpretation": "Friendship is infrastructure you maintain fiercely.",
+        "canonicalFact": "He leads Firelights as family as much as gang.",
+        "parallelExplanation": "Social loyalty as survival rhymes."
+      },
+      {
+        "userInterpretation": "You replay choices mentally, seeking better outcomes.",
+        "canonicalFact": "Ekko literally revisits moments to save allies.",
+        "parallelExplanation": "Mental what-ifs parallel his temporal ones safely."
+      },
+      {
+        "userInterpretation": "Pragmatism includes joy, not only grim calculation.",
+        "canonicalFact": "He dances through fights, mocking despair.",
+        "parallelExplanation": "Playful resilience aligns."
+      },
+      {
+        "userInterpretation": "You distrust authority that never visits your streets.",
+        "canonicalFact": "Zaun's councils and Piltover's enforcers overlook his people.",
+        "parallelExplanation": "Skepticism of distant power links."
+      },
+      {
+        "userInterpretation": "Sacrifice for friends feels obvious, not heroic.",
+        "canonicalFact": "He risked paradox to save Jinx-era loved ones in stories told.",
+        "parallelExplanation": "Protective sacrifice theme aligns."
+      },
+      {
+        "userInterpretation": "Ambition aims at changing conditions, not climbing alone.",
+        "canonicalFact": "Ekko wants safer Zaun, not personal throne.",
+        "parallelExplanation": "Community ambition rhymes."
+      },
+      {
+        "userInterpretation": "Impulse serves rescue more than vanity.",
+        "canonicalFact": "He dives into fights when timers run out.",
+        "parallelExplanation": "Fast action for others aligns."
+      },
+      {
+        "userInterpretation": "Memory anchors identity against chaos.",
+        "canonicalFact": "His device stores moments that define who survived.",
+        "parallelExplanation": "Memory as selfhood links."
+      },
+      {
+        "userInterpretation": "Hope is a plan with deadlines.",
+        "canonicalFact": "Firelights schedule raids, repairs, and celebrations alike.",
+        "parallelExplanation": "Structured hope aligns with quiz pragmatism."
+      }
+    ],
+    "strengths": [
+      "You invent paths where none existed.",
+      "You keep friend groups cohesive under pressure.",
+      "You learn quickly from failed attempts.",
+      "You bring humor into bleak rooms.",
+      "You prioritize kids and vulnerable neighbors."
+    ],
+    "weaknesses": [
+      "Playing with limits risks burnout or harm.",
+      "You may overpromise second chances.",
+      "Anger at injustice can scatter focus.",
+      "You hide grief behind jokes.",
+      "Time tricks cannot fix every systemic wound."
+    ],
+    "conclusions": [
+      "Ekko says futures belong to those who schedule rebellion and rest.",
+      "Use memory to guide, not to trap.",
+      "Build with friends; do not carry Z-Drive alone.",
+      "Zaun progress is brick by brick, laugh by laugh.",
+      "Rewind only to learn; live forward."
+    ]
+  },
+  {
+    "id": "senna",
+    "loreEventIds": [
+      "shadow_isles_ruin"
+    ],
+    "intros": [
+      "Senna hunted mist and found love inside a lantern, refusing to stay a victim of grief.",
+      "Your pattern carries resilience through long separation and stubborn faith.",
+      "Lucian and the Black Mist framed her story; she reframed it with will.",
+      "Light in her hands answers darkness that tried to define her entirely.",
+      "You need not be a Sentinel to know love that persists through impossible odds."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You endure captivity, literal or emotional, without surrendering self.",
+        "canonicalFact": "Thresh imprisoned Senna's soul for years before she escaped.",
+        "parallelExplanation": "Endurance aligns; her prison was spectral.",
+        "tag": "sentinel"
+      },
+      {
+        "userInterpretation": "Partnership doubles courage when hope thins.",
+        "canonicalFact": "Lucian's hunt intertwined with her fight for release.",
+        "parallelExplanation": "Bonded resilience rhymes."
+      },
+      {
+        "userInterpretation": "You transform pain into purpose rather than identity.",
+        "canonicalFact": "Senna became Sentinel to free others from the Mist.",
+        "parallelExplanation": "Purpose after trauma aligns."
+      },
+      {
+        "userInterpretation": "Mercy and wrath coexist in your justice.",
+        "canonicalFact": "She wields relic cannon against wraiths while protecting the living.",
+        "parallelExplanation": "Dual tone of justice is thematic."
+      },
+      {
+        "userInterpretation": "You distrust endings declared by enemies.",
+        "canonicalFact": "She rejected Thresh's claim that souls belong to him.",
+        "parallelExplanation": "Agency against domination aligns."
+      },
+      {
+        "userInterpretation": "Faith means action under fire, not comfort.",
+        "canonicalFact": "Sentinels of Light train for constant war with undeath.",
+        "parallelExplanation": "Active faith links."
+      },
+      {
+        "userInterpretation": "You collect fragments of others' stories to honor them.",
+        "canonicalFact": "Senna carries souls she frees, guiding their release.",
+        "parallelExplanation": "Witness-bearing aligns metaphorically."
+      },
+      {
+        "userInterpretation": "Freedom includes choosing who you become after harm.",
+        "canonicalFact": "She returned changed, wiser, still loving.",
+        "parallelExplanation": "Reclamation of self rhymes."
+      },
+      {
+        "userInterpretation": "You protect the grieving from predatory hope.",
+        "canonicalFact": "She fights wraiths that feed on sorrow.",
+        "parallelExplanation": "Guardian of mourners theme aligns."
+      },
+      {
+        "userInterpretation": "Legacy is chain broken, not chain worn.",
+        "canonicalFact": "Her escape weakened Thresh's myth of inevitability.",
+        "parallelExplanation": "Breaking cycles is shared hope."
+      }
+    ],
+    "strengths": [
+      "You return from hardship with clarified purpose.",
+      "You inspire partners to keep fighting.",
+      "You channel anger into disciplined aim.",
+      "You honor the dead by freeing the living.",
+      "You believe love can survive transformation."
+    ],
+    "weaknesses": [
+      "Hypervigilance exhausts body and trust.",
+      "You may define yourself by the hunt too long.",
+      "Grief flashes when triggers appear.",
+      "Forgiveness for captors comes slowly, if at all.",
+      "You struggle to rest while mist still breathes."
+    ],
+    "conclusions": [
+      "Senna proves lanterns can be escaped with will and help.",
+      "Let love be active, not nostalgic.",
+      "Rest is tactical, not betrayal.",
+      "Carry stories lightly; do not become archive of pain.",
+      "Your light can be Sentinel calm, not only blaze."
+    ]
+  },
+  {
+    "id": "diana",
+    "loreEventIds": [
+      "targon_ascent"
+    ],
+    "intros": [
+      "Diana climbed Targon chasing truth and found moon's wrath where she sought belonging.",
+      "Your pattern touches devotion that outgrows doctrine, faith sharpened into exile.",
+      "Her armor remembers ascent; her heart remembers rejection by sun cult.",
+      "Lunari truth collided with Solari power; she chose the sky that answered.",
+      "You need not scale a mountain to feel calling that society denies."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You pursue truth even when elders forbid questions.",
+        "canonicalFact": "Diana uncovered Lunari heritage hidden by Solari leaders.",
+        "parallelExplanation": "Heresy as honesty aligns; her cost was exile.",
+        "tag": "moon"
+      },
+      {
+        "userInterpretation": "Destiny feels like pull stronger than comfort.",
+        "canonicalFact": "Targon chose her, reshaping flesh with celestial force.",
+        "parallelExplanation": "Sense of call rhymes without cosmic rewrite."
+      },
+      {
+        "userInterpretation": "You protect outcasts who share hidden names.",
+        "canonicalFact": "She fights for Lunari survivors across Runeterra.",
+        "parallelExplanation": "Protective advocacy links."
+      },
+      {
+        "userInterpretation": "Anger at injustice arrives fast, cooled slowly.",
+        "canonicalFact": "Her crusade against Solari hypocrisy was fierce.",
+        "parallelExplanation": "Hot justice temperament aligns."
+      },
+      {
+        "userInterpretation": "Discipline in training grounds volatile revelation.",
+        "canonicalFact": "Years of mountaineering forged body before apotheosis.",
+        "parallelExplanation": "Preparedness plus breakthrough rhymes."
+      },
+      {
+        "userInterpretation": "You feel torn between two homes that both claim you.",
+        "canonicalFact": "Diana belongs to Targon sky and mortal memory alike.",
+        "parallelExplanation": "Split belonging is human parallel."
+      },
+      {
+        "userInterpretation": "Independence follows betrayal by institutions.",
+        "canonicalFact": "Solari tried to silence her; she walked into night.",
+        "parallelExplanation": "Institutional betrayal theme links."
+      },
+      {
+        "userInterpretation": "You seek recognition from the cosmos, not crowds.",
+        "canonicalFact": "Moon's voice matters more than temple applause.",
+        "parallelExplanation": "Spiritual validation aligns."
+      },
+      {
+        "userInterpretation": "Courage is continuing when faith feels lonely.",
+        "canonicalFact": "She wandered Runeterra without a nation.",
+        "parallelExplanation": "Lonely faith rhymes."
+      },
+      {
+        "userInterpretation": "Legacy means opening paths others were denied.",
+        "canonicalFact": "Her fight reopens Lunari worship in secret.",
+        "parallelExplanation": "Trailblazing legacy aligns."
+      }
+    ],
+    "strengths": [
+      "You endure physical and moral ascent.",
+      "You defend minorities with lethal and legal force.",
+      "You integrate mystic experience with action.",
+      "You question authority productively.",
+      "You remain loyal to truth over title."
+    ],
+    "weaknesses": [
+      "Zeal can blur nuance among allies.",
+      "Isolation on the road hardens judgment.",
+      "You may replay rejection obsessively.",
+      "Body and spirit strain under dual calling.",
+      "Forgiveness for Solari comes reluctantly."
+    ],
+    "conclusions": [
+      "Diana asks you to honor the moon you see, not only the sun allowed.",
+      "Ascent continues after the peak; keep climbing inward.",
+      "Let wrath serve protection, not vanity.",
+      "Find kin who share hidden names.",
+      "Faith denied by mortals may still be true."
+    ]
+  },
+  {
+    "id": "leona",
+    "loreEventIds": [
+      "targon_ascent"
+    ],
+    "intros": [
+      "Leona rises like dawn over Targon: radiant, disciplined, vow-bound to solar order.",
+      "Your pattern suggests protective authority rooted in faith and training.",
+      "She ascended to defend Solari truth with shield and spear.",
+      "Warmth and severity share her face depending on who threatens light.",
+      "You need not be Aspect-host to lead with visible conviction."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You accept leadership as duty, not vanity.",
+        "canonicalFact": "Leona became Aspect of the Sun to guard Mount Targon.",
+        "parallelExplanation": "Called leadership aligns; her power is divine.",
+        "tag": "sun"
+      },
+      {
+        "userInterpretation": "You shield others before advancing yourself.",
+        "canonicalFact": "Her eclipse shield protects allies in every battle.",
+        "parallelExplanation": "Protective instinct rhymes."
+      },
+      {
+        "userInterpretation": "Discipline is worship made daily.",
+        "canonicalFact": "Solari training shaped her before ascension.",
+        "parallelExplanation": "Ritual discipline links."
+      },
+      {
+        "userInterpretation": "You believe order prevents greater suffering.",
+        "canonicalFact": "Solari doctrine frames sun as civilization's spine.",
+        "parallelExplanation": "Order as mercy aligns."
+      },
+      {
+        "userInterpretation": "Friendship can survive ideological distance.",
+        "canonicalFact": "Diana was her childhood ally before their paths split.",
+        "parallelExplanation": "Bond across conflict is poignant parallel."
+      },
+      {
+        "userInterpretation": "You confront heresy with sorrow as well as strength.",
+        "canonicalFact": "Leona did not rejoice in hunting Diana.",
+        "parallelExplanation": "Reluctant enforcement aligns emotionally."
+      },
+      {
+        "userInterpretation": "Courage is standing in light others fear.",
+        "canonicalFact": "She returned from ascent changed yet steadfast.",
+        "parallelExplanation": "Visible bravery rhymes."
+      },
+      {
+        "userInterpretation": "Authority must serve the vulnerable.",
+        "canonicalFact": "She protects pilgrims and Solari faithful.",
+        "parallelExplanation": "Servant protector theme links."
+      },
+      {
+        "userInterpretation": "You fear failing the divine charge.",
+        "canonicalFact": "Aspects bear cosmic responsibility.",
+        "parallelExplanation": "Fear of letting down calling aligns."
+      },
+      {
+        "userInterpretation": "Legacy is dawn that others can walk by.",
+        "canonicalFact": "Solari look to her as living sun.",
+        "parallelExplanation": "Guiding legacy aligns."
+      }
+    ],
+    "strengths": [
+      "You stabilize groups with calm certainty.",
+      "You translate faith into protective action.",
+      "You train until competence feels like prayer.",
+      "You inspire discipline without cruelty.",
+      "You remain loyal to friends even in disagreement."
+    ],
+    "weaknesses": [
+      "Doctrine can blind you to legitimate dissent.",
+      "You may suppress your own doubts.",
+      "Radiance intimidates those who need gentleness.",
+      "Conflict with loved ones wounds deeply.",
+      "Perfectionism in vows creates brittle joy."
+    ],
+    "conclusions": [
+      "Leona teaches light can guard without scorching.",
+      "Question sun when shadows hold truth.",
+      "Let shield face outward, heart stay porous.",
+      "Dawn returns; repair with Diana if paths allow.",
+      "Lead so others feel warmed, not shrunk."
+    ]
+  },
+  {
+    "id": "morgana",
+    "loreEventIds": [
+      "targon_ascent"
+    ],
+    "intros": [
+      "Morgana chose fallen wings and doubted crowns, power spent on shielding the broken.",
+      "Your pattern carries empathy for outcasts and skepticism toward glittering authority.",
+      "She rejected Aspect ascension to walk among mortals who fear the sky.",
+      "Pain taught her mercy; betrayal taught her boundaries.",
+      "You need not be immortal to know love that looks like defiance."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You distrust power that demands worship.",
+        "canonicalFact": "Morgana broke from Kayle's celestial crusade.",
+        "parallelExplanation": "Anti-idolatry aligns; her break was cosmic.",
+        "tag": "fallen"
+      },
+      {
+        "userInterpretation": "You shelter those punished for difference.",
+        "canonicalFact": "She protects mages and exiles across Demacia and beyond.",
+        "parallelExplanation": "Sanctuary giver rhymes."
+      },
+      {
+        "userInterpretation": "Sacrifice of comfort for others feels natural.",
+        "canonicalFact": "She endured mortal pain willingly to stay near sufferers.",
+        "parallelExplanation": "Embodied empathy aligns."
+      },
+      {
+        "userInterpretation": "Anger at injustice simmers long.",
+        "canonicalFact": "Her grudge against Kayle spans centuries.",
+        "parallelExplanation": "Long grievance is cautionary parallel."
+      },
+      {
+        "userInterpretation": "Freedom means choosing pain over hollow perfection.",
+        "canonicalFact": "She kept broken wings rather than pristine ascension.",
+        "parallelExplanation": "Authentic suffering over false glory aligns."
+      },
+      {
+        "userInterpretation": "You teach boundaries alongside mercy.",
+        "canonicalFact": "Morgana's chains bind tyrants, not only comfort victims.",
+        "parallelExplanation": "Boundaried mercy links."
+      },
+      {
+        "userInterpretation": "Faith is questioned, not copied.",
+        "canonicalFact": "She rejects Targon dogma that ignores mortal frailty.",
+        "parallelExplanation": "Critical spirituality rhymes."
+      },
+      {
+        "userInterpretation": "You forgive individuals slower than systems.",
+        "canonicalFact": "Kayle represents system; mortals receive softer grace.",
+        "parallelExplanation": "Selective forgiveness aligns."
+      },
+      {
+        "userInterpretation": "Legacy is refuge, not throne.",
+        "canonicalFact": "Outcasts whisper her name like shelter.",
+        "parallelExplanation": "Refuge legacy aligns."
+      },
+      {
+        "userInterpretation": "Hope looks like dark wings spread over the accused.",
+        "canonicalFact": "She appears when mages face execution.",
+        "parallelExplanation": "Protective hope rhymes."
+      }
+    ],
+    "strengths": [
+      "You offer sanctuary without condescension.",
+      "You challenge cruel law with moral clarity.",
+      "You endure pain to remain relatable.",
+      "You bind abusers while healing victims.",
+      "You articulate doubt that strengthens ethics."
+    ],
+    "weaknesses": [
+      "Bitterness toward institutions can spill onto individuals.",
+      "You carry others' trauma without enough rest.",
+      "Isolation from sisterhood aches.",
+      "Dark aesthetic hides need for joy.",
+      "Martyrdom tempts when boundaries slip."
+    ],
+    "conclusions": [
+      "Morgana says mercy without boundaries becomes self-erasure.",
+      "Question crowns, keep hands open.",
+      "Let fallen wings still lift someone.",
+      "Forgive where safe; fight where not.",
+      "Your doubt can be holy, not only heresy."
+    ]
+  },
+  {
+    "id": "nasus",
+    "loreEventIds": [
+      "shurima_fall"
+    ],
+    "intros": [
+      "Nasus walks desert memory as curator, brother, and reluctant warrior beneath a fallen sun.",
+      "Your pattern suggests duty stretched across centuries, wisdom heavy on shoulders.",
+      "Shurima's collapse scarred him; Renekton's rage scarred them both.",
+      "Knowledge preserved in tomes and choices alike defines his atonement.",
+      "You need not be Ascended to feel responsible for what empire broke."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You carry guilt for failing someone you loved.",
+        "canonicalFact": "Nasus sealed Renekton with Azir's crumbling palace, a mercy that became torment.",
+        "parallelExplanation": "Impossible choice aligns; his scale was mythic.",
+        "tag": "curator",
+        "loreEventId": "shurima_fall"
+      },
+      {
+        "userInterpretation": "Discipline channels grief into stewardship.",
+        "canonicalFact": "He guarded the Great Library before war pulled him frontward.",
+        "parallelExplanation": "Scholarly duty rhymes."
+      },
+      {
+        "userInterpretation": "You prefer teaching to dominating.",
+        "canonicalFact": "Nasus instructs survivors in Shuriman history and ethics.",
+        "parallelExplanation": "Pedagogy as power aligns."
+      },
+      {
+        "userInterpretation": "Pragmatism accepts ugly solutions to prevent worse.",
+        "canonicalFact": "He imprisoned his brother to stop immediate slaughter.",
+        "parallelExplanation": "Tragic tradeoff theme links without repeating his act."
+      },
+      {
+        "userInterpretation": "You believe cultures must be remembered accurately.",
+        "canonicalFact": "He preserves records amid sand that buries truth.",
+        "parallelExplanation": "Archivist instinct aligns."
+      },
+      {
+        "userInterpretation": "Resilience is measured in eras, not days.",
+        "canonicalFact": "Ascended lifespan forced him to watch Shurima crumble slowly.",
+        "parallelExplanation": "Long horizon endurance rhymes."
+      },
+      {
+        "userInterpretation": "Authority serves continuity, not vanity.",
+        "canonicalFact": "He rejected petty thrones for custodial role.",
+        "parallelExplanation": "Servant leader aligns."
+      },
+      {
+        "userInterpretation": "You fear rage in yourself or those you love.",
+        "canonicalFact": "Renekton's fury haunts every decision Nasus makes.",
+        "parallelExplanation": "Fear of uncontrolled anger links."
+      },
+      {
+        "userInterpretation": "Destiny feels like obligation to unfinished repair.",
+        "canonicalFact": "Shurima's return forces him to confront old oaths.",
+        "parallelExplanation": "Repair calling aligns."
+      },
+      {
+        "userInterpretation": "Justice prefers restoration over spectacle.",
+        "canonicalFact": "He seeks to heal land before punishing pretenders.",
+        "parallelExplanation": "Restorative justice rhymes."
+      }
+    ],
+    "strengths": [
+      "You think in generations, not news cycles.",
+      "You teach patiently under insult.",
+      "You choose preservation when rage would be easier.",
+      "You navigate family conflict with sorrowful clarity.",
+      "You ground ambition in ethics."
+    ],
+    "weaknesses": [
+      "Guilt slows necessary action.",
+      "You may romanticize past golden ages.",
+      "Brother wounds reopen unexpectedly.",
+      "Detachment looks like coldness.",
+      "You burden yourself as sole rememberer."
+    ],
+    "conclusions": [
+      "Nasus asks you to curate mercy along with history.",
+      "Release what cannot be sealed again.",
+      "Teach so fall does not repeat as farce.",
+      "Renekton's rage warns: monitor your own heat.",
+      "Shurima lives in honest memory, not only golden myth."
+    ]
+  },
+  {
+    "id": "azir",
+    "loreEventIds": [
+      "shurima_restoration",
+      "shurima_fall"
+    ],
+    "intros": [
+      "Azir returned from betrayal dust to raise a sun-disc and call empire back to life.",
+      "Your pattern touches ambition fused with vision, pride that believes restoration possible.",
+      "He was emperor once; now he is miracle with blueprint.",
+      "Sand obeys memory of glory; skeptics obey caution.",
+      "You need not ascend to want legacy that rebuilds what collapse stole."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You believe greatness can be rebuilt after humiliation.",
+        "canonicalFact": "Azir resurrected and lifted Shurima's capital from desert.",
+        "parallelExplanation": "Restoration drive aligns; his method was divine.",
+        "tag": "emperor",
+        "loreEventId": "shurima_restoration"
+      },
+      {
+        "userInterpretation": "Ambition serves civilization, not only ego.",
+        "canonicalFact": "He promises prosperity to reunited Shuriman peoples.",
+        "parallelExplanation": "Visionary ambition rhymes."
+      },
+      {
+        "userInterpretation": "Betrayal taught you who must never hold keys again.",
+        "canonicalFact": "Xerath's treachery killed him at ascension ritual.",
+        "parallelExplanation": "Trust fracture aligns."
+      },
+      {
+        "userInterpretation": "You delegate to capable hands while setting direction.",
+        "canonicalFact": "Azir elevates loyal commanders in new empire.",
+        "parallelExplanation": "Leader-as-architect aligns."
+      },
+      {
+        "userInterpretation": "Recognition matters when it legitimizes reform.",
+        "canonicalFact": "He demands acknowledgment as true emperor.",
+        "parallelExplanation": "Need for legitimate title links."
+      },
+      {
+        "userInterpretation": "Discipline in planning prevents second collapse.",
+        "canonicalFact": "He studies old failures while designing new institutions.",
+        "parallelExplanation": "Learning from fall rhymes.",
+        "loreEventId": "shurima_fall"
+      },
+      {
+        "userInterpretation": "You romanticize golden age yet work in present sand.",
+        "canonicalFact": "Azir merges ancient aesthetics with current needs.",
+        "parallelExplanation": "Nostalgia plus action aligns."
+      },
+      {
+        "userInterpretation": "Power tempts you to speed timelines others call impossible.",
+        "canonicalFact": "Restoration magic accelerates rebuilding dramatically.",
+        "parallelExplanation": "Impatience with slowness links."
+      },
+      {
+        "userInterpretation": "Legacy is city skyline, not personal anecdote.",
+        "canonicalFact": "He measures success in restored aqueducts and armies.",
+        "parallelExplanation": "Civilizational legacy aligns."
+      },
+      {
+        "userInterpretation": "Hope looks like banners rising from dunes.",
+        "canonicalFact": "Shuriman refugees witness sun-disc and weep.",
+        "parallelExplanation": "Symbolic hope rhymes."
+      }
+    ],
+    "strengths": [
+      "You inspire large projects with articulate vision.",
+      "You learn from catastrophic mistakes.",
+      "You magnetize talented collaborators.",
+      "You combine pride with genuine care for people.",
+      "You persist after deathly setbacks metaphorically or literally."
+    ],
+    "weaknesses": [
+      "Pride blinds you to necessary compromise.",
+      "Speed risks repeating Xerath-era hubris.",
+      "You may confuse loyalty with obedience.",
+      "Skeptics feel crushed, not convinced.",
+      "Golden myth overshadows present suffering."
+    ],
+    "conclusions": [
+      "Azir warns: empires rise on trust, not only sun.",
+      "Rebuild with ears open to desert poor.",
+      "Let ambition serve living Shurimans, not ghosts.",
+      "Forgive cautiously; remember treason clearly.",
+      "Your skyline needs justice inside walls."
+    ]
+  },
+  {
+    "id": "missfortune",
+    "loreEventIds": [
+      "bilgewater_vengeance"
+    ],
+    "intros": [
+      "Miss Fortune wears red and reputation, captain who turned grief into fleet and flag.",
+      "Your pattern mixes charm, calculation, and hunger to rewrite a city's power map.",
+      "Bilgewater respects brass; she brought brass and theater both.",
+      "Vengeance against Gangplank reshaped docks; pragmatism keeps them.",
+      "You need not sail slaughterer's bay to know revenge as business plan."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You perform confidence while calculating angles.",
+        "canonicalFact": "Sarah Fortune built persona to dominate Bilgewater politics.",
+        "parallelExplanation": "Strategic persona aligns; her stage was piracy.",
+        "tag": "captain"
+      },
+      {
+        "userInterpretation": "Loss of parent forged appetite for control.",
+        "canonicalFact": "Gangplank murdered her mother; she rebuilt power to unseat him.",
+        "parallelExplanation": "Origin grief drives ambition safely scaled."
+      },
+      {
+        "userInterpretation": "You leverage charisma as tool, not confession.",
+        "canonicalFact": "Her pistols and smile negotiate before blood.",
+        "parallelExplanation": "Social weaponry rhymes."
+      },
+      {
+        "userInterpretation": "Pragmatism accepts messy allies.",
+        "canonicalFact": "She allies with scoundrels when docks require it.",
+        "parallelExplanation": "Coalition realism aligns."
+      },
+      {
+        "userInterpretation": "Freedom means owning your route, not following tide.",
+        "canonicalFact": "She refused to be trophy pirate princess.",
+        "parallelExplanation": "Autonomy narrative links."
+      },
+      {
+        "userInterpretation": "You fear becoming what you hunt.",
+        "canonicalFact": "Victory over Gangplank left her ruling with hard edges.",
+        "parallelExplanation": "Mirror fear is human parallel."
+      },
+      {
+        "userInterpretation": "Justice on docks is personal before institutional.",
+        "canonicalFact": "Bilgewater lacks clean courts; captains enforce.",
+        "parallelExplanation": "Personal justice theme aligns."
+      },
+      {
+        "userInterpretation": "Recognition stabilizes crew loyalty.",
+        "canonicalFact": "Her flag unites mercenaries under visible success.",
+        "parallelExplanation": "Merit leadership rhymes."
+      },
+      {
+        "userInterpretation": "Hope looks like a harbor where your name means safety.",
+        "canonicalFact": "She aims to make Bilgewater less random in cruelty.",
+        "parallelExplanation": "Ordered hope aligns."
+      },
+      {
+        "userInterpretation": "You separate public mask from private doubt.",
+        "canonicalFact": "Few see uncertainty beneath captain's laugh.",
+        "parallelExplanation": "Masked vulnerability links."
+      }
+    ],
+    "strengths": [
+      "You rally disparate people quickly.",
+      "You negotiate under gunfire, literal or metaphorical.",
+      "You turn trauma into strategic patience.",
+      "You read rooms and winds equally well.",
+      "You maintain style without losing edge."
+    ],
+    "weaknesses": [
+      "Revenge can become identity after victory.",
+      "Trust issues linger with allies.",
+      "Performance exhausts inner life.",
+      "Hard edges scare potential friends.",
+      "Control obsession limits delegation."
+    ],
+    "conclusions": [
+      "Miss Fortune says captains must choose what harbor becomes after war.",
+      "Let red coat be warning, not wall.",
+      "Build institutions, not only personal score.",
+      "Grief fueled rise; do not fuel forever.",
+      "Bilgewater thrives when brass serves docks, not ego."
+    ]
+  },
+  {
+    "id": "pyke",
+    "loreEventIds": [
+      "bilgewater_vengeance"
+    ],
+    "intros": [
+      "Pyke lists names in salt and memory, revenant accountant of Bilgewater's betrayals.",
+      "Your pattern may touch uncompromising justice, or fear of those who cannot forgive.",
+      "He was harpooner cheated to death; now he returns debt to captains who thought accounts closed.",
+      "Spectacle follows him; mercy rarely does.",
+      "You are not undead enforcer; you may still feel ledgers that must balance."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You remember who owed what when systems failed.",
+        "canonicalFact": "Pyke hunts those he judges guilty of maritime murder.",
+        "parallelExplanation": "Moral accounting aligns; his collection is lethal.",
+        "tag": "ledger"
+      },
+      {
+        "userInterpretation": "Betrayal by peers defines your caution.",
+        "canonicalFact": "Crew sacrificed him to save gold.",
+        "parallelExplanation": "Workplace betrayal theme links."
+      },
+      {
+        "userInterpretation": "You distrust wealthy captains who rewrite stories.",
+        "canonicalFact": "Bilgewater oligarchs erased Pyke's death easily.",
+        "parallelExplanation": "Class skepticism rhymes."
+      },
+      {
+        "userInterpretation": "Impulse executes before committee meets.",
+        "canonicalFact": "Pyke strikes from shadows without trial.",
+        "parallelExplanation": "Fast retribution is his; you may feel urge safely."
+      },
+      {
+        "userInterpretation": "You vocalize grudges others swallow.",
+        "canonicalFact": "His hook screams names in alleyways.",
+        "parallelExplanation": "Naming harm aligns without murder."
+      },
+      {
+        "userInterpretation": "Community justice feels personal on docks.",
+        "canonicalFact": "Harbor folk whisper his killings like weather.",
+        "parallelExplanation": "Folk justice theme links."
+      },
+      {
+        "userInterpretation": "You struggle to forgive yourself for surviving.",
+        "canonicalFact": "Undeath keeps Pyke from closure.",
+        "parallelExplanation": "Survivor guilt rhymes metaphorically."
+      },
+      {
+        "userInterpretation": "Power without mercy terrifies you when mirrored.",
+        "canonicalFact": "Even allies fear his unpredictability.",
+        "parallelExplanation": "Fear of unchecked avengers aligns."
+      },
+      {
+        "userInterpretation": "Hope for you means accounts settled without new ghosts.",
+        "canonicalFact": "Some pray his list ends; it never does.",
+        "parallelExplanation": "Desire for closure links."
+      },
+      {
+        "userInterpretation": "Identity fused with mission can erase rest.",
+        "canonicalFact": "Pyke barely recalls human tenderness.",
+        "parallelExplanation": "Mission obsession cautionary."
+      }
+    ],
+    "strengths": [
+      "You detect liars in negotiation.",
+      "You advocate for workers cheated by bosses.",
+      "You persist when institutions ignore you.",
+      "You make violators feel seen.",
+      "You survive betrayal with narrative clarity."
+    ],
+    "weaknesses": [
+      "Vengeance loops without healing.",
+      "Binary guilt ignores context.",
+      "You may isolate from fear of becoming judge.",
+      "Rage erodes empathy.",
+      "Ledger mindset misses redemption arcs."
+    ],
+    "conclusions": [
+      "Pyke warns: unpaid debts fester into monsters.",
+      "Seek justice with process, not only hook.",
+      "Let survival become life, not list.",
+      "Bilgewater needs courts, not only specters.",
+      "Close accounts you can; release those you cannot."
+    ]
+  },
+  {
+    "id": "yone",
+    "loreEventIds": [
+      "ionian_balance",
+      "shadow_isles_ruin"
+    ],
+    "intros": [
+      "Yone crossed death hunting his brother's shadow and returned with two blades, two truths.",
+      "Your pattern balances duty to family with duty to balance itself.",
+      "Azakana and mist tested him; discipline and sorrow forged Azakana hunter path.",
+      "He loves Yasuo still, though story between them tore.",
+      "You need not die to feel split between honor and forgiveness."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You feel responsible for siblings' or peers' failures.",
+        "canonicalFact": "Yone died pursuing Yasuo after master's murder accusation.",
+        "parallelExplanation": "Family duty aligns; his pursuit was fatal.",
+        "tag": "dual"
+      },
+      {
+        "userInterpretation": "Discipline masks heartbreak.",
+        "canonicalFact": "He trains endlessly as azakana hunter.",
+        "parallelExplanation": "Training as grief container rhymes."
+      },
+      {
+        "userInterpretation": "You seek harmony between spirit and mortal choice.",
+        "canonicalFact": "Yone walks realm between living and demonic.",
+        "parallelExplanation": "Integrated self theme aligns metaphorically."
+      },
+      {
+        "userInterpretation": "Forgiveness competes with need for answers.",
+        "canonicalFact": "Reunion with Yasuo mixed embrace and unresolved pain.",
+        "parallelExplanation": "Sibling reconciliation arc links."
+      },
+      {
+        "userInterpretation": "You protect others from spiritual corruption.",
+        "canonicalFact": "He binds azakana that feed on emotion.",
+        "parallelExplanation": "Protective spiritual work rhymes."
+      },
+      {
+        "userInterpretation": "Independence follows death of old identity.",
+        "canonicalFact": "Return from spirit realm remade his name and role.",
+        "parallelExplanation": "Rebirth narrative aligns."
+      },
+      {
+        "userInterpretation": "Courage is facing family truth without blade first.",
+        "canonicalFact": "Yone ultimately chose understanding with Yasuo.",
+        "parallelExplanation": "Late softness aligns."
+      },
+      {
+        "userInterpretation": "You fear becoming monster when anger wins.",
+        "canonicalFact": "Azakana nearly consumed him.",
+        "parallelExplanation": "Fear of inner demon links."
+      },
+      {
+        "userInterpretation": "Legacy is restoring balance, not winning duels.",
+        "canonicalFact": "Kinkou traditions inform his hunts.",
+        "parallelExplanation": "Balance legacy aligns."
+      },
+      {
+        "userInterpretation": "Hope looks like two blades pointing same direction again.",
+        "canonicalFact": "Brothers fight side by side in newer tales.",
+        "parallelExplanation": "Repaired bond hope rhymes."
+      }
+    ],
+    "strengths": [
+      "You mediate between emotion and code.",
+      "You master skills requiring patience.",
+      "You return after setback transformed.",
+      "You defend realm others cannot see.",
+      "You choose family repair when possible."
+    ],
+    "weaknesses": [
+      "Duty to family can delay your own healing.",
+      "You suppress anger until it flares.",
+      "Spiritual burden isolates you.",
+      "Perfectionism in form avoids feeling.",
+      "You judge yourself harder than azakana."
+    ],
+    "conclusions": [
+      "Yone teaches second life can be chooser, not victim.",
+      "Speak with Yasuo before story hardens.",
+      "Bind your demons with name and ritual.",
+      "Two blades need one purpose: protect living.",
+      "Balance includes forgiving yourself."
+    ]
+  },
+  {
+    "id": "zed",
+    "loreEventIds": [
+      "ionian_balance"
+    ],
+    "intros": [
+      "Zed leads Order of Shadow, power taken because balance, to him, demanded teeth.",
+      "Your pattern may carry pragmatism sharp enough to cut tradition.",
+      "He broke from kinkou after witnessing invaders crush passive doctrine.",
+      "Forbidden techniques live in his hands; fear lives in Ionian councils.",
+      "You need not steal shadow to know urgency that outruns elders."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You accept moral cost when soft methods fail.",
+        "canonicalFact": "Zed embraced forbidden shadow arts after Noxian invasion.",
+        "parallelExplanation": "Hard means debate aligns; his means are lethal.",
+        "tag": "shadow"
+      },
+      {
+        "userInterpretation": "You distrust institutions that preach while burning.",
+        "canonicalFact": "He saw kinkou restraint as complicity.",
+        "parallelExplanation": "Institutional skepticism links."
+      },
+      {
+        "userInterpretation": "Discipline in training is absolute.",
+        "canonicalFact": "Order of Shadow drills relentlessly.",
+        "parallelExplanation": "Harsh discipline rhymes."
+      },
+      {
+        "userInterpretation": "You cultivate fear as diplomatic tool.",
+        "canonicalFact": "Ionians negotiate differently when Zed intervenes.",
+        "parallelExplanation": "Fear as leverage cautionary parallel."
+      },
+      {
+        "userInterpretation": "Personal loss fed appetite for control.",
+        "canonicalFact": "Early trauma and invasion shaped his doctrine.",
+        "parallelExplanation": "Trauma-driven control aligns safely."
+      },
+      {
+        "userInterpretation": "You mentor apprentices in your image.",
+        "canonicalFact": "Zed trains assassins to enforce his balance.",
+        "parallelExplanation": "Legacy through disciples links."
+      },
+      {
+        "userInterpretation": "Independence from elders feels like survival.",
+        "canonicalFact": "He split from Shen's path openly.",
+        "parallelExplanation": "Breakaway autonomy rhymes."
+      },
+      {
+        "userInterpretation": "Ambition serves nation, not only ego, in your telling.",
+        "canonicalFact": "Zed claims shadow protects Ionia.",
+        "parallelExplanation": "Nationalist pragmatism theme."
+      },
+      {
+        "userInterpretation": "You hide tenderness entirely.",
+        "canonicalFact": "Rare glimpses show care for Ionian civilians.",
+        "parallelExplanation": "Hidden warmth aligns."
+      },
+      {
+        "userInterpretation": "Legacy is order maintained by unseen blade.",
+        "canonicalFact": "His shadow persists across provinces.",
+        "parallelExplanation": "Covert legacy rhymes."
+      }
+    ],
+    "strengths": [
+      "You act when committees stall.",
+      "You master skills others fear to learn.",
+      "You protect homeland in ways you choose.",
+      "You organize loyal teams efficiently.",
+      "You read threats before they bloom."
+    ],
+    "weaknesses": [
+      "Ends justify means until lines blur.",
+      "Fear erodes trust you need.",
+      "Isolation from kinkou costs wisdom.",
+      "Apprentices inherit your hardness.",
+      "Control becomes addiction."
+    ],
+    "conclusions": [
+      "Zed asks whether teeth alone can hold balance.",
+      "Shadow can guard; it should not devour.",
+      "Listen once to Shen before striking.",
+      "Power taken must be power checked.",
+      "Ionia needs you human, not only feared."
+    ]
+  },
+  {
+    "id": "sett",
+    "loreEventIds": [
+      "noxian_conquest"
+    ],
+    "intros": [
+      "Sett turned Noxian pit into stage, half vastaya pride and whole Ionian stubbornness.",
+      "Your pattern mixes showmanship, protectiveness for crew, and rage at absent fathers.",
+      "He punches for coin, reputation, and mom; empire watches and bets.",
+      "Boss of bosses in arena, son at heart beneath ink and scars.",
+      "You need not fight champions to know duty to family worn like championship belt."
+    ],
+    "parallels": [
+      {
+        "userInterpretation": "You perform strength to hide vulnerability.",
+        "canonicalFact": "Sett plays braggart while funding his mother's quiet life.",
+        "parallelExplanation": "Performative toughness aligns.",
+        "tag": "pit"
+      },
+      {
+        "userInterpretation": "You protect your people like extended family.",
+        "canonicalFact": "He runs pit crews with loyalist code.",
+        "parallelExplanation": "Crew loyalty rhymes."
+      },
+      {
+        "userInterpretation": "Abandonment by parent fuels ambition.",
+        "canonicalFact": "His Noxian father left; Sett built fame without him.",
+        "parallelExplanation": "Father wound links."
+      },
+      {
+        "userInterpretation": "You enjoy recognition loudly earned.",
+        "canonicalFact": "Crowds chant his name in Noxus arena.",
+        "parallelExplanation": "Need for recognition aligns."
+      },
+      {
+        "userInterpretation": "Pragmatism accepts dirty arenas to fund clean purposes.",
+        "canonicalFact": "He tolerates Noxian violence business to support Ionia remittances.",
+        "parallelExplanation": "Moral compromise for family rhymes."
+      },
+      {
+        "userInterpretation": "Impulse hits when disrespect lands.",
+        "canonicalFact": "Sett's temper flares in ring and backroom.",
+        "parallelExplanation": "Hot temper aligns without requiring fights."
+      },
+      {
+        "userInterpretation": "You negotiate from position of demonstrated force.",
+        "canonicalFact": "Rivals bend after public beating.",
+        "parallelExplanation": "Demonstrated credibility links."
+      },
+      {
+        "userInterpretation": "Independence from both nations defines you.",
+        "canonicalFact": "Half Ionian, half vastaya, he claims pit as home.",
+        "parallelExplanation": "Between-cultures identity rhymes."
+      },
+      {
+        "userInterpretation": "Hope looks like mom safe while you take the hits.",
+        "canonicalFact": "Letters and coin reach Ionia regularly.",
+        "parallelExplanation": "Protective hope aligns."
+      },
+      {
+        "userInterpretation": "Legacy is name mom can speak proudly.",
+        "canonicalFact": "He wants her to see champion, not thug.",
+        "parallelExplanation": "Family-centered legacy links."
+      }
+    ],
+    "strengths": [
+      "You energize crowds and teams.",
+      "You convert pain into visible success.",
+      "You fund care for loved ones reliably.",
+      "You stand up to bullies in your domain.",
+      "You blend charm with credible threat."
+    ],
+    "weaknesses": [
+      "Performative rage hides unprocessed hurt.",
+      "You risk body for approval.",
+      "Noxian ties stain reputation at home.",
+      "Temper ends negotiations early.",
+      "You avoid asking mom for emotional support."
+    ],
+    "conclusions": [
+      "Sett shows strength can bankroll tenderness.",
+      "Leave pit when show costs soul.",
+      "Forgive slowly; protect fiercely.",
+      "Let crew see the son, not only boss.",
+      "Champion is who you protect, not only who you beat."
+    ]
+  }
+]

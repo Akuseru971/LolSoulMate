@@ -60,6 +60,18 @@ export const LORE_EVENTS = {
     summary:
       "Kindred embody life's end—Lamb offering gentle release and Wolf pursuing those who flee the inevitable.",
   },
+  shurima_fall: {
+    id: "shurima_fall",
+    label: "The fall of Shurima",
+    summary:
+      "Shurima's golden empire collapsed in catastrophe, leaving brothers like Nasus and Renekton to carry guilt, duty, and ruin across the desert.",
+  },
+  shurima_restoration: {
+    id: "shurima_restoration",
+    label: "Shurima's restoration",
+    summary:
+      "Azir returned from death to raise Shurima's sun-disc and reclaim a empire he believes must rise again, whatever the cost.",
+  },
 } as const;
 
 export type LoreEventId = keyof typeof LORE_EVENTS;
