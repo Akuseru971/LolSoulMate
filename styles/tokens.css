@@ -1,0 +1,45 @@
+:root {
+  --sor-bg-primary: #050608;
+  --sor-bg-midnight: #111b2a;
+  --sor-gold: #c5a46d;
+  --sor-ivory: #e6ddce;
+  --sor-mist: #718c8b;
+  --sor-text-muted: rgba(230, 221, 206, 0.55);
+  --sor-border-subtle: rgba(197, 164, 109, 0.22);
+  --sor-focus-ring: rgba(197, 164, 109, 0.55);
+  --sor-read-max: 42rem;
+  --sor-visual-max: 90rem;
+}
+
+.text-sor-ivory {
+  color: var(--sor-ivory);
+}
+
+.text-sor-muted {
+  color: var(--sor-text-muted);
+}
+
+.bg-sor-midnight {
+  background-color: var(--sor-bg-midnight);
+}
+
+.type-cinematic-title {
+  font-family: var(--font-display), Georgia, serif;
+  letter-spacing: 0.02em;
+  line-height: 1.08;
+}
+
+.type-chapter {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 0.6875rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--sor-gold);
+  opacity: 0.85;
+}
+
+.type-body-narrative {
+  font-size: 1.0625rem;
+  line-height: 1.82;
+  color: rgba(230, 221, 206, 0.78);
+}

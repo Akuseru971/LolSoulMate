@@ -23,7 +23,7 @@ import {
 import { resolveImageSrcForExport } from "@/lib/sharing/resolveImageSrc";
 import { getVisualFrame } from "@/data/champions/visualProfiles";
 import { shareContextForFormat } from "@/lib/champions/visualTypes";
-import type { UserArtTransform } from "@/lib/champions/visualTypes";
+import type { ArtworkDisplayMode, UserArtTransform } from "@/lib/champions/visualTypes";
 import { DEFAULT_USER_TRANSFORM } from "@/lib/champions/visualTypes";
 import { sanitizeNickname } from "@/lib/champions/nickname";
 
@@ -66,7 +66,8 @@ export function ShareStudio({
   const nicknameBase = sanitizeNickname(data.nickname);
 
   const [template, setTemplate] = useState<ShareTemplateId>("cinematic");
-  const [format, setFormat] = useState<ShareFormatId>("story");
+  const [format, setFormat] = useState<ShareFormatId>("cinematic");
+  const [artworkMode, setArtworkMode] = useState<ArtworkDisplayMode>("full");
   const [imageSrc, setImageSrc] = useState(data.imageUrl);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -125,10 +126,12 @@ export function ShareStudio({
     quote: data.quote,
     showNickname: showNickname && !!sanitizeNickname(displayNickname),
     displayNickname: sanitizeNickname(displayNickname),
+    artworkMode,
   };
 
   const { width, height } = getShareFormat(format);
-  const previewScale = Math.min(1, 300 / width, 420 / height);
+  const previewScale = Math.min(1, 520 / width, 560 / height);
+  const cropEnabled = artworkMode === "artisticCrop";
 
   const buildUrl = useCallback((): string | null => {
     try {
@@ -268,7 +271,7 @@ export function ShareStudio({
   }
 
   function onPointerDown(e: React.PointerEvent) {
-    if (e.button !== 0) return;
+    if (!cropEnabled || e.button !== 0) return;
     dragRef.current = { x: e.clientX, y: e.clientY, active: true };
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
   }
@@ -306,9 +309,9 @@ export function ShareStudio({
         role="dialog"
         aria-modal="true"
         aria-labelledby={labelId}
-        className="flex max-h-[96dvh] w-full max-w-lg flex-col overflow-hidden rounded-t-2xl border border-white/10 bg-[#0a0e14] pb-[env(safe-area-inset-bottom)] sm:rounded-2xl"
+        className="flex max-h-[96dvh] w-full max-w-lg flex-col overflow-hidden rounded-t-2xl border border-white/10 bg-[#0a0e14] pb-[env(safe-area-inset-bottom)] sm:max-w-6xl sm:rounded-2xl lg:flex-row lg:max-h-[92dvh]"
       >
-        <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+        <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 lg:absolute lg:left-0 lg:right-0 lg:top-0 lg:z-10 lg:bg-[#0a0e14]/95">
           <h2 id={labelId} className="font-serif text-lg text-amber-100">
             Portrait studio
           </h2>
@@ -323,34 +326,71 @@ export function ShareStudio({
           </button>
         </div>
 
-        <div className="overflow-y-auto overscroll-contain px-4 py-4">
-          <div
-            className="relative mx-auto touch-none overflow-hidden rounded-lg border border-white/10 bg-black/50 py-3"
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={onPointerUp}
-            onPointerCancel={onPointerUp}
-          >
-            <div style={{ width: width * previewScale, height: height * previewScale, margin: "0 auto" }}>
+        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-4 py-4 lg:flex-row lg:gap-6 lg:px-6 lg:pb-6 lg:pt-16">
+          <div className="lg:min-w-0 lg:flex-1">
+            <div
+              className={`relative mx-auto overflow-hidden rounded-lg border border-white/10 bg-black/50 py-3 ${cropEnabled ? "touch-none" : ""}`}
+              onPointerDown={onPointerDown}
+              onPointerMove={onPointerMove}
+              onPointerUp={onPointerUp}
+              onPointerCancel={onPointerUp}
+            >
               <div
-                style={{
-                  transform: `scale(${previewScale})`,
-                  transformOrigin: "top left",
-                  width,
-                  height,
-                }}
+                style={{ width: width * previewScale, height: height * previewScale, margin: "0 auto" }}
               >
-                <ShareExportCard {...cardProps} />
+                <div
+                  style={{
+                    transform: `scale(${previewScale})`,
+                    transformOrigin: "top left",
+                    width,
+                    height,
+                  }}
+                >
+                  <ShareExportCard {...cardProps} />
+                </div>
               </div>
+              {cropEnabled && (
+                <p className="pointer-events-none absolute bottom-2 left-0 right-0 text-center text-[10px] text-white/35">
+                  Drag to reposition · adjust zoom below
+                </p>
+              )}
             </div>
-            <p className="pointer-events-none absolute bottom-2 left-0 right-0 text-center text-[10px] text-white/35">
-              Drag to reposition · pinch zoom below
+            <p className="mt-2 text-center text-xs text-white/45">
+              Export {width}×{height}px
             </p>
           </div>
 
-          <p className="mt-2 text-center text-xs text-white/45">
-            Export {width}×{height}px
-          </p>
+          <div className="mt-4 min-w-0 lg:mt-0 lg:w-[min(100%,22rem)] lg:shrink-0 lg:overflow-y-auto">
+          <div className="space-y-2">
+            <p className="text-xs uppercase tracking-widest text-white/40">Artwork</p>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setArtworkMode("full");
+                  resetTransform();
+                }}
+                className={`min-h-[44px] rounded-full px-4 py-2 text-sm ${
+                  artworkMode === "full"
+                    ? "bg-amber-500/20 text-amber-100 ring-1 ring-amber-500/40"
+                    : "border border-white/15 text-white/70"
+                }`}
+              >
+                Full artwork
+              </button>
+              <button
+                type="button"
+                onClick={() => setArtworkMode("artisticCrop")}
+                className={`min-h-[44px] rounded-full px-4 py-2 text-sm ${
+                  artworkMode === "artisticCrop"
+                    ? "bg-amber-500/20 text-amber-100 ring-1 ring-amber-500/40"
+                    : "border border-white/15 text-white/70"
+                }`}
+              >
+                Artistic crop
+              </button>
+            </div>
+          </div>
 
           <div className="mt-4 space-y-2">
             <label className="flex items-center gap-2 text-sm text-white/70">
@@ -381,27 +421,31 @@ export function ShareStudio({
             </button>
           </div>
 
-          <div className="mt-4">
-            <label className="text-xs text-white/50">Zoom</label>
-            <input
-              type="range"
-              min={0.85}
-              max={1.35}
-              step={0.01}
-              value={userTransform.zoom}
-              className="mt-1 w-full"
-              onChange={(e) => updateTransform({ zoom: Number(e.target.value) })}
-              aria-label="Artwork zoom"
-            />
-          </div>
+          {cropEnabled && (
+            <>
+              <div className="mt-4">
+                <label className="text-xs text-white/50">Zoom</label>
+                <input
+                  type="range"
+                  min={0.85}
+                  max={1.35}
+                  step={0.01}
+                  value={userTransform.zoom}
+                  className="mt-1 w-full"
+                  onChange={(e) => updateTransform({ zoom: Number(e.target.value) })}
+                  aria-label="Artwork zoom"
+                />
+              </div>
 
-          <button
-            type="button"
-            onClick={resetTransform}
-            className="mt-2 inline-flex min-h-[44px] items-center gap-1 text-xs text-white/50"
-          >
-            <RotateCcw className="h-3 w-3" /> Reset framing
-          </button>
+              <button
+                type="button"
+                onClick={resetTransform}
+                className="mt-2 inline-flex min-h-[44px] items-center gap-1 text-xs text-white/50"
+              >
+                <RotateCcw className="h-3 w-3" /> Reset framing
+              </button>
+            </>
+          )}
 
           <div className="mt-4">
             <p className="text-xs uppercase tracking-widest text-white/40">Template</p>
@@ -485,6 +529,7 @@ export function ShareStudio({
             >
               <Link2 className="h-4 w-4" /> {copied ? "Copied!" : en.results.shareCopy}
             </button>
+          </div>
           </div>
         </div>
       </div>

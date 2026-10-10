@@ -3,7 +3,7 @@ import { NARRATIVE_COMPLETE_IDS } from "@/data/narratives/packs/all";
 import { allVisualProfiles, getVisualFrame } from "@/data/champions/visualProfiles";
 import { SHARE_FORMATS } from "@/lib/sharing/formats";
 import { SHARE_TEMPLATE_LABELS } from "@/lib/sharing/formats";
-import { mergeArtworkFrame } from "@/lib/champions/visualTypes";
+import { mergeArtworkFrame, shareContextForFormat } from "@/lib/champions/visualTypes";
 import { sanitizeNickname, soulPortraitLabel } from "@/lib/champions/nickname";
 
 describe("champion visual profiles", () => {
@@ -22,6 +22,7 @@ describe("champion visual profiles", () => {
         "shareStory",
         "sharePortrait",
         "shareSquare",
+        "shareCinematic",
         "altThumb",
       ] as const) {
         const frame = p[key];
@@ -32,24 +33,19 @@ describe("champion visual profiles", () => {
     }
   });
 
-  it("validates 225 template-format profile bindings exist", () => {
+  it("validates template-format profile bindings exist", () => {
     const templates = Object.keys(SHARE_TEMPLATE_LABELS);
     let count = 0;
     for (const id of NARRATIVE_COMPLETE_IDS) {
       for (const format of SHARE_FORMATS) {
-        const ctx =
-          format.id === "portrait"
-            ? "sharePortrait"
-            : format.id === "square"
-              ? "shareSquare"
-              : "shareStory";
+        const ctx = shareContextForFormat(format.id);
         const frame = getVisualFrame(id, ctx);
         expect(frame.scale).toBeGreaterThan(0);
         count += templates.length;
       }
     }
     expect(count).toBe(25 * SHARE_FORMATS.length * templates.length);
-    expect(count).toBe(225);
+    expect(count).toBe(300);
   });
 });
 
@@ -60,9 +56,13 @@ describe("nickname helpers", () => {
     expect(soulPortraitLabel(undefined)).toBe("Your soul");
   });
 
-  it("merges user transforms deterministically", () => {
+  it("merges user transforms deterministically in artistic crop", () => {
     const base = getVisualFrame("irelia", "shareStory");
-    const merged = mergeArtworkFrame(base, { panX: 0.2, panY: -0.1, zoom: 1.1 });
+    const merged = mergeArtworkFrame(
+      base,
+      { panX: 0.2, panY: -0.1, zoom: 1.1 },
+      "artisticCrop",
+    );
     expect(merged.scale).toBeGreaterThan(base.scale);
     expect(merged.panX).toBe(0.2);
   });

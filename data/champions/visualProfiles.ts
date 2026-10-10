@@ -23,6 +23,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(52, 18, 1.2),
     sharePortrait: f(54, 22, 1.18),
     shareSquare: f(50, 28, 1.25),
+    shareCinematic: f(52, 18, 1.2),
     altThumb: f(55, 25, 1.3),
   },
   {
@@ -34,6 +35,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(44, 26, 1.22),
     sharePortrait: f(48, 30, 1.2),
     shareSquare: f(42, 35, 1.28),
+    shareCinematic: f(44, 26, 1.22),
     altThumb: f(47, 32, 1.35),
   },
   {
@@ -45,6 +47,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(46, 30, 1.12),
     sharePortrait: f(50, 33, 1.1),
     shareSquare: f(52, 38, 1.15),
+    shareCinematic: f(46, 30, 1.12),
     altThumb: f(50, 36, 1.25),
   },
   {
@@ -56,6 +59,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(48, 20, 1.2),
     sharePortrait: f(50, 24, 1.18),
     shareSquare: f(46, 30, 1.22),
+    shareCinematic: f(48, 20, 1.2),
     altThumb: f(52, 28, 1.32),
   },
   {
@@ -67,6 +71,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(40, 24, 1.15),
     sharePortrait: f(43, 28, 1.12),
     shareSquare: f(38, 32, 1.2),
+    shareCinematic: f(40, 24, 1.15),
     altThumb: f(45, 30, 1.28),
   },
   {
@@ -78,6 +83,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(50, 26, 1.1),
     sharePortrait: f(53, 30, 1.08),
     shareSquare: f(48, 35, 1.12),
+    shareCinematic: f(50, 26, 1.1),
     altThumb: f(54, 32, 1.22),
   },
   {
@@ -89,6 +95,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(56, 18, 1.18),
     sharePortrait: f(58, 22, 1.15),
     shareSquare: f(54, 28, 1.22),
+    shareCinematic: f(56, 18, 1.18),
     altThumb: f(60, 26, 1.3),
   },
   {
@@ -100,6 +107,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(46, 20, 1.12),
     sharePortrait: f(48, 24, 1.1),
     shareSquare: f(44, 30, 1.18),
+    shareCinematic: f(46, 20, 1.12),
     altThumb: f(50, 28, 1.25),
   },
   {
@@ -111,6 +119,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(44, 22, 1.14),
     sharePortrait: f(46, 26, 1.12),
     shareSquare: f(42, 32, 1.2),
+    shareCinematic: f(44, 22, 1.14),
     altThumb: f(48, 30, 1.28),
   },
   {
@@ -122,6 +131,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(52, 24, 1.16),
     sharePortrait: f(54, 28, 1.14),
     shareSquare: f(50, 34, 1.2),
+    shareCinematic: f(52, 24, 1.16),
     altThumb: f(56, 32, 1.3),
   },
   {
@@ -133,6 +143,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(38, 26, 1.18),
     sharePortrait: f(40, 30, 1.15),
     shareSquare: f(36, 36, 1.22),
+    shareCinematic: f(38, 26, 1.18),
     altThumb: f(42, 34, 1.32),
   },
   {
@@ -144,6 +155,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(48, 22, 1.12),
     sharePortrait: f(50, 26, 1.1),
     shareSquare: f(46, 32, 1.16),
+    shareCinematic: f(48, 22, 1.12),
     altThumb: f(52, 30, 1.26),
   },
   {
@@ -155,6 +167,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(54, 20, 1.16),
     sharePortrait: f(56, 24, 1.14),
     shareSquare: f(52, 30, 1.2),
+    shareCinematic: f(54, 20, 1.16),
     altThumb: f(58, 28, 1.28),
   },
   {
@@ -166,6 +179,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(50, 28, 1.14),
     sharePortrait: f(52, 32, 1.12),
     shareSquare: f(48, 38, 1.18),
+    shareCinematic: f(50, 28, 1.14),
     altThumb: f(54, 36, 1.26),
   },
   {
@@ -177,6 +191,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(46, 24, 1.14),
     sharePortrait: f(48, 28, 1.12),
     shareSquare: f(44, 34, 1.18),
+    shareCinematic: f(46, 24, 1.14),
     altThumb: f(50, 32, 1.28),
   },
   {
@@ -188,6 +203,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(50, 22, 1.14),
     sharePortrait: f(52, 26, 1.12),
     shareSquare: f(48, 32, 1.18),
+    shareCinematic: f(50, 22, 1.14),
     altThumb: f(54, 30, 1.26),
   },
   {
@@ -199,6 +215,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(44, 20, 1.12),
     sharePortrait: f(46, 24, 1.1),
     shareSquare: f(42, 30, 1.16),
+    shareCinematic: f(44, 20, 1.12),
     altThumb: f(48, 28, 1.24),
   },
   {
@@ -210,6 +227,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(48, 26, 1.14),
     sharePortrait: f(50, 30, 1.12),
     shareSquare: f(46, 36, 1.18),
+    shareCinematic: f(48, 26, 1.14),
     altThumb: f(52, 34, 1.28),
   },
   {
@@ -221,6 +239,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(42, 28, 1.1),
     sharePortrait: f(44, 32, 1.08),
     shareSquare: f(40, 38, 1.14),
+    shareCinematic: f(42, 28, 1.1),
     altThumb: f(46, 36, 1.24),
   },
   {
@@ -232,6 +251,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(46, 24, 1.12),
     sharePortrait: f(48, 28, 1.1),
     shareSquare: f(44, 34, 1.16),
+    shareCinematic: f(46, 24, 1.12),
     altThumb: f(50, 32, 1.26),
   },
   {
@@ -243,6 +263,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(52, 22, 1.14),
     sharePortrait: f(54, 26, 1.12),
     shareSquare: f(50, 32, 1.18),
+    shareCinematic: f(52, 22, 1.14),
     altThumb: f(56, 30, 1.28),
   },
   {
@@ -254,6 +275,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(52, 26, 1.16),
     sharePortrait: f(54, 30, 1.14),
     shareSquare: f(50, 36, 1.2),
+    shareCinematic: f(52, 26, 1.16),
     altThumb: f(56, 34, 1.3),
   },
   {
@@ -265,6 +287,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(56, 20, 1.16),
     sharePortrait: f(58, 24, 1.14),
     shareSquare: f(54, 30, 1.2),
+    shareCinematic: f(56, 20, 1.16),
     altThumb: f(60, 28, 1.28),
   },
   {
@@ -276,6 +299,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(52, 24, 1.16),
     sharePortrait: f(54, 28, 1.14),
     shareSquare: f(50, 34, 1.2),
+    shareCinematic: f(52, 24, 1.16),
     altThumb: f(56, 32, 1.3),
   },
   {
@@ -287,6 +311,7 @@ const PROFILES: ChampionVisualProfile[] = [
     shareStory: f(46, 28, 1.12),
     sharePortrait: f(48, 32, 1.1),
     shareSquare: f(44, 38, 1.16),
+    shareCinematic: f(46, 28, 1.12),
     altThumb: f(50, 36, 1.26),
   },
 ];
@@ -301,6 +326,7 @@ const FALLBACK: Omit<ChampionVisualProfile, "championId"> = {
   shareStory: f(48, 24, 1.12),
   sharePortrait: f(50, 28, 1.1),
   shareSquare: f(46, 34, 1.16),
+  shareCinematic: f(48, 24, 1.12),
   altThumb: f(50, 32, 1.25),
 };
 

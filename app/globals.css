@@ -1,9 +1,10 @@
 @import "tailwindcss";
+@import "../styles/tokens.css";
 
 :root {
-  --background: #050608;
-  --foreground: #e8eaef;
-  --gold: #c9a227;
+  --background: var(--sor-bg-primary);
+  --foreground: var(--sor-ivory);
+  --gold: var(--sor-gold);
 }
 
 @theme inline {

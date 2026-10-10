@@ -52,9 +52,21 @@ describe("share quotes", () => {
 });
 
 describe("share formats", () => {
-  it("exposes three export dimensions", () => {
-    expect(SHARE_FORMATS).toHaveLength(3);
-    expect(getShareFormat("story")).toEqual({ id: "story", label: "Story", width: 1080, height: 1920 });
+  it("exposes four export dimensions with cinematic default", () => {
+    expect(SHARE_FORMATS).toHaveLength(4);
+    expect(SHARE_FORMATS[0].id).toBe("cinematic");
+    expect(getShareFormat("cinematic")).toEqual({
+      id: "cinematic",
+      label: "Cinematic 16:9",
+      width: 1920,
+      height: 1080,
+    });
+    expect(getShareFormat("story")).toEqual({
+      id: "story",
+      label: "Story",
+      width: 1080,
+      height: 1920,
+    });
     expect(getShareFormat("square").width).toBe(1080);
   });
 });

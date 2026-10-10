@@ -3,17 +3,18 @@
 import { useState } from "react";
 import { getMatchableChampions } from "@/data/champions/matchable";
 import { allVisualProfiles, getVisualProfile } from "@/data/champions/visualProfiles";
-import type { VisualContextKey } from "@/lib/champions/visualTypes";
+import type { ArtworkDisplayMode, VisualContextKey } from "@/lib/champions/visualTypes";
 import { ChampionArtwork } from "@/components/champions/ChampionArtwork";
 
 const CONTEXTS: { key: VisualContextKey; label: string; aspect: string }[] = [
-  { key: "revealMobile", label: "Mobile reveal", aspect: "9/16" },
-  { key: "revealDesktop", label: "Desktop reveal", aspect: "16/10" },
-  { key: "result", label: "Result artwork", aspect: "4/5" },
-  { key: "shareStory", label: "Story card", aspect: "9/16" },
-  { key: "sharePortrait", label: "Portrait card", aspect: "4/5" },
-  { key: "shareSquare", label: "Square card", aspect: "1/1" },
-  { key: "altThumb", label: "Alt thumbnail", aspect: "4/5" },
+  { key: "revealMobile", label: "Mobile reveal", aspect: "16 / 9" },
+  { key: "revealDesktop", label: "Desktop reveal", aspect: "16 / 9" },
+  { key: "result", label: "Result artwork", aspect: "16 / 9" },
+  { key: "shareCinematic", label: "Cinematic export", aspect: "16 / 9" },
+  { key: "shareStory", label: "Story card", aspect: "16 / 9" },
+  { key: "sharePortrait", label: "Portrait card", aspect: "16 / 9" },
+  { key: "shareSquare", label: "Square card", aspect: "16 / 9" },
+  { key: "altThumb", label: "Alt match", aspect: "16 / 9" },
 ];
 
 function FramingPreview({
@@ -27,10 +28,12 @@ function FramingPreview({
   const champion = champs.find((c) => c.id === championId) ?? champs[0];
   const profile = getVisualProfile(championId);
   const frame = profile[context];
+  const [mode, setMode] = useState<ArtworkDisplayMode>("full");
   const [focalX, setFocalX] = useState(frame.focalX);
   const [focalY, setFocalY] = useState(frame.focalY);
   const [scale, setScale] = useState(frame.scale);
   const ctxMeta = CONTEXTS.find((c) => c.key === context)!;
+  const cropControls = mode === "artisticCrop";
 
   if (!champion) return null;
 
@@ -42,14 +45,37 @@ function FramingPreview({
       >
         <ChampionArtwork
           src={champion.imageUrl}
+          mode={mode}
           frame={{ focalX, focalY, scale }}
+          aspectRatio={ctxMeta.aspect}
           alt={champion.name}
           className="h-full w-full"
         />
       </div>
 
       <div className="space-y-4 text-sm">
-        <label className="block">
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => setMode("full")}
+            className={`rounded-full px-3 py-1.5 ${mode === "full" ? "bg-amber-500/20 text-amber-100" : "border border-white/15"}`}
+          >
+            Full artwork
+          </button>
+          <button
+            type="button"
+            onClick={() => setMode("artisticCrop")}
+            className={`rounded-full px-3 py-1.5 ${mode === "artisticCrop" ? "bg-amber-500/20 text-amber-100" : "border border-white/15"}`}
+          >
+            Artistic crop
+          </button>
+        </div>
+        {!cropControls && (
+          <p className="text-xs text-white/45">
+            Full mode ignores focal presets — switch to artistic crop to tune cover framing.
+          </p>
+        )}
+        <label className={`block ${cropControls ? "" : "pointer-events-none opacity-40"}`}>
           focalX {focalX.toFixed(0)}
           <input
             type="range"
@@ -60,7 +86,7 @@ function FramingPreview({
             className="w-full"
           />
         </label>
-        <label className="block">
+        <label className={`block ${cropControls ? "" : "pointer-events-none opacity-40"}`}>
           focalY {focalY.toFixed(0)}
           <input
             type="range"
@@ -71,7 +97,7 @@ function FramingPreview({
             className="w-full"
           />
         </label>
-        <label className="block">
+        <label className={`block ${cropControls ? "" : "pointer-events-none opacity-40"}`}>
           scale {scale.toFixed(2)}
           <input
             type="range"

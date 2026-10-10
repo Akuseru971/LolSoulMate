@@ -1,6 +1,8 @@
+import type { ShareFormatId as ShareFormatIdType } from "@/lib/champions/visualTypes";
+
 export type ShareTemplateId = "cinematic" | "soul" | "legend";
 
-export type ShareFormatId = "story" | "portrait" | "square";
+export type ShareFormatId = ShareFormatIdType;
 
 export interface ShareFormatSpec {
   id: ShareFormatId;
@@ -10,6 +12,7 @@ export interface ShareFormatSpec {
 }
 
 export const SHARE_FORMATS: ShareFormatSpec[] = [
+  { id: "cinematic", label: "Cinematic 16:9", width: 1920, height: 1080 },
   { id: "story", label: "Story", width: 1080, height: 1920 },
   { id: "portrait", label: "Portrait", width: 1080, height: 1350 },
   { id: "square", label: "Square", width: 1080, height: 1080 },

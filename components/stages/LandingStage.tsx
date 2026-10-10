@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import { en } from "@/lib/i18n/en";
+import { SoulSeal } from "@/components/ornaments/SoulSeal";
 
 export function LandingStage({ onStart }: { onStart: () => void }) {
   const reduce = useReducedMotion();
@@ -14,6 +15,15 @@ export function LandingStage({ onStart }: { onStart: () => void }) {
       <div className="landing-hero__vignette" aria-hidden />
 
       <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-3xl flex-col justify-end px-5 pb-16 pt-24 sm:justify-center sm:pb-24 sm:pt-32">
+        <motion.div
+          initial={reduce ? false : { opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="mb-8 sm:mb-10"
+          aria-hidden
+        >
+          <SoulSeal size={44} className="text-[var(--sor-gold)]/55" />
+        </motion.div>
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}

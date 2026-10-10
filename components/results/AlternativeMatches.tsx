@@ -13,25 +13,27 @@ export function AlternativeMatches({ match }: { match: MatchResult }) {
 
   return (
     <aside className="mt-16 border-t border-white/10 pt-10">
-      <h4 className="font-serif text-xl text-amber-100/85">{en.results.alsoClose}</h4>
-      <p className="mt-1 text-xs text-white/40">Near matches, not equal to your primary reading.</p>
-      <ul className="mt-6 space-y-8">
+      <p className="type-chapter">{en.results.alsoClose}</p>
+      <p className="mt-2 text-xs text-white/40">Near matches — not equal to your primary reading.</p>
+      <ul className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {match.alternatives.map((alt) => (
-          <li key={alt.championId} className="flex gap-4 opacity-90">
-            <div className="relative h-20 w-16 shrink-0 overflow-hidden rounded-sm sm:h-24 sm:w-20">
-              <ChampionArtwork
-                src={alt.champion.imageUrl}
-                frame={getVisualFrame(alt.championId, "altThumb")}
-                alt={alt.champion.name}
-                className="h-full w-full"
-              />
-            </div>
-            <div className="min-w-0 flex-1">
+          <li
+            key={alt.championId}
+            className="overflow-hidden rounded-sm border border-white/[0.06] bg-white/[0.02]"
+          >
+            <ChampionArtwork
+              src={alt.champion.imageUrl}
+              mode="full"
+              frame={getVisualFrame(alt.championId, "altThumb")}
+              alt={alt.champion.name}
+              className="w-full"
+            />
+            <div className="space-y-2 p-4">
               <p className="font-serif text-lg text-white/88">{alt.champion.name}</p>
               <p className="text-xs text-white/45">
                 {alt.champion.region} · {alt.compatibility}%
               </p>
-              <p className="mt-2 text-sm leading-relaxed text-white/58">
+              <p className="text-sm leading-relaxed text-white/58">
                 {buildAlternativeInsight(match.blendedVector, alt.champion, primary)}
               </p>
             </div>

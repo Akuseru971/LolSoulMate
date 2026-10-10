@@ -30,8 +30,7 @@ export function QuizStage({
       <button
         type="button"
         onClick={onBack}
-        disabled={index === 0}
-        className="mb-4 inline-flex items-center gap-1 text-sm text-white/60 disabled:opacity-30"
+        className="mb-4 inline-flex min-h-[44px] items-center gap-1 text-sm text-white/60 transition hover:text-white/85"
       >
         <ChevronLeft className="h-4 w-4" /> Previous
       </button>
