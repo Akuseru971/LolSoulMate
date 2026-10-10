@@ -18,6 +18,13 @@ export function possessiveStory(nickname?: string): string {
   return `${nickname}'s story`;
 }
 
+export function soulRevealLabel(nickname?: string): string {
+  if (!nickname) return "Your soul";
+  const upper = nickname.toUpperCase();
+  if (upper.length > 20) return `${upper.slice(0, 18)}…'S SOUL`;
+  return `${upper}'S SOUL`;
+}
+
 export function soulPortraitLabel(nickname?: string): string {
   if (!nickname) return "Your soul";
   if (nickname.length > 18) return `${nickname.slice(0, 16)}…'s soul`;

@@ -6,8 +6,7 @@ import { getVisualFrame } from "@/data/champions/visualProfiles";
 import { shareContextForFormat } from "@/lib/champions/visualTypes";
 import { sanitizeNickname } from "@/lib/champions/nickname";
 
-const PREVIEW_FORMAT = "square" as const;
-const PREVIEW_SCALE = 0.22;
+const PREVIEW_FORMAT = "cinematic" as const;
 
 export function ResultCardPreview({
   data,
@@ -18,46 +17,52 @@ export function ResultCardPreview({
 }) {
   const nick = sanitizeNickname(data.nickname);
   const artFrame = getVisualFrame(data.championId, shareContextForFormat(PREVIEW_FORMAT));
-  const { width, height } = { width: 1080, height: 1080 };
+  const width = 1920;
+  const height = 1080;
+  const previewScale = Math.min(1, 640 / width);
 
   return (
-    <div className="mt-8 flex flex-col items-center">
+    <div className="mt-10 w-full">
       <div
-        className="overflow-hidden rounded-md shadow-[0_24px_80px_rgba(0,0,0,0.45)] ring-1 ring-white/10"
-        style={{ width: width * PREVIEW_SCALE, height: height * PREVIEW_SCALE }}
+        className="mx-auto overflow-hidden rounded-sm shadow-[0_32px_100px_rgba(0,0,0,0.5)] ring-1 ring-white/10"
+        style={{ width: width * previewScale, maxWidth: "100%" }}
       >
-        <div
-          style={{
-            transform: `scale(${PREVIEW_SCALE})`,
-            transformOrigin: "top left",
-            width,
-            height,
-          }}
-        >
-          <ShareExportCard
-            template="cinematic"
-            format={PREVIEW_FORMAT}
-            championName={data.championName}
-            championTitle={data.championTitle}
-            region={data.region}
-            imageSrc={data.imageUrl}
-            artFrame={artFrame}
-            artworkMode="full"
-            compatibility={data.compatibility}
-            traits={data.traits}
-            quote={data.quote}
-            showNickname={!!nick}
-            displayNickname={nick}
-          />
+        <div style={{ height: height * previewScale, overflow: "hidden" }}>
+          <div
+            style={{
+              transform: `scale(${previewScale})`,
+              transformOrigin: "top left",
+              width,
+              height,
+            }}
+          >
+            <ShareExportCard
+              template="cinematic"
+              format={PREVIEW_FORMAT}
+              championName={data.championName}
+              championTitle={data.championTitle}
+              region={data.region}
+              imageSrc={data.imageUrl}
+              artFrame={artFrame}
+              artworkMode="full"
+              compatibility={data.compatibility}
+              traits={data.traits}
+              quote={data.quote}
+              showNickname={!!nick}
+              displayNickname={nick}
+            />
+          </div>
         </div>
       </div>
-      <button
-        type="button"
-        onClick={onOpenStudio}
-        className="mt-6 min-h-[44px] border-b border-[var(--sor-border-subtle)] pb-1 font-serif text-[var(--sor-ivory)] transition hover:border-[var(--sor-gold)]/50"
-      >
-        Create your portrait
-      </button>
+      <div className="mt-8 text-center">
+        <button
+          type="button"
+          onClick={onOpenStudio}
+          className="min-h-[44px] border-b border-[var(--sor-border-subtle)] pb-1 font-serif text-[var(--sor-ivory)] transition hover:border-[var(--sor-gold)]/50"
+        >
+          Create your portrait
+        </button>
+      </div>
     </div>
   );
 }

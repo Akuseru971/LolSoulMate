@@ -1,6 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, lazy, Suspense } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  lazy,
+  Suspense,
+  useMemo,
+  forwardRef,
+} from "react";
 import { useReducedMotion } from "framer-motion";
 import type { MatchResult } from "@/lib/matching/engine";
 import type { NarrativeResponse } from "@/lib/validation/schemas";
@@ -9,16 +18,32 @@ import { siteConfig } from "@/lib/config";
 import { ExternalLink, RefreshCw } from "lucide-react";
 import { ChampionReveal } from "./ChampionReveal";
 import { AlternativeMatches } from "./AlternativeMatches";
+import { ResultAtmosphere } from "./ResultAtmosphere";
+import { LoreFragment } from "./LoreFragment";
+import { InnerTruth } from "./InnerTruth";
+import { SoulConclusion } from "./SoulConclusion";
 import type { ShareStudioData } from "@/components/sharing/ShareStudio";
 import { trackEvent } from "@/lib/analytics";
 import { sanitizeNickname } from "@/lib/champions/nickname";
-import { ChapterSeparator } from "@/components/ornaments/ChapterSeparator";
-import { FinalMark } from "@/components/ornaments/FinalMark";
 import { ResultCardPreview } from "@/components/sharing/ResultCardPreview";
+import { getResultTheme } from "@/data/champions/resultThemes";
+import { useResultScene } from "@/lib/results/useResultScene";
+import type { ResultScrollScene } from "@/data/champions/resultThemes";
 
 const ShareStudio = lazy(() =>
   import("@/components/sharing/ShareStudio").then((m) => ({ default: m.ShareStudio })),
 );
+
+const SceneSection = forwardRef<
+  HTMLElement,
+  { scene: ResultScrollScene; children: React.ReactNode; className?: string }
+>(function SceneSection({ scene, children, className = "" }, ref) {
+  return (
+    <section ref={ref} data-result-scene={scene} className={`scroll-mt-6 ${className}`}>
+      {children}
+    </section>
+  );
+});
 
 export function ResultsStage({
   match,
@@ -35,11 +60,26 @@ export function ResultsStage({
   const [revealDone, setRevealDone] = useState(!!reduce);
   const [studioOpen, setStudioOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
-  const narrativeRef = useRef<HTMLElement>(null);
-  const studioTriggerRef = useRef<HTMLButtonElement>(null);
   const revealTracked = useRef(false);
+  const studioTriggerRef = useRef<HTMLButtonElement>(null);
   const nickname = sanitizeNickname(rawNickname);
   const { champion, compatibility } = match.primary;
+  const theme = getResultTheme(champion.id);
+
+  const revealRef = useRef<HTMLElement>(null);
+  const connectionRef = useRef<HTMLElement>(null);
+  const fragmentsRef = useRef<HTMLElement>(null);
+  const innerRef = useRef<HTMLElement>(null);
+  const conclusionRef = useRef<HTMLElement>(null);
+  const legacyRef = useRef<HTMLElement>(null);
+  const activeScene = useResultScene({
+    reveal: revealRef,
+    connection: connectionRef,
+    fragments: fragmentsRef,
+    inner: innerRef,
+    conclusion: conclusionRef,
+    legacy: legacyRef,
+  });
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
@@ -49,23 +89,29 @@ export function ResultsStage({
     return () => mq.removeEventListener("change", apply);
   }, []);
 
-  const studioData: ShareStudioData = {
-    championId: champion.id,
-    championName: champion.name,
-    championTitle: champion.title,
-    region: champion.region,
-    imageUrl: champion.imageUrl,
-    compatibility,
-    traits: narrative.definingTraits,
-    quote: narrative.shareQuote,
-    traitDimensions: match.topDimensions.slice(0, 3).map((d) => d.dimension),
-    nickname,
-  };
+  const studioData: ShareStudioData = useMemo(
+    () => ({
+      championId: champion.id,
+      championName: champion.name,
+      championTitle: champion.title,
+      region: champion.region,
+      imageUrl: champion.imageUrl,
+      compatibility,
+      traits: narrative.definingTraits,
+      quote: narrative.shareQuote,
+      traitDimensions: match.topDimensions.slice(0, 3).map((d) => d.dimension),
+      nickname,
+    }),
+    [champion, compatibility, narrative, match.topDimensions, nickname],
+  );
 
-  function scrollToNarrative() {
+  const scrollToConnection = useCallback(() => {
     trackEvent("narrative_read_started");
-    narrativeRef.current?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-  }
+    connectionRef.current?.scrollIntoView({
+      behavior: reduce ? "auto" : "smooth",
+      block: "start",
+    });
+  }, [reduce]);
 
   function openStudio() {
     setStudioOpen(true);
@@ -80,151 +126,122 @@ export function ResultsStage({
   }, [champion.id]);
 
   return (
-    <section className="mx-auto w-full max-w-[var(--sor-visual-max)] px-4 py-6 pb-32 sm:pb-24">
-      <ChampionReveal
-        champion={champion}
-        compatibility={compatibility}
-        oneLiner={narrative.reveal.oneLiner}
-        nickname={nickname}
-        isDesktop={isDesktop}
-        revealComplete={revealDone}
-        onRevealComplete={handleRevealComplete}
-        onSkip={handleRevealComplete}
-        onReadStory={scrollToNarrative}
-        onOpenStudio={openStudio}
-      />
-
-      <article
-        ref={narrativeRef}
-        className="mx-auto mt-4 max-w-[var(--sor-read-max)] scroll-mt-6 space-y-14"
+    <>
+      <ResultAtmosphere championId={champion.id} scene={activeScene} />
+      <div
+        className="relative mx-auto w-full max-w-[var(--sor-visual-max)] px-4 py-6 pb-[max(8rem,env(safe-area-inset-bottom))] sm:pb-24"
+        style={{ color: theme.palette.text }}
       >
-        <section className="rounded-sm bg-black/20 px-1 py-2 sm:px-2">
-          <p className="type-chapter">{en.results.connection}</p>
-          <p className="type-body-narrative mt-6 text-[1.08rem] leading-[1.85]">
-            {narrative.sharedSoul}
-          </p>
-          <p className="mt-5 text-sm text-white/40">{en.results.compatibilityNote}</p>
-        </section>
+        <SceneSection scene="reveal" ref={revealRef}>
+          <ChampionReveal
+            champion={champion}
+            compatibility={compatibility}
+            oneLiner={narrative.reveal.oneLiner}
+            nickname={nickname}
+            isDesktop={isDesktop}
+            revealComplete={revealDone}
+            onRevealComplete={handleRevealComplete}
+            onSkip={handleRevealComplete}
+            onReadStory={scrollToConnection}
+            onOpenStudio={openStudio}
+          />
+        </SceneSection>
 
-        {narrative.parallels.length > 0 && (
-          <>
-            <ChapterSeparator className="my-8" />
-            <section>
-              <p className="type-chapter">{en.results.parallels}</p>
-              <div className="mt-8 space-y-8">
+        <div className="mx-auto max-w-[var(--sor-read-max)] space-y-20 sm:space-y-24">
+          <SceneSection scene="connection" ref={connectionRef}>
+            <p className="font-serif text-sm text-white/50">{en.results.connection}</p>
+            <p className="type-body-narrative mt-8 text-[1.1rem] leading-[1.88] sm:text-[1.12rem]">
+              {narrative.sharedSoul}
+            </p>
+            <p className="mt-6 text-xs text-white/38">{en.results.compatibilityNote}</p>
+          </SceneSection>
+
+          {narrative.parallels.length > 0 && (
+            <SceneSection scene="fragments" ref={fragmentsRef}>
+              <p className="font-serif text-sm text-white/50">{en.results.parallels}</p>
+              <div className="mt-10 space-y-14 sm:space-y-16">
                 {narrative.parallels.map((p, i) => (
-                  <div
+                  <LoreFragment
                     key={i}
-                    className="grid gap-4 border-t border-white/[0.06] pt-6 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]"
-                  >
-                    <div className="space-y-3">
-                      <p className="text-[11px] uppercase tracking-[0.22em] text-[var(--sor-mist)]">
-                        Your choice
-                      </p>
-                      <p className="text-sm text-[var(--sor-ivory)]/88">{p.userChoiceSummary}</p>
-                    </div>
-                    <div className="space-y-3 sm:border-l sm:border-[var(--sor-border-subtle)] sm:pl-6">
-                      <p className="text-[11px] uppercase tracking-[0.22em] text-white/40">
-                        In their legend
-                      </p>
-                      <p className="text-sm italic text-white/55">{p.canonicalBeat}</p>
-                      <p className="type-body-narrative text-[1rem]">{p.resonance}</p>
-                    </div>
-                  </div>
+                    index={i}
+                    userChoiceSummary={p.userChoiceSummary}
+                    canonicalBeat={p.canonicalBeat}
+                    resonance={p.resonance}
+                    theme={theme}
+                  />
                 ))}
               </div>
-            </section>
-          </>
-        )}
+            </SceneSection>
+          )}
 
-        <ChapterSeparator className="my-8" />
+          <SceneSection scene="inner" ref={innerRef}>
+            <p className="mb-10 font-serif text-sm text-white/50">The inner truth</p>
+            <InnerTruth
+              strength={narrative.greatestStrength}
+              shadow={narrative.shadowWithin}
+              theme={theme}
+            />
+          </SceneSection>
 
-        <section className="grid gap-10 sm:grid-cols-2">
-          <div>
-            <p className="type-chapter">Strength</p>
-            <h3 className="mt-2 font-serif text-xl text-[var(--sor-ivory)]/95">
-              {en.results.strength}
-            </h3>
-            <p className="type-body-narrative mt-4">{narrative.greatestStrength}</p>
-          </div>
-          <div>
-            <p className="type-chapter">Contradiction</p>
-            <h3 className="mt-2 font-serif text-xl text-white/72">{en.results.shadow}</h3>
-            <p className="type-body-narrative mt-4 text-white/65">{narrative.shadowWithin}</p>
-          </div>
-        </section>
+          <SceneSection scene="conclusion" ref={conclusionRef}>
+            <SoulConclusion destiny={narrative.destiny} theme={theme} />
+          </SceneSection>
 
-        <ChapterSeparator className="my-8" />
+          <SceneSection scene="legacy" ref={legacyRef}>
+            <AlternativeMatches match={match} />
+            <div className="mt-20 border-t border-white/[0.08] pt-14 text-center">
+              <h4 className="font-serif text-xl text-[var(--sor-ivory)]/92 sm:text-2xl">
+                Your legend, preserved.
+              </h4>
+              <ResultCardPreview data={studioData} onOpenStudio={openStudio} />
+              <button
+                ref={studioTriggerRef}
+                type="button"
+                className="sr-only"
+                onClick={openStudio}
+              >
+                Open portrait studio
+              </button>
+              <button
+                type="button"
+                onClick={onRestart}
+                className="mt-10 inline-flex min-h-[44px] items-center gap-2 text-sm text-white/45 hover:text-white/70"
+              >
+                <RefreshCw className="h-4 w-4" /> Restart
+              </button>
+            </div>
 
-        <section>
-          <p className="type-chapter">The final word</p>
-          <h3 className="mt-3 font-serif text-2xl text-[var(--sor-ivory)]/95">
-            {en.results.closing}
-          </h3>
-          <p className="mt-8 font-serif text-[1.35rem] leading-[1.65] text-[var(--sor-ivory)]/92">
-            {narrative.destiny}
-          </p>
-          <div className="mt-10 flex justify-center">
-            <FinalMark className="text-[var(--sor-gold)]/45" size={28} />
-          </div>
-        </section>
-      </article>
-
-      <div className="mx-auto max-w-[var(--sor-read-max)]">
-        <AlternativeMatches match={match} />
-
-        <div className="mt-16 border-t border-white/10 pt-10 text-center">
-          <p className="type-chapter">{en.results.shareHeading}</p>
-          <p className="mt-2 text-sm text-white/45">
-            A collectible portrait — ready to save or share.
-          </p>
-          <ResultCardPreview data={studioData} onOpenStudio={openStudio} />
-          <button
-            ref={studioTriggerRef}
-            type="button"
-            className="sr-only"
-            onClick={openStudio}
-          >
-            Open portrait studio
-          </button>
-          <button
-            type="button"
-            onClick={onRestart}
-            className="mt-8 inline-flex min-h-[44px] items-center gap-2 text-sm text-white/45 hover:text-white/70"
-          >
-            <RefreshCw className="h-4 w-4" /> Restart
-          </button>
+            <footer className="mt-20 text-center">
+              <p className="font-serif text-white/70">{en.results.kofiTitle}</p>
+              <p className="mt-2 text-sm text-white/45">{en.results.kofiBody}</p>
+              {siteConfig.kofiUrl ? (
+                <a
+                  href={siteConfig.kofiUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex min-h-[44px] items-center gap-2 text-sm text-[var(--sor-gold)]/85 underline-offset-2 hover:underline"
+                  onClick={() => trackEvent("kofi_clicked")}
+                >
+                  {en.results.kofiCta} <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              ) : null}
+              <p className="mt-10 text-xs text-white/35">
+                Interpretive fan analysis · Canonical facts drawn from Riot Universe lore · Not
+                affiliated with Riot Games
+              </p>
+            </footer>
+          </SceneSection>
         </div>
 
-        <footer className="mt-16 text-center">
-          <p className="font-serif text-white/70">{en.results.kofiTitle}</p>
-          <p className="mt-2 text-sm text-white/45">{en.results.kofiBody}</p>
-          {siteConfig.kofiUrl ? (
-            <a
-              href={siteConfig.kofiUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-5 inline-flex min-h-[44px] items-center gap-2 text-sm text-[var(--sor-gold)]/85 underline-offset-2 hover:underline"
-              onClick={() => trackEvent("kofi_clicked")}
-            >
-              {en.results.kofiCta} <ExternalLink className="h-3.5 w-3.5" />
-            </a>
-          ) : null}
-          <p className="mt-10 text-xs text-white/35">
-            Interpretive fan analysis · Canonical facts drawn from Riot Universe lore · Not
-            affiliated with Riot Games
-          </p>
-        </footer>
+        <Suspense fallback={null}>
+          <ShareStudio
+            open={studioOpen}
+            onClose={() => setStudioOpen(false)}
+            data={studioData}
+            triggerRef={studioTriggerRef}
+          />
+        </Suspense>
       </div>
-
-      <Suspense fallback={null}>
-        <ShareStudio
-          open={studioOpen}
-          onClose={() => setStudioOpen(false)}
-          data={studioData}
-          triggerRef={studioTriggerRef}
-        />
-      </Suspense>
-    </section>
+    </>
   );
 }
