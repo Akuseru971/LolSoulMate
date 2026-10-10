@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-export const instant = false;
+export const dynamic = "force-dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { getShareSnapshot } from "@/lib/privacy/shareStore";
