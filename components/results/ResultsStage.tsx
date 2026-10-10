@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import type { MatchResult } from "@/lib/matching/engine";
@@ -22,27 +22,10 @@ export function ResultsStage({
 }) {
   const reduce = useReducedMotion();
   const [skippedReveal, setSkippedReveal] = useState(false);
-  const [shareUrl, setShareUrl] = useState<string | null>(null);
   const { champion, compatibility } = match.primary;
 
-  useEffect(() => {
-    fetch("/api/share", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        championId: champion.id,
-        compatibility,
-        definingTraits: narrative.definingTraits,
-        shareQuote: narrative.shareQuote,
-      }),
-    })
-      .then((r) => r.json())
-      .then((d: { url?: string }) => setShareUrl(d.url ?? null))
-      .catch(() => undefined);
-  }, [champion.id, compatibility, narrative]);
-
   return (
-    <section className="mx-auto w-full max-w-3xl px-4 py-10 pb-24">
+    <section className="mx-auto w-full max-w-3xl px-4 py-10 pb-32 sm:pb-24">
       {!skippedReveal && !reduce && (
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
@@ -54,6 +37,7 @@ export function ResultsStage({
               src={champion.imageUrl}
               alt=""
               fill
+              sizes="(max-width: 768px) 100vw, 768px"
               className="object-cover object-top"
               priority
               unoptimized
@@ -62,14 +46,14 @@ export function ResultsStage({
           </div>
           <div className="absolute bottom-0 left-0 right-0 p-6">
             <p className="text-sm uppercase tracking-widest text-amber-200/80">
-              The Reveal
+              Your Champion
             </p>
-            <h2 className="font-serif text-4xl text-white">
+            <h2 className="font-serif text-3xl text-white sm:text-4xl">
               Your soul resonates with {narrative.reveal.championName}.
             </h2>
             <button
               type="button"
-              className="mt-3 text-sm text-white/60 underline"
+              className="mt-3 min-h-[44px] text-sm text-white/60 underline"
               onClick={() => setSkippedReveal(true)}
             >
               Skip reveal animation
@@ -83,7 +67,7 @@ export function ResultsStage({
           <p className="text-sm uppercase tracking-widest text-amber-200/70">
             {champion.region} · {champion.title}
           </p>
-          <h2 className="font-serif text-4xl text-white">
+          <h2 className="font-serif text-3xl text-white sm:text-4xl">
             Your soul resonates with {champion.name}.
           </h2>
           <p className="mt-2 text-lg text-amber-100/80">{narrative.reveal.oneLiner}</p>
@@ -98,43 +82,43 @@ export function ResultsStage({
         <p className="mt-1 text-sm text-white/55">{en.results.compatibilityNote}</p>
       </GlassPanel>
 
-      <article className="prose prose-invert max-w-none space-y-8 prose-p:text-white/75">
+      <article className="max-w-none space-y-8 text-white/75">
         <section>
-          <h3 className="font-serif text-2xl text-amber-100">Your Shared Soul</h3>
-          <p className="mt-3 whitespace-pre-wrap text-white/75">{narrative.sharedSoul}</p>
+          <h3 className="font-serif text-2xl text-amber-100">The Soul You Share</h3>
+          <p className="mt-3 leading-relaxed">{narrative.sharedSoul}</p>
         </section>
 
         <section>
           <h3 className="font-serif text-2xl text-amber-100">
-            Your Story, Reflected in Theirs
+            Your Story, Their Legend
           </h3>
           <ul className="mt-4 space-y-6">
             {narrative.parallels.map((p, i) => (
               <li key={i} className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
-                <p className="text-sm text-amber-200/80">{p.userChoiceSummary}</p>
-                <p className="mt-2 text-sm text-white/60">
-                  <span className="text-white/40">Canon: </span>
+                <p className="text-sm font-medium text-amber-200/90">{p.userChoiceSummary}</p>
+                <p className="mt-3 text-sm text-white/65">
+                  <span className="text-white/40">Canonical lore: </span>
                   {p.canonicalBeat}
                 </p>
-                <p className="mt-2 text-white/75">{p.resonance}</p>
+                <p className="mt-3 leading-relaxed text-white/80">{p.resonance}</p>
               </li>
             ))}
           </ul>
         </section>
 
         <section>
-          <h3 className="font-serif text-2xl text-amber-100">The Shadow Within</h3>
-          <p className="mt-3 text-white/75">{narrative.shadowWithin}</p>
+          <h3 className="font-serif text-2xl text-amber-100">Your Inner Shadow</h3>
+          <p className="mt-3 leading-relaxed">{narrative.shadowWithin}</p>
         </section>
 
         <section>
           <h3 className="font-serif text-2xl text-amber-100">Your Greatest Strength</h3>
-          <p className="mt-3 text-white/75">{narrative.greatestStrength}</p>
+          <p className="mt-3 leading-relaxed">{narrative.greatestStrength}</p>
         </section>
 
         <section>
           <h3 className="font-serif text-2xl text-amber-100">Your Destiny</h3>
-          <p className="mt-3 font-serif text-lg italic text-amber-50/90">
+          <p className="mt-3 font-serif text-lg italic leading-relaxed text-amber-50/90">
             {narrative.destiny}
           </p>
         </section>
@@ -178,7 +162,9 @@ export function ResultsStage({
             traits: narrative.definingTraits,
             quote: narrative.shareQuote,
           }}
-          shareUrl={shareUrl}
+          championId={champion.id}
+          traitDimensions={match.topDimensions.slice(0, 3).map((d) => d.dimension)}
+          shareQuote={narrative.shareQuote}
           onRestart={onRestart}
         />
       </div>
@@ -196,7 +182,7 @@ export function ResultsStage({
             href={siteConfig.kofiUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#ff5e5b] px-5 py-2.5 text-sm font-medium text-white"
+            className="mt-4 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-[#ff5e5b] px-5 py-2.5 text-sm font-medium text-white"
           >
             Support the Creator on Ko-fi <ExternalLink className="h-4 w-4" />
           </a>

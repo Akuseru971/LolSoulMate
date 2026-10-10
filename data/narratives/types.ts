@@ -3,26 +3,43 @@ import type { LoreEventId } from "./loreEvents";
 
 export type FragmentType =
   | "introduction"
-  | "personality_parallel"
+  | "lore_parallel"
   | "strength"
   | "weakness"
-  | "lore_comparison"
   | "conclusion";
 
-export interface NarrativeFragment {
+/** Structured parallel — three distinct narrative layers. */
+export interface LoreParallelFragment {
   id: string;
   championId: string;
-  type: FragmentType;
-  text: string;
-  requiredTraits?: PersonalityDimension[];
+  type: "lore_parallel";
+  relatedDimensions: PersonalityDimension[];
+  relevantAnswerKeys: string[];
   minTraitScores?: Partial<Record<PersonalityDimension, number>>;
-  relatedQuestionIds?: string[];
-  relatedAnswerIds?: string[];
+  maxTraitScores?: Partial<Record<PersonalityDimension, number>>;
   loreEventId?: LoreEventId;
-  /** Tags that must not co-occur with this fragment (coherence). */
-  excludesTags?: string[];
+  userInterpretation: string;
+  canonicalFact: string;
+  parallelExplanation: string;
   tags?: string[];
+  excludesTags?: string[];
+  incompatibleFragmentIds?: string[];
 }
+
+export interface TextFragment {
+  id: string;
+  championId: string;
+  type: Exclude<FragmentType, "lore_parallel">;
+  text: string;
+  relatedDimensions?: PersonalityDimension[];
+  relevantAnswerKeys?: string[];
+  minTraitScores?: Partial<Record<PersonalityDimension, number>>;
+  loreEventId?: LoreEventId;
+  tags?: string[];
+  excludesTags?: string[];
+}
+
+export type NarrativeFragment = LoreParallelFragment | TextFragment;
 
 export interface ChampionNarrativePack {
   championId: string;
@@ -34,5 +51,5 @@ export interface NarrativeBuildMeta {
   seed: string;
   selectedFragmentIds: string[];
   topDimensions: PersonalityDimension[];
-  influentialAnswers: { questionId: string; answerId: string; label: string }[];
+  matchedAnswerKeys: string[];
 }

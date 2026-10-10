@@ -30,7 +30,7 @@ export const narrativeResponseSchema = z.object({
         resonance: z.string().max(800),
       }),
     )
-    .min(3)
+    .min(1)
     .max(5),
   shadowWithin: z.string().max(2000),
   greatestStrength: z.string().max(1500),
@@ -40,10 +40,3 @@ export const narrativeResponseSchema = z.object({
 });
 
 export type NarrativeResponse = z.infer<typeof narrativeResponseSchema>;
-
-export const shareCreateSchema = z.object({
-  championId: z.string().min(1).max(64),
-  compatibility: z.number().min(0).max(100),
-  definingTraits: z.array(z.string()).min(3).max(3),
-  shareQuote: z.string().max(220),
-});

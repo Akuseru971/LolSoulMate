@@ -1,20 +1,23 @@
 import type { MatchResult } from "@/lib/matching/engine";
 import { getNarrativePack } from "@/data/narratives/packs/all";
-import {
-  PERSONALITY_DIMENSIONS,
-  vectorToPercentScores,
-  DIMENSION_LABELS,
-  type PersonalityDimension,
-} from "@/lib/matching/dimensions";
+import { vectorToPercentScores } from "@/lib/matching/dimensions";
 import type { NarrativeBuildMeta } from "@/data/narratives/types";
 import type { NarrativeResponse } from "@/lib/validation/schemas";
 import { narrativeSeed } from "./seed";
-import { selectFragments, selectOne, type SelectionContext } from "./select";
+import {
+  parallelToUserSummary,
+  selectLoreParallels,
+  selectTextFragment,
+  type SelectionContext,
+} from "./select";
+import { joinSentences, firstSentence, limitSentences } from "./text";
+import { CONTENT_VERSION } from "@/lib/config/versions";
 
 export interface ComposeInput {
   match: MatchResult;
   answers: { questionId: string; answerId: string }[];
   nickname?: string;
+  contentVersion?: number;
 }
 
 export interface ComposedNarrative {
@@ -22,8 +25,12 @@ export interface ComposedNarrative {
   meta: NarrativeBuildMeta;
 }
 
-function buildContext(input: ComposeInput, championId: string): SelectionContext {
-  const seed = narrativeSeed(championId, input.answers);
+function buildContext(
+  input: ComposeInput,
+  championId: string,
+  contentVersion: number,
+): SelectionContext {
+  const seed = `${narrativeSeed(championId, input.answers)}@cv${contentVersion}`;
   const pct = vectorToPercentScores(input.match.blendedVector);
   const answerKeys = new Set(
     input.answers.map((a) => `${a.questionId}:${a.answerId}`),
@@ -34,13 +41,9 @@ function buildContext(input: ComposeInput, championId: string): SelectionContext
     answerKeys,
     usedTags: new Set(),
     usedIds: new Set(),
+    usedLoreEvents: new Set(),
+    usedThemes: new Set(),
   };
-}
-
-function trimWords(text: string, min: number, max: number): string {
-  const words = text.split(/\s+/);
-  if (words.length <= max) return text;
-  return words.slice(0, max).join(" ") + "…";
 }
 
 export function composeNarrative(input: ComposeInput): ComposedNarrative {
@@ -50,52 +53,59 @@ export function composeNarrative(input: ComposeInput): ComposedNarrative {
     throw new Error(`No narrative pack for champion ${champion.id}`);
   }
 
-  const ctx = buildContext(input, champion.id);
-  const intro = selectOne(pack.fragments, ctx, "introduction", "intro");
-  const parallels = selectFragments(pack.fragments, ctx, 4, "personality_parallel");
-  const loreBits = selectFragments(pack.fragments, ctx, 2, "lore_comparison");
-  const strength = selectOne(pack.fragments, ctx, "strength", "strength");
-  const weakness = selectOne(pack.fragments, ctx, "weakness", "weakness");
-  const conclusion = selectOne(pack.fragments, ctx, "conclusion", "end");
+  const cv = input.contentVersion ?? CONTENT_VERSION;
+  const ctx = buildContext(input, champion.id, cv);
+  const intro = selectTextFragment(pack.fragments, ctx, "introduction", "intro");
+  const parallels = selectLoreParallels(pack.fragments, ctx, 5);
+  const strength = selectTextFragment(pack.fragments, ctx, "strength", "strength");
+  const weakness = selectTextFragment(pack.fragments, ctx, "weakness", "weakness");
+  const conclusion = selectTextFragment(pack.fragments, ctx, "conclusion", "end");
 
   const name = input.nickname?.trim() || "Traveler";
   const topDims = input.match.topDimensions.slice(0, 3);
 
-  const sharedSoulParts = [
-    intro.text.replace(/\bYour choices\b/, `${name}, your choices`),
-    `Across your answers, ${topDims.map((d) => d.label.toLowerCase()).join(", ")} rise most strongly—dimensions that align with ${champion.name}'s established lore as ${champion.title}.`,
-    `${champion.loreSummary}`,
-  ];
-  const sharedSoul = trimWords(sharedSoulParts.join(" "), 100, 150);
+  const sharedSoul = joinSentences(
+    [
+      intro.text.replace(/\bYour choices\b/, `${name}, your choices`),
+      `What rises most in your pattern is ${topDims.map((d) => d.label.toLowerCase()).join(", ")} — the same currents that shape ${champion.name}'s story as ${champion.title}.`,
+      limitSentences(champion.loreSummary, 2),
+    ],
+    5,
+  );
 
-  const narrativeParallels = [...parallels, ...loreBits].slice(0, 5).map((f, i) => {
-    const answer = input.match.influentialAnswers[i] ?? input.match.influentialAnswers[0];
-    return {
-      userChoiceSummary: answer
-        ? `You indicated: "${answer.label}"`
-        : "Your questionnaire pattern emphasizes this trait.",
-      canonicalBeat: f.loreEventId
-        ? `${f.text}`
-        : f.text.split(".")[0] + ".",
-      resonance: f.text,
-    };
-  });
+  const narrativeParallels = parallels.map((p) => ({
+    userChoiceSummary: parallelToUserSummary(p, ctx.answerKeys),
+    canonicalBeat: p.canonicalFact,
+    resonance: p.parallelExplanation,
+  }));
 
   const definingTraits = topDims.map((d) => d.label);
+  const traitDimensions = topDims.map((d) => d.dimension);
 
   const narrative: NarrativeResponse = {
     reveal: {
       championName: champion.name,
       region: champion.region,
       compatibility: input.match.primary.compatibility,
-      oneLiner: intro.text.split(".")[0] + ".",
+      oneLiner: firstSentence(intro.text),
     },
     sharedSoul,
-    parallels: narrativeParallels,
+    parallels:
+      narrativeParallels.length >= 3
+        ? narrativeParallels
+        : narrativeParallels.length > 0
+          ? narrativeParallels
+          : [
+              {
+                userChoiceSummary: "Your overall pattern emphasizes conviction under pressure.",
+                canonicalBeat: limitSentences(champion.loreSummary, 2),
+                resonance: `With ${champion.name}, that conviction is written into canon—not as borrowed trauma, but as a shared way of choosing responsibility.`,
+              },
+            ],
     shadowWithin: weakness.text,
     greatestStrength: strength.text,
-    destiny: conclusion.text,
-    shareQuote: `"${conclusion.text.split(".")[0]}."`,
+    destiny: limitSentences(conclusion.text, 4),
+    shareQuote: firstSentence(conclusion.text),
     definingTraits,
   };
 
@@ -104,17 +114,10 @@ export function composeNarrative(input: ComposeInput): ComposedNarrative {
     meta: {
       seed: ctx.seed,
       selectedFragmentIds: [...ctx.usedIds],
-      topDimensions: topDims.map((d) => d.dimension),
-      influentialAnswers: input.match.influentialAnswers,
+      topDimensions: traitDimensions,
+      matchedAnswerKeys: [...ctx.answerKeys].filter((k) =>
+        parallels.some((p) => p.relevantAnswerKeys.includes(k)),
+      ),
     },
   };
-}
-
-export function topTraitLabels(vector: Record<PersonalityDimension, number>, n = 3): string[] {
-  const pct = vectorToPercentScores(vector);
-  return [...PERSONALITY_DIMENSIONS]
-    .map((d) => ({ d, s: pct[d] }))
-    .sort((a, b) => b.s - a.s)
-    .slice(0, n)
-    .map((x) => DIMENSION_LABELS[x.d]);
 }

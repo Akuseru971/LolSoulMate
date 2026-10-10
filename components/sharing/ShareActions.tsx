@@ -5,23 +5,49 @@ import { toPng } from "html-to-image";
 import { Download, Link2, RefreshCw, Share2 } from "lucide-react";
 import { ShareCard, type ShareCardProps } from "./ShareCard";
 import { siteConfig } from "@/lib/config";
+import {
+  buildShareUrl,
+  createSharePayload,
+} from "@/lib/sharing/payload";
+import type { PersonalityDimension } from "@/lib/matching/dimensions";
+import { trackEvent } from "@/lib/analytics";
 
 export function ShareActions({
   card,
+  championId,
+  traitDimensions,
+  shareQuote,
   onRestart,
-  shareUrl,
 }: {
   card: ShareCardProps;
-  shareUrl: string | null;
+  championId: string;
+  traitDimensions: PersonalityDimension[];
+  shareQuote: string;
   onRestart: () => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [busy, setBusy] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [shareError, setShareError] = useState<string | null>(null);
+
+  function buildUrl(): string | null {
+    try {
+      const payload = createSharePayload({
+        championId,
+        compatibility: card.compatibility,
+        traitDimensions,
+        shareQuote,
+      });
+      return buildShareUrl(payload, siteConfig.siteUrl);
+    } catch {
+      return null;
+    }
+  }
 
   async function downloadPng() {
     if (!ref.current) return;
     setBusy(true);
+    setShareError(null);
     try {
       const dataUrl = await toPng(ref.current, {
         cacheBust: true,
@@ -33,13 +59,25 @@ export function ShareActions({
       a.href = dataUrl;
       a.download = `soul-of-runeterra-${card.championName.toLowerCase().replace(/\s+/g, "-")}.png`;
       a.click();
+      trackEvent("share_image_download");
+    } catch {
+      setShareError("Could not export image. Try again or use Copy link.");
     } finally {
       setBusy(false);
     }
   }
 
   async function nativeShare() {
-    if (!ref.current) return;
+    const url = buildUrl();
+    if (!url) {
+      setShareError("Could not create share link.");
+      return;
+    }
+    trackEvent("share_clicked");
+    if (!ref.current) {
+      await copyLink();
+      return;
+    }
     if (!navigator.share) {
       await copyLink();
       return;
@@ -53,7 +91,7 @@ export function ShareActions({
       await navigator.share({
         title: "My Soul of Runeterra",
         text: `I matched with ${card.championName}!`,
-        url: shareUrl ?? siteConfig.siteUrl,
+        url,
         files: [file],
       });
     } catch {
@@ -64,10 +102,19 @@ export function ShareActions({
   }
 
   async function copyLink() {
-    const url = shareUrl ?? siteConfig.siteUrl;
-    await navigator.clipboard.writeText(url);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    const url = buildUrl();
+    if (!url) {
+      setShareError("Could not create share link.");
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      trackEvent("share_clicked");
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setShareError("Clipboard unavailable. Copy manually from the address bar after sharing.");
+    }
   }
 
   return (
@@ -76,12 +123,18 @@ export function ShareActions({
         <ShareCard ref={ref} {...card} />
       </div>
 
+      {shareError && (
+        <p className="text-sm text-amber-200/90" role="alert">
+          {shareError}
+        </p>
+      )}
+
       <div className="flex flex-wrap gap-3">
         <button
           type="button"
           disabled={busy}
           onClick={downloadPng}
-          className="inline-flex items-center gap-2 rounded-full bg-amber-500/90 px-4 py-2.5 text-sm font-medium text-black"
+          className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-amber-500/90 px-4 py-2.5 text-sm font-medium text-black"
         >
           <Download className="h-4 w-4" /> Download PNG
         </button>
@@ -89,21 +142,21 @@ export function ShareActions({
           type="button"
           disabled={busy}
           onClick={nativeShare}
-          className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2.5 text-sm text-white/85"
+          className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/20 px-4 py-2.5 text-sm text-white/85"
         >
           <Share2 className="h-4 w-4" /> Share
         </button>
         <button
           type="button"
           onClick={copyLink}
-          className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2.5 text-sm text-white/85"
+          className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/20 px-4 py-2.5 text-sm text-white/85"
         >
           <Link2 className="h-4 w-4" /> {copied ? "Copied!" : "Copy link"}
         </button>
         <button
           type="button"
           onClick={onRestart}
-          className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2.5 text-sm text-white/85"
+          className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/20 px-4 py-2.5 text-sm text-white/85"
         >
           <RefreshCw className="h-4 w-4" /> Restart
         </button>

@@ -72,7 +72,7 @@ describe("simulated traffic (zero API)", () => {
         answerId: answers[q.id],
       }));
       const { narrative, meta } = composeNarrative({ match, answers: payload });
-      expect(narrative.parallels.length).toBeGreaterThanOrEqual(3);
+      expect(narrative.parallels.length).toBeGreaterThanOrEqual(1);
       narrativeHashes.add(meta.selectedFragmentIds.join(","));
       expect(fingerprintMatchInput({ answers: selections })).toContain("q01");
     }

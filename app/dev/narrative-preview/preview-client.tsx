@@ -84,8 +84,8 @@ export function DevNarrativePreview() {
           Fragments: {preview.meta.selectedFragmentIds.join(", ")}
         </p>
         <ul className="list-disc pl-5 text-white/70">
-          {preview.meta.influentialAnswers.map((a) => (
-            <li key={a.questionId}>{a.label}</li>
+          {preview.meta.matchedAnswerKeys.map((key) => (
+            <li key={key}>{key}</li>
           ))}
         </ul>
       </section>

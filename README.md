@@ -47,7 +47,7 @@ See [docs/ZERO_COST_ENGINE.md](docs/ZERO_COST_ENGINE.md).
 2. **Champion similarity** via weighted cosine distance on lore-derived vectors.
 3. **Modular narratives** from prewritten fragments per champion (deterministic selection seeded by answer IDs).
 
-Quiz matching and narrative composition run **in the browser** after static assets load. The only server route used for results is optional share-link minting (`/api/share`) — no inference.
+Quiz matching and narrative composition run **in the browser** after static assets load. Shared results use a compact **URL payload** (`/share?d=…`) with champion id, score, and traits only — no questionnaire answers, no server memory store, no inference.
 
 ## Champion roster status
 
@@ -59,12 +59,12 @@ Quiz matching and narrative composition run **in the browser** after static asse
 
 Regenerate narrative packs: `node scripts/generate-narrative-packs.mjs`
 
-At time of last update: **15 narrative-complete**, **~33 vector-only** profiles in repo (48 total with Kindred). Expand with verified Universe lore only.
+At time of last update: **25 narrative-complete**, **~23 vector-only** profiles in repo (48 total with Kindred). Expand with verified Universe lore only.
 
 ## Architecture
 
 ```
-app/                      # SPA journey + dev preview + share API
+app/                      # SPA journey + dev preview + share page
 components/               # UI (unchanged experience)
 data/champions/           # Profiles + coverage flags
 data/narratives/packs/    # Fragment libraries

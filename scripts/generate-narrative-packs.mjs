@@ -16,6 +16,16 @@ const COMPLETE = [
   "riven",
   "ekko",
   "senna",
+  "diana",
+  "leona",
+  "morgana",
+  "nasus",
+  "azir",
+  "missfortune",
+  "pyke",
+  "yone",
+  "zed",
+  "sett",
 ];
 
 const LORE = {
@@ -169,6 +179,106 @@ const LORE = {
       "Her resilience is active—not passive endurance.",
     ],
   },
+  diana: {
+    events: ["targon_ascent"],
+    name: "Diana",
+    themes: ["faith", "rebellion", "conviction", "solitude"],
+    canon: [
+      "Diana embraced the moon's power against Targonian dogma that cast her as heretic.",
+      "She walks a lonely path between celestial duty and personal truth.",
+      "Her strikes defend beliefs others call blasphemy.",
+    ],
+  },
+  leona: {
+    events: ["targon_ascent"],
+    name: "Leona",
+    themes: ["duty", "faith", "protection", "discipline"],
+    canon: [
+      "Leona serves as the sun's knight, binding herself to Mount Targon's celestial order.",
+      "She shields allies with radiant conviction.",
+      "Her loyalty is to cosmic law as much as to people.",
+    ],
+  },
+  morgana: {
+    events: ["demacia_mage_secrets"],
+    name: "Morgana",
+    themes: ["empathy", "defiance", "power", "protection"],
+    canon: [
+      "Morgana rejected Demacia's fear of magic and shelters the outcast.",
+      "She accepts forbidden power to shield the suffering.",
+      "Her wings mark exile turned into purpose.",
+    ],
+  },
+  nasus: {
+    events: ["noxian_conquest"],
+    name: "Nasus",
+    themes: ["duty", "knowledge", "grief", "discipline"],
+    canon: [
+      "Nasus is a curator of Shuriman history burdened by tragedy involving his brother Renekton.",
+      "He wields knowledge and strength with scholarly restraint.",
+      "Empires fall; he remains to remember.",
+    ],
+  },
+  azir: {
+    events: ["noxian_conquest"],
+    name: "Azir",
+    themes: ["ambition", "legacy", "pride", "restoration"],
+    canon: [
+      "Azir returned to seek restoration of Shurima's golden age.",
+      "His ambition is imperial and deeply personal.",
+      "He believes greatness is a birthright worth any cost.",
+    ],
+  },
+  missfortune: {
+    events: ["bilgewater_vengeance"],
+    name: "Miss Fortune",
+    themes: ["ambition", "vengeance", "charisma", "control"],
+    canon: [
+      "Miss Fortune built power in Bilgewater through calculated revenge.",
+      "She commands with charm and pistol alike.",
+      "Her rise is a lesson in turning loss into leverage.",
+    ],
+  },
+  pyke: {
+    events: ["bilgewater_vengeance"],
+    name: "Pyke",
+    themes: ["justice", "rage", "obsession", "judgment"],
+    canon: [
+      "Pyke returned from death to hunt greedy captains of Bilgewater.",
+      "He enforces a brutal code against those who profit from betrayal.",
+      "Undeath sharpened his sense of debt, not mercy.",
+    ],
+  },
+  yone: {
+    events: ["ionian_balance"],
+    name: "Yone",
+    themes: ["duty", "balance", "honor", "discipline"],
+    canon: [
+      "Yone hunts azakana while guarding thresholds between spirit and living realms.",
+      "He balances emotion with obligation after returning from death.",
+      "His blades answer threats mortal law cannot reach.",
+    ],
+  },
+  zed: {
+    events: ["ionian_balance"],
+    name: "Zed",
+    themes: ["power", "order", "severity", "sacrifice"],
+    canon: [
+      "Zed leads the Order of Shadow, choosing brutal efficiency over his master's perceived weakness.",
+      "He believes Ionia requires harsh protection.",
+      "Power, to Zed, is the price of survival.",
+    ],
+  },
+  sett: {
+    events: ["ionian_resistance"],
+    name: "Sett",
+    themes: ["loyalty", "strength", "family", "pride"],
+    canon: [
+      "Sett rose as a pit boss in Ionia to protect his mother and found family.",
+      "He wears strength like armor for people others overlook.",
+      "His confidence masks the cost of half-vastaya identity in a divided world.",
+    ],
+  },
 };
 
 const TRAITS = [
@@ -217,74 +327,78 @@ const QUESTIONS = [
   "q20",
 ];
 
+const ANSWER_SUFFIXES = ["a", "b", "c", "d", "e"];
+
 function frags(championId, cfg) {
   const out = [];
   let n = 0;
-  const mk = (type, text, extra = {}) => {
+
+  for (let i = 0; i < 5; i++) {
     out.push({
-      id: `${championId}-${type}-${n++}`,
+      id: `${championId}-intro-${n++}`,
       championId,
-      type,
-      text,
-      ...extra,
+      type: "introduction",
+      text: `Some souls announce themselves loudly; others, like ${cfg.name}, reveal their weight through what they refuse to abandon. Your pattern leans toward ${cfg.themes[i % cfg.themes.length]}—not as borrowed drama, but as a recognizable rhythm of choice.`,
+      relatedDimensions: [TRAITS[i % TRAITS.length], TRAITS[(i + 3) % TRAITS.length]],
+      relevantAnswerKeys: [`${QUESTIONS[i % QUESTIONS.length]}:${ANSWER_SUFFIXES[i % 5]}`],
+      tags: [`intro-${i}`],
     });
-  };
-
-  for (let i = 0; i < 5; i++) {
-    mk(
-      "introduction",
-      `Your choices echo ${cfg.name}'s legend—a soul shaped by ${cfg.themes[i % cfg.themes.length]} and ${cfg.themes[(i + 1) % cfg.themes.length]}. This is not fate copying fiction; it is pattern recognition across who you protect, what you refuse, and what you still dare to hope (${i + 1}).`,
-      { tags: [`intro-${i}`], requiredTraits: [TRAITS[i % TRAITS.length]] },
-    );
   }
 
-  for (let i = 0; i < 10; i++) {
-    const canon = cfg.canon[i % cfg.canon.length];
+  for (let i = 0; i < 12; i++) {
     const q = QUESTIONS[i % QUESTIONS.length];
-    mk(
-      "personality_parallel",
-      `You indicated priorities that mirror ${cfg.name}'s canonical path: ${canon} Your answers around ${q} suggest you weigh similar costs—meaning over comfort, and consequence over applause.`,
-      {
-        relatedQuestionIds: [q, QUESTIONS[(i + 3) % QUESTIONS.length]],
-        loreEventId: cfg.events[0],
-        minTraitScores: { [TRAITS[(i + 2) % TRAITS.length]]: 55 + (i % 20) },
-        tags: [`parallel-${i}`],
-      },
-    );
-  }
-
-  for (let i = 0; i < 5; i++) {
-    mk(
-      "strength",
-      `Your strongest current is ${TRAITS[(i + 4) % TRAITS.length].replace(/([A-Z])/g, " $1").toLowerCase()}. ${cfg.name} embodies this in official lore—not as perfection, but as a repeated choice under pressure (${cfg.themes[i % cfg.themes.length]}).`,
-      { requiredTraits: [TRAITS[(i + 4) % TRAITS.length]], tags: [`strength-${i}`] },
-    );
-  }
-
-  for (let i = 0; i < 5; i++) {
-    mk(
-      "weakness",
-      `When ${TRAITS[(i + 7) % TRAITS.length].replace(/([A-Z])/g, " $1").toLowerCase()} rises in you, shadow follows—as it does for ${cfg.name}, whose lore acknowledges ${cfg.themes[(i + 2) % cfg.themes.length]} becoming a chain.`,
-      { tags: [`weakness-${i}`], excludesTags: i === 0 ? [] : ["weakness-0"] },
-    );
-  }
-
-  for (let i = 0; i < 5; i++) {
-    const canon = cfg.canon[(i + 1) % cfg.canon.length];
-    mk("lore_comparison", canon, {
-      type: "lore_comparison",
+    const ans = ANSWER_SUFFIXES[i % ANSWER_SUFFIXES.length];
+    const key = `${q}:${ans}`;
+    const canon = cfg.canon[i % cfg.canon.length];
+    const traitA = TRAITS[(i + 1) % TRAITS.length];
+    const traitB = TRAITS[(i + 4) % TRAITS.length];
+    out.push({
+      id: `${championId}-parallel-${n++}`,
+      championId,
+      type: "lore_parallel",
+      relatedDimensions: [traitA, traitB, TRAITS[(i + 7) % TRAITS.length]],
+      relevantAnswerKeys: [key, `${QUESTIONS[(i + 2) % QUESTIONS.length]}:${ANSWER_SUFFIXES[(i + 1) % 5]}`],
+      minTraitScores: { [traitA]: 52 + (i % 15) },
       loreEventId: cfg.events[i % cfg.events.length] || undefined,
-      relatedQuestionIds: [QUESTIONS[(i + 5) % QUESTIONS.length]],
-      tags: [`lore-${i}`],
+      userInterpretation: `You tend to prioritize ${cfg.themes[i % cfg.themes.length]} when choices grow costly—preferring meaning over comfort.`,
+      canonicalFact: canon,
+      parallelExplanation: `${cfg.name}'s canon turns on similar tension: ${cfg.themes[(i + 1) % cfg.themes.length]} shaped by consequence, not performance. The parallel is thematic—you need not have lived the same events to recognize the same gravity.`,
+      tags: [`parallel-${i}`, cfg.themes[i % cfg.themes.length]],
     });
   }
 
   for (let i = 0; i < 5; i++) {
-    mk(
-      "conclusion",
-      `Destiny does not ask ${cfg.name}'s permission—and it does not ask yours. Between ${cfg.themes[i % cfg.themes.length]} and ${cfg.themes[(i + 3) % cfg.themes.length]}, your legend keeps unfolding: not copied from Runeterra, but rhyming with it (${i + 1}).`,
-      { tags: [`end-${i}`] },
-    );
+    out.push({
+      id: `${championId}-strength-${n++}`,
+      championId,
+      type: "strength",
+      text: `Your answers suggest ${TRAITS[(i + 2) % TRAITS.length].replace(/([A-Z])/g, " $1").toLowerCase()} as a living strength. In lore, ${cfg.name} returns to that virtue when easier paths appear—${cfg.themes[i % cfg.themes.length]} as practice, not poster slogan.`,
+      relatedDimensions: [TRAITS[(i + 2) % TRAITS.length]],
+      relevantAnswerKeys: [`${QUESTIONS[(i + 5) % QUESTIONS.length]}:a`],
+      tags: [`strength-${i}`],
+    });
+  }
+
+  for (let i = 0; i < 5; i++) {
+    out.push({
+      id: `${championId}-weakness-${n++}`,
+      championId,
+      type: "weakness",
+      text: `When ${cfg.themes[(i + 2) % cfg.themes.length]} hardens into reflex, shadow appears—the same edge ${cfg.name} must negotiate in canon, where ${cfg.themes[i % cfg.themes.length]} can become a cage.`,
+      relatedDimensions: [TRAITS[(i + 9) % TRAITS.length]],
+      tags: [`weakness-${i}`],
+      excludesTags: i > 0 ? ["weakness-0"] : undefined,
+    });
+  }
+
+  for (let i = 0; i < 5; i++) {
+    out.push({
+      id: `${championId}-end-${n++}`,
+      championId,
+      type: "conclusion",
+      text: `Runeterra does not ask ${cfg.name} to be flawless—and it does not ask you to be finished. Between ${cfg.themes[i % cfg.themes.length]} and tomorrow's choice, your legend keeps its pulse: quiet, stubborn, and yours.`,
+      tags: [`end-${i}`],
+    });
   }
 
   return out;

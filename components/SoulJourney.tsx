@@ -11,19 +11,22 @@ import {
 import { QuizStage } from "@/components/quiz/QuizStage";
 import { AnalyzingStage } from "@/components/stages/AnalyzingStage";
 import { ResultsStage } from "@/components/results/ResultsStage";
+import { RecoveryStage } from "@/components/stages/RecoveryStage";
 import { QUESTIONS } from "@/data/questions";
 import {
   clearProgress,
   defaultProgress,
   loadProgress,
   saveProgress,
+  isQuizComplete,
   type JourneyStage,
   type StoredProgress,
 } from "@/lib/quiz/storage";
-import { computeMatch } from "@/lib/quiz/matchFromProgress";
+import { restoreResultFromProgress } from "@/lib/quiz/restoreResult";
 import type { MatchResult } from "@/lib/matching/engine";
 import type { NarrativeResponse } from "@/lib/validation/schemas";
-import { composeNarrative } from "@/lib/narrative/composeNarrative";
+import { trackEvent } from "@/lib/analytics";
+import { CONTENT_VERSION } from "@/lib/config/versions";
 
 const emptyForm: PersonalFormState = {
   nickname: "",
@@ -33,69 +36,129 @@ const emptyForm: PersonalFormState = {
   personalityKeywords: "",
 };
 
+type BootState = "hydrating" | "ready" | "recovery";
+
 export function SoulJourney() {
+  const [bootState, setBootState] = useState<BootState>("hydrating");
+  const [recoveryReason, setRecoveryReason] = useState<
+    "corrupt" | "incompatible" | "incomplete"
+  >("corrupt");
   const [progress, setProgress] = useState<StoredProgress>(() => defaultProgress());
   const [form, setForm] = useState<PersonalFormState>(emptyForm);
   const [match, setMatch] = useState<MatchResult | null>(null);
   const [narrative, setNarrative] = useState<NarrativeResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const analysisLock = useRef(false);
-
-  useEffect(() => {
-    const stored = loadProgress();
-    if (!stored) return;
-    queueMicrotask(() => {
-      setProgress(stored);
-      setForm({
-        nickname: stored.nickname ?? "",
-        birthMonth: stored.birthMonth?.toString() ?? "",
-        birthDay: stored.birthDay?.toString() ?? "",
-        zodiac: stored.zodiac ?? "",
-        personalityKeywords: stored.personalityKeywords ?? "",
-      });
-    });
-  }, []);
+  const hydrated = useRef(false);
 
   const persist = useCallback((next: StoredProgress) => {
     setProgress(next);
     saveProgress(next);
   }, []);
 
+  const applyRestoredResult = useCallback(
+    (snapshot: StoredProgress, zodiac?: ReturnType<typeof resolveZodiac>) => {
+      const restored = restoreResultFromProgress(
+        snapshot,
+        zodiac ?? snapshot.zodiac,
+      );
+      if (!restored) return false;
+      setMatch(restored.match);
+      setNarrative(restored.narrative);
+      return true;
+    },
+    [],
+  );
+
+  useEffect(() => {
+    if (hydrated.current) return;
+    hydrated.current = true;
+
+    queueMicrotask(() => {
+      const { data, error: loadError } = loadProgress();
+      if (loadError) {
+        setRecoveryReason(loadError);
+        setBootState("recovery");
+        return;
+      }
+      if (!data) {
+        setBootState("ready");
+        trackEvent("landing_view");
+        return;
+      }
+
+      setProgress(data);
+      setForm({
+        nickname: data.nickname ?? "",
+        birthMonth: data.birthMonth?.toString() ?? "",
+        birthDay: data.birthDay?.toString() ?? "",
+        zodiac: data.zodiac ?? "",
+        personalityKeywords: data.personalityKeywords ?? "",
+      });
+
+      const z = data.zodiac ?? resolveZodiac({
+        nickname: data.nickname ?? "",
+        birthMonth: data.birthMonth?.toString() ?? "",
+        birthDay: data.birthDay?.toString() ?? "",
+        zodiac: data.zodiac ?? "",
+        personalityKeywords: data.personalityKeywords ?? "",
+      });
+
+      if (
+        (data.stage === "results" || data.stage === "analyzing") &&
+        isQuizComplete(data.answers)
+      ) {
+        const ok = applyRestoredResult(data, z);
+        if (!ok) {
+          setRecoveryReason("incomplete");
+          setBootState("recovery");
+          return;
+        }
+        analysisLock.current = true;
+        setProgress({ ...data, stage: "results" });
+        saveProgress({ ...data, stage: "results" });
+        trackEvent("result_view_restored");
+      }
+
+      setBootState("ready");
+    });
+  }, [applyRestoredResult]);
+
   const runAnalysis = useCallback(
     (snapshot: StoredProgress) => {
       if (analysisLock.current) return;
       analysisLock.current = true;
 
-      const z = resolveZodiac(form) ?? snapshot.zodiac;
-      const result = computeMatch(snapshot.answers, z);
-      setMatch(result);
-
-      const answersPayload = QUESTIONS.map((q) => ({
-        questionId: q.id,
-        answerId: snapshot.answers[q.id] ?? q.answers[0].id,
-      }));
+      const z =
+        resolveZodiac(form) ??
+        snapshot.zodiac ??
+        undefined;
 
       try {
-        const { narrative: composed } = composeNarrative({
-          match: result,
-          answers: answersPayload,
-          nickname: form.nickname || snapshot.nickname,
+        const restored = restoreResultFromProgress(snapshot, z);
+        if (!restored) throw new Error("Incomplete answers");
+        setMatch(restored.match);
+        setNarrative(restored.narrative);
+        persist({
+          ...snapshot,
+          stage: "results",
+          contentVersion: CONTENT_VERSION,
+          resultChampionId: restored.match.primary.championId,
+          zodiac: z ?? snapshot.zodiac,
         });
-        setNarrative(composed);
+        trackEvent("quiz_completed");
+        trackEvent("result_view");
       } catch (e) {
         setError(
           e instanceof Error ? e.message : "Unable to compose narrative locally.",
         );
         analysisLock.current = false;
-        return;
       }
-
-      persist({ ...snapshot, stage: "results" });
     },
     [form, persist],
   );
 
-  function restart() {
+  function hardReset() {
     analysisLock.current = false;
     clearProgress();
     setProgress(defaultProgress());
@@ -103,12 +166,30 @@ export function SoulJourney() {
     setMatch(null);
     setNarrative(null);
     setError(null);
+    setBootState("ready");
+    trackEvent("restart");
+  }
+
+  function restart() {
+    hardReset();
   }
 
   function startAnalyzing(snapshot: StoredProgress) {
     const analyzing = { ...snapshot, stage: "analyzing" as JourneyStage };
     persist(analyzing);
     runAnalysis(analyzing);
+  }
+
+  if (bootState === "hydrating") {
+    return (
+      <div className="flex min-h-[40vh] items-center justify-center text-white/60">
+        Restoring your journey…
+      </div>
+    );
+  }
+
+  if (bootState === "recovery") {
+    return <RecoveryStage reason={recoveryReason} onReset={hardReset} />;
   }
 
   return (
@@ -121,7 +202,12 @@ export function SoulJourney() {
         transition={{ duration: 0.3 }}
       >
         {progress.stage === "landing" && (
-          <LandingStage onStart={() => persist({ ...progress, stage: "personal" })} />
+          <LandingStage
+            onStart={() => {
+              trackEvent("quiz_started");
+              persist({ ...progress, stage: "personal" });
+            }}
+          />
         )}
 
         {progress.stage === "personal" && (
@@ -138,6 +224,7 @@ export function SoulJourney() {
                 zodiac: resolveZodiac(form),
                 personalityKeywords: form.personalityKeywords || undefined,
               };
+              trackEvent("personal_step_completed");
               persist(next);
             }}
             onSkip={() => persist({ ...progress, stage: "quiz" })}
@@ -153,6 +240,7 @@ export function SoulJourney() {
                 ...progress,
                 answers: { ...progress.answers, [questionId]: answerId },
               });
+              trackEvent("question_answered", { questionId });
             }}
             onBack={() => {
               if (progress.quizIndex === 0) {
@@ -195,6 +283,10 @@ export function SoulJourney() {
 
         {progress.stage === "results" && match && narrative && (
           <ResultsStage match={match} narrative={narrative} onRestart={restart} />
+        )}
+
+        {progress.stage === "results" && (!match || !narrative) && (
+          <RecoveryStage reason="incomplete" onReset={hardReset} />
         )}
       </motion.div>
     </AnimatePresence>

@@ -28,7 +28,10 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
           <p className="text-3xl uppercase tracking-[0.3em] text-amber-200/80">
             My Soul of Runeterra
           </p>
-          <h2 className="mt-8 font-serif text-7xl leading-tight text-amber-50">
+          <h2
+            className="mt-8 font-serif leading-tight text-amber-50"
+            style={{ fontSize: championName.length > 12 ? 56 : 72 }}
+          >
             {championName}
           </h2>
           <p className="mt-6 text-4xl text-white/80">
@@ -49,8 +52,8 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
               <li key={t}>• {t}</li>
             ))}
           </ul>
-          <p className="mt-12 font-serif text-4xl italic leading-snug text-white/85">
-            {quote}
+          <p className="mt-12 line-clamp-6 font-serif text-[2rem] italic leading-snug text-white/85">
+            {quote.replace(/^["']|["']$/g, "")}
           </p>
           <div className="mt-auto pt-16 text-2xl text-white/55">
             <p>{siteConfig.siteUrl.replace(/^https?:\/\//, "")}</p>
