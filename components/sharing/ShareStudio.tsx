@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { X, Download, Share2, Link2 } from "lucide-react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { X, Download, Share2, Link2, RotateCcw } from "lucide-react";
 import { ShareExportCard, type ShareExportCardProps } from "./ShareExportCard";
 import {
   SHARE_FORMATS,
@@ -10,10 +10,7 @@ import {
   type ShareTemplateId,
 } from "@/lib/sharing/formats";
 import { getShareFormat } from "@/lib/sharing/formats";
-import {
-  buildShareUrl,
-  createSharePayload,
-} from "@/lib/sharing/payload";
+import { buildShareUrl, createSharePayload } from "@/lib/sharing/payload";
 import type { PersonalityDimension } from "@/lib/matching/dimensions";
 import { siteConfig } from "@/lib/config";
 import { trackEvent } from "@/lib/analytics";
@@ -24,6 +21,11 @@ import {
   waitForImages,
 } from "@/lib/sharing/exportImage";
 import { resolveImageSrcForExport } from "@/lib/sharing/resolveImageSrc";
+import { getVisualFrame } from "@/data/champions/visualProfiles";
+import { shareContextForFormat } from "@/lib/champions/visualTypes";
+import type { UserArtTransform } from "@/lib/champions/visualTypes";
+import { DEFAULT_USER_TRANSFORM } from "@/lib/champions/visualTypes";
+import { sanitizeNickname } from "@/lib/champions/nickname";
 
 export interface ShareStudioData {
   championId: string;
@@ -35,24 +37,49 @@ export interface ShareStudioData {
   traits: string[];
   quote: string;
   traitDimensions: PersonalityDimension[];
+  nickname?: string;
+}
+
+function transformKey(template: ShareTemplateId, format: ShareFormatId) {
+  return `${template}:${format}`;
 }
 
 export function ShareStudio({
   open,
   onClose,
   data,
+  triggerRef,
 }: {
   open: boolean;
   onClose: () => void;
   data: ShareStudioData;
+  triggerRef?: React.RefObject<HTMLElement | null>;
 }) {
   const exportRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const dragRef = useRef<{ x: number; y: number; active: boolean }>({
+    x: 0,
+    y: 0,
+    active: false,
+  });
+  const nicknameBase = sanitizeNickname(data.nickname);
+
   const [template, setTemplate] = useState<ShareTemplateId>("cinematic");
   const [format, setFormat] = useState<ShareFormatId>("story");
   const [imageSrc, setImageSrc] = useState(data.imageUrl);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [showNickname, setShowNickname] = useState(!!nicknameBase);
+  const [displayNickname, setDisplayNickname] = useState(nicknameBase ?? "");
+  const [transforms, setTransforms] = useState<Record<string, UserArtTransform>>({});
+  const labelId = useId();
+
+  const userKey = transformKey(template, format);
+  const userTransform = transforms[userKey] ?? DEFAULT_USER_TRANSFORM;
+
+  const artFrame = getVisualFrame(data.championId, shareContextForFormat(format));
 
   useEffect(() => {
     if (!open) return;
@@ -61,8 +88,10 @@ export function ShareStudio({
     resolveImageSrcForExport(data.imageUrl).then((src) => {
       if (!cancelled) setImageSrc(src);
     });
+    const t = setTimeout(() => closeBtnRef.current?.focus(), 50);
     return () => {
       cancelled = true;
+      clearTimeout(t);
     };
   }, [open, data.championId, data.imageUrl]);
 
@@ -70,10 +99,17 @@ export function ShareStudio({
     if (!open) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    const trigger = triggerRef?.current;
     return () => {
       document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+      trigger?.focus();
     };
-  }, [open]);
+  }, [open, onClose, triggerRef]);
 
   const cardProps: ShareExportCardProps = {
     template,
@@ -82,13 +118,17 @@ export function ShareStudio({
     championTitle: data.championTitle,
     region: data.region,
     imageSrc,
+    artFrame,
+    userTransform,
     compatibility: data.compatibility,
     traits: data.traits,
     quote: data.quote,
+    showNickname: showNickname && !!sanitizeNickname(displayNickname),
+    displayNickname: sanitizeNickname(displayNickname),
   };
 
   const { width, height } = getShareFormat(format);
-  const previewScale = Math.min(1, 320 / width, 480 / height);
+  const previewScale = Math.min(1, 300 / width, 420 / height);
 
   const buildUrl = useCallback((): string | null => {
     try {
@@ -108,11 +148,16 @@ export function ShareStudio({
     const node = exportRef.current;
     if (!node) return null;
     await waitForFonts();
-    await waitForImages(node);
+    const imgWait = await waitForImages(node);
+    if (!imgWait.ok) {
+      throw new Error(`images:${imgWait.failed.join(",")}`);
+    }
     const { toPng } = await import("html-to-image");
     const dataUrl = await toPng(node, exportCaptureOptions(width, height));
     const res = await fetch(dataUrl);
-    return res.blob();
+    const blob = await res.blob();
+    if (blob.size < 800) throw new Error("blank");
+    return blob;
   }
 
   async function downloadPortrait() {
@@ -121,15 +166,13 @@ export function ShareStudio({
     trackEvent("share_png_attempt", { template, format });
     try {
       const blob = await capturePng();
-      if (!blob || blob.size < 500) {
-        throw new Error("empty");
-      }
+      if (!blob) throw new Error("empty");
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
       a.download = `soul-of-runeterra-${data.championName.toLowerCase().replace(/\s+/g, "-")}-${format}.png`;
       a.click();
-      URL.revokeObjectURL(url);
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
       trackEvent("share_png_success", { template, format });
     } catch {
       setError("We could not save the portrait. Try again or copy your link instead.");
@@ -156,7 +199,7 @@ export function ShareStudio({
           : null;
       if (canShareFn) {
         const blob = await capturePng();
-        if (blob && blob.size > 500) {
+        if (blob) {
           file = new File([blob], "soul-of-runeterra.png", { type: "image/png" });
         }
       }
@@ -204,8 +247,49 @@ export function ShareStudio({
       trackEvent("share_link_copied");
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      setError("Clipboard blocked. Long-press the link field on your device if shown.");
+      setError("Clipboard blocked. Copy the link from your browser if needed.");
       trackEvent("share_link_copy_failed");
+    }
+  }
+
+  function updateTransform(partial: Partial<UserArtTransform>) {
+    setTransforms((prev) => ({
+      ...prev,
+      [userKey]: { ...userTransform, ...partial },
+    }));
+  }
+
+  function resetTransform() {
+    setTransforms((prev) => {
+      const next = { ...prev };
+      delete next[userKey];
+      return next;
+    });
+  }
+
+  function onPointerDown(e: React.PointerEvent) {
+    if (e.button !== 0) return;
+    dragRef.current = { x: e.clientX, y: e.clientY, active: true };
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+  }
+
+  function onPointerMove(e: React.PointerEvent) {
+    if (!dragRef.current.active) return;
+    const dx = (e.clientX - dragRef.current.x) / 120;
+    const dy = (e.clientY - dragRef.current.y) / 120;
+    dragRef.current = { x: e.clientX, y: e.clientY, active: true };
+    updateTransform({
+      panX: Math.max(-1, Math.min(1, userTransform.panX + dx)),
+      panY: Math.max(-1, Math.min(1, userTransform.panY + dy)),
+    });
+  }
+
+  function onPointerUp(e: React.PointerEvent) {
+    dragRef.current.active = false;
+    try {
+      (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+    } catch {
+      /* ignore */
     }
   }
 
@@ -213,34 +297,41 @@ export function ShareStudio({
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-end justify-center bg-black/80 sm:items-center"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="share-studio-title"
+      className="fixed inset-0 z-[100] flex items-end justify-center bg-black/85 sm:items-center"
+      role="presentation"
+      onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="flex max-h-[96dvh] w-full max-w-lg flex-col overflow-hidden rounded-t-2xl border border-white/10 bg-[#0a0e14] sm:rounded-2xl">
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={labelId}
+        className="flex max-h-[96dvh] w-full max-w-lg flex-col overflow-hidden rounded-t-2xl border border-white/10 bg-[#0a0e14] pb-[env(safe-area-inset-bottom)] sm:rounded-2xl"
+      >
         <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
-          <h2 id="share-studio-title" className="font-serif text-lg text-amber-100">
-            Share studio
+          <h2 id={labelId} className="font-serif text-lg text-amber-100">
+            Portrait studio
           </h2>
           <button
+            ref={closeBtnRef}
             type="button"
             onClick={onClose}
             className="min-h-[44px] min-w-[44px] rounded-full p-2 text-white/60 hover:bg-white/5"
-            aria-label="Close"
+            aria-label="Close portrait studio"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
-        <div className="overflow-y-auto px-4 py-4">
-          <div className="flex justify-center overflow-hidden rounded-lg border border-white/10 bg-black/40 py-3">
-            <div
-              style={{
-                width: width * previewScale,
-                height: height * previewScale,
-              }}
-            >
+        <div className="overflow-y-auto overscroll-contain px-4 py-4">
+          <div
+            className="relative mx-auto touch-none overflow-hidden rounded-lg border border-white/10 bg-black/50 py-3"
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={onPointerUp}
+            onPointerCancel={onPointerUp}
+          >
+            <div style={{ width: width * previewScale, height: height * previewScale, margin: "0 auto" }}>
               <div
                 style={{
                   transform: `scale(${previewScale})`,
@@ -252,11 +343,65 @@ export function ShareStudio({
                 <ShareExportCard {...cardProps} />
               </div>
             </div>
+            <p className="pointer-events-none absolute bottom-2 left-0 right-0 text-center text-[10px] text-white/35">
+              Drag to reposition · pinch zoom below
+            </p>
           </div>
 
-          <p className="mt-3 text-center text-xs text-white/45">
-            Preview matches export ({width}×{height})
+          <p className="mt-2 text-center text-xs text-white/45">
+            Export {width}×{height}px
           </p>
+
+          <div className="mt-4 space-y-2">
+            <label className="flex items-center gap-2 text-sm text-white/70">
+              <input
+                type="checkbox"
+                checked={showNickname}
+                onChange={(e) => setShowNickname(e.target.checked)}
+                disabled={!nicknameBase}
+              />
+              Show nickname on portrait
+            </label>
+            {showNickname && (
+              <input
+                className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-white"
+                value={displayNickname}
+                maxLength={40}
+                onChange={(e) => setDisplayNickname(e.target.value)}
+                placeholder="Display name"
+                aria-label="Display nickname on portrait"
+              />
+            )}
+            <button
+              type="button"
+              className="text-xs text-amber-200/70 underline"
+              onClick={() => setDisplayNickname(nicknameBase ?? "")}
+            >
+              Reset to questionnaire name
+            </button>
+          </div>
+
+          <div className="mt-4">
+            <label className="text-xs text-white/50">Zoom</label>
+            <input
+              type="range"
+              min={0.85}
+              max={1.35}
+              step={0.01}
+              value={userTransform.zoom}
+              className="mt-1 w-full"
+              onChange={(e) => updateTransform({ zoom: Number(e.target.value) })}
+              aria-label="Artwork zoom"
+            />
+          </div>
+
+          <button
+            type="button"
+            onClick={resetTransform}
+            className="mt-2 inline-flex min-h-[44px] items-center gap-1 text-xs text-white/50"
+          >
+            <RotateCcw className="h-3 w-3" /> Reset framing
+          </button>
 
           <div className="mt-4">
             <p className="text-xs uppercase tracking-widest text-white/40">Template</p>
@@ -310,6 +455,12 @@ export function ShareStudio({
             </p>
           )}
 
+          {busy && (
+            <p className="mt-2 text-center text-xs text-white/45" aria-live="polite">
+              Preparing portrait…
+            </p>
+          )}
+
           <div className="mt-6 flex flex-col gap-2 pb-2">
             <button
               type="button"
@@ -340,7 +491,7 @@ export function ShareStudio({
 
       <div
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 -z-10 overflow-hidden"
+        className="pointer-events-none fixed left-0 top-0 overflow-hidden"
         style={{ transform: "translateX(-200vw)" }}
       >
         <div ref={exportRef}>

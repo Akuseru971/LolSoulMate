@@ -282,7 +282,12 @@ export function SoulJourney() {
         )}
 
         {progress.stage === "results" && match && narrative && (
-          <ResultsStage match={match} narrative={narrative} onRestart={restart} />
+          <ResultsStage
+            match={match}
+            narrative={narrative}
+            nickname={progress.nickname ?? form.nickname}
+            onRestart={restart}
+          />
         )}
 
         {progress.stage === "results" && (!match || !narrative) && (

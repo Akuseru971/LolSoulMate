@@ -76,3 +76,12 @@ body {
     animation: none;
   }
 }
+
+@keyframes artwork-drift {
+  from {
+    transform: scale(1.02) translate(0, 0);
+  }
+  to {
+    transform: scale(1.06) translate(-1%, -0.5%);
+  }
+}

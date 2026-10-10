@@ -1,4 +1,9 @@
-export async function waitForFonts(timeoutMs = 4000): Promise<void> {
+export interface ImageWaitResult {
+  ok: boolean;
+  failed: string[];
+}
+
+export async function waitForFonts(timeoutMs = 5000): Promise<void> {
   if (typeof document === "undefined") return;
   try {
     await Promise.race([
@@ -10,23 +15,38 @@ export async function waitForFonts(timeoutMs = 4000): Promise<void> {
   }
 }
 
-export async function waitForImages(root: HTMLElement, timeoutMs = 8000): Promise<void> {
+function waitOneImage(img: HTMLImageElement, timeoutMs: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    const finish = (ok: boolean) => resolve(ok);
+    if (img.complete && img.naturalWidth > 0 && img.naturalHeight > 0) {
+      finish(true);
+      return;
+    }
+    const onLoad = () => {
+      if (img.naturalWidth > 0 && img.naturalHeight > 0) finish(true);
+      else finish(false);
+    };
+    const onError = () => finish(false);
+    img.addEventListener("load", onLoad, { once: true });
+    img.addEventListener("error", onError, { once: true });
+    setTimeout(() => finish(false), timeoutMs);
+  });
+}
+
+export async function waitForImages(
+  root: HTMLElement,
+  timeoutMs = 10000,
+): Promise<ImageWaitResult> {
   const imgs = Array.from(root.querySelectorAll("img"));
-  await Promise.all(
-    imgs.map(
-      (img) =>
-        new Promise<void>((resolve) => {
-          if (img.complete && img.naturalWidth > 0) {
-            resolve();
-            return;
-          }
-          const done = () => resolve();
-          img.addEventListener("load", done, { once: true });
-          img.addEventListener("error", done, { once: true });
-          setTimeout(done, timeoutMs);
-        }),
-    ),
-  );
+  if (imgs.length === 0) {
+    return { ok: false, failed: ["no-images"] };
+  }
+  const results = await Promise.all(imgs.map((img) => waitOneImage(img, timeoutMs)));
+  const failed: string[] = [];
+  imgs.forEach((img, i) => {
+    if (!results[i]) failed.push(img.src.slice(0, 80));
+  });
+  return { ok: failed.length === 0, failed };
 }
 
 export function exportCaptureOptions(width: number, height: number) {

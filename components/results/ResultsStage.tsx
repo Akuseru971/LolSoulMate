@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState, lazy, Suspense } from "react";
+import { useCallback, useEffect, useRef, useState, lazy, Suspense } from "react";
 import { useReducedMotion } from "framer-motion";
 import type { MatchResult } from "@/lib/matching/engine";
 import type { NarrativeResponse } from "@/lib/validation/schemas";
@@ -11,6 +11,7 @@ import { ChampionReveal } from "./ChampionReveal";
 import { AlternativeMatches } from "./AlternativeMatches";
 import type { ShareStudioData } from "@/components/sharing/ShareStudio";
 import { trackEvent } from "@/lib/analytics";
+import { sanitizeNickname } from "@/lib/champions/nickname";
 
 const ShareStudio = lazy(() =>
   import("@/components/sharing/ShareStudio").then((m) => ({ default: m.ShareStudio })),
@@ -19,18 +20,31 @@ const ShareStudio = lazy(() =>
 export function ResultsStage({
   match,
   narrative,
+  nickname: rawNickname,
   onRestart,
 }: {
   match: MatchResult;
   narrative: NarrativeResponse;
+  nickname?: string;
   onRestart: () => void;
 }) {
   const reduce = useReducedMotion();
   const [revealDone, setRevealDone] = useState(!!reduce);
   const [studioOpen, setStudioOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const narrativeRef = useRef<HTMLElement>(null);
+  const studioTriggerRef = useRef<HTMLButtonElement>(null);
   const revealTracked = useRef(false);
+  const nickname = sanitizeNickname(rawNickname);
   const { champion, compatibility } = match.primary;
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const apply = () => setIsDesktop(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
 
   const studioData: ShareStudioData = {
     championId: champion.id,
@@ -42,6 +56,7 @@ export function ResultsStage({
     traits: narrative.definingTraits,
     quote: narrative.shareQuote,
     traitDimensions: match.topDimensions.slice(0, 3).map((d) => d.dimension),
+    nickname,
   };
 
   function scrollToNarrative() {
@@ -67,6 +82,8 @@ export function ResultsStage({
         champion={champion}
         compatibility={compatibility}
         oneLiner={narrative.reveal.oneLiner}
+        nickname={nickname}
+        isDesktop={isDesktop}
         revealComplete={revealDone}
         onRevealComplete={handleRevealComplete}
         onSkip={handleRevealComplete}
@@ -126,11 +143,12 @@ export function ResultsStage({
         <h4 className="font-serif text-xl text-amber-100/90">{en.results.shareHeading}</h4>
         <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <button
+            ref={studioTriggerRef}
             type="button"
             onClick={openStudio}
             className="min-h-[44px] border-b border-amber-400/40 pb-1 font-serif text-amber-100"
           >
-            Save your portrait
+            Create your portrait
           </button>
           <button
             type="button"
@@ -163,7 +181,12 @@ export function ResultsStage({
       </footer>
 
       <Suspense fallback={null}>
-        <ShareStudio open={studioOpen} onClose={() => setStudioOpen(false)} data={studioData} />
+        <ShareStudio
+          open={studioOpen}
+          onClose={() => setStudioOpen(false)}
+          data={studioData}
+          triggerRef={studioTriggerRef}
+        />
       </Suspense>
     </section>
   );
