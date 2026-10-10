@@ -14,6 +14,7 @@ import { trackEvent } from "@/lib/analytics";
 import { sanitizeNickname } from "@/lib/champions/nickname";
 import { ChapterSeparator } from "@/components/ornaments/ChapterSeparator";
 import { FinalMark } from "@/components/ornaments/FinalMark";
+import { ResultCardPreview } from "@/components/sharing/ResultCardPreview";
 
 const ShareStudio = lazy(() =>
   import("@/components/sharing/ShareStudio").then((m) => ({ default: m.ShareStudio })),
@@ -97,31 +98,38 @@ export function ResultsStage({
         ref={narrativeRef}
         className="mx-auto mt-4 max-w-[var(--sor-read-max)] scroll-mt-6 space-y-14"
       >
-        <section>
-          <p className="type-chapter">The connection</p>
-          <h3 className="mt-3 font-serif text-2xl text-[var(--sor-ivory)]/95">
-            {en.results.connection}
-          </h3>
-          <p className="type-body-narrative mt-6">{narrative.sharedSoul}</p>
-          <p className="mt-4 text-sm text-white/40">{en.results.compatibilityNote}</p>
+        <section className="rounded-sm bg-black/20 px-1 py-2 sm:px-2">
+          <p className="type-chapter">{en.results.connection}</p>
+          <p className="type-body-narrative mt-6 text-[1.08rem] leading-[1.85]">
+            {narrative.sharedSoul}
+          </p>
+          <p className="mt-5 text-sm text-white/40">{en.results.compatibilityNote}</p>
         </section>
 
         {narrative.parallels.length > 0 && (
           <>
             <ChapterSeparator className="my-8" />
             <section>
-              <p className="type-chapter">Their story, your choices</p>
-              <h3 className="mt-3 font-serif text-2xl text-[var(--sor-ivory)]/95">
-                {en.results.parallels}
-              </h3>
-              <div className="mt-8 space-y-10">
+              <p className="type-chapter">{en.results.parallels}</p>
+              <div className="mt-8 space-y-8">
                 {narrative.parallels.map((p, i) => (
-                  <div key={i} className="space-y-3">
-                    <p className="text-sm text-[var(--sor-gold)]/75">{p.userChoiceSummary}</p>
-                    <p className="text-sm italic text-white/50">{p.canonicalBeat}</p>
-                    <p className="border-l border-[var(--sor-border-subtle)] pl-4 leading-relaxed text-white/78">
-                      {p.resonance}
-                    </p>
+                  <div
+                    key={i}
+                    className="grid gap-4 border-t border-white/[0.06] pt-6 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]"
+                  >
+                    <div className="space-y-3">
+                      <p className="text-[11px] uppercase tracking-[0.22em] text-[var(--sor-mist)]">
+                        Your choice
+                      </p>
+                      <p className="text-sm text-[var(--sor-ivory)]/88">{p.userChoiceSummary}</p>
+                    </div>
+                    <div className="space-y-3 sm:border-l sm:border-[var(--sor-border-subtle)] sm:pl-6">
+                      <p className="text-[11px] uppercase tracking-[0.22em] text-white/40">
+                        In their legend
+                      </p>
+                      <p className="text-sm italic text-white/55">{p.canonicalBeat}</p>
+                      <p className="type-body-narrative text-[1rem]">{p.resonance}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -166,27 +174,26 @@ export function ResultsStage({
         <AlternativeMatches match={match} />
 
         <div className="mt-16 border-t border-white/10 pt-10 text-center">
-          <p className="type-chapter">The portrait</p>
-          <h4 className="mt-3 font-serif text-xl text-[var(--sor-ivory)]/90">
-            {en.results.shareHeading}
-          </h4>
-          <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <button
-              ref={studioTriggerRef}
-              type="button"
-              onClick={openStudio}
-              className="min-h-[44px] border-b border-[var(--sor-border-subtle)] pb-1 font-serif text-[var(--sor-ivory)]"
-            >
-              Create your portrait
-            </button>
-            <button
-              type="button"
-              onClick={onRestart}
-              className="inline-flex min-h-[44px] items-center gap-2 text-sm text-white/45 hover:text-white/70"
-            >
-              <RefreshCw className="h-4 w-4" /> Restart
-            </button>
-          </div>
+          <p className="type-chapter">{en.results.shareHeading}</p>
+          <p className="mt-2 text-sm text-white/45">
+            A collectible portrait — ready to save or share.
+          </p>
+          <ResultCardPreview data={studioData} onOpenStudio={openStudio} />
+          <button
+            ref={studioTriggerRef}
+            type="button"
+            className="sr-only"
+            onClick={openStudio}
+          >
+            Open portrait studio
+          </button>
+          <button
+            type="button"
+            onClick={onRestart}
+            className="mt-8 inline-flex min-h-[44px] items-center gap-2 text-sm text-white/45 hover:text-white/70"
+          >
+            <RefreshCw className="h-4 w-4" /> Restart
+          </button>
         </div>
 
         <footer className="mt-16 text-center">

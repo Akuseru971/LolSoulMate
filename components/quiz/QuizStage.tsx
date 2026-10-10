@@ -3,7 +3,8 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import { QUESTIONS } from "@/data/questions";
-import { QuizProgress } from "./QuizProgress";
+import { ConstellationProgress } from "./ConstellationProgress";
+import { EchoMark } from "@/components/ornaments/EchoMark";
 
 interface QuizStageProps {
   index: number;
@@ -25,8 +26,13 @@ export function QuizStage({
   const selected = answers[q.id];
 
   return (
-    <div className="mx-auto w-full max-w-2xl px-4 py-8">
-      <QuizProgress current={index} total={QUESTIONS.length} />
+    <div className="relative mx-auto w-full max-w-2xl px-4 py-8">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-12 -z-[1] h-[min(70vh,520px)] bg-gradient-to-b from-black/55 via-black/35 to-transparent"
+        aria-hidden
+      />
+
+      <ConstellationProgress currentIndex={index} answers={answers} />
       <button
         type="button"
         onClick={onBack}
@@ -38,15 +44,13 @@ export function QuizStage({
       <AnimatePresence mode="wait">
         <motion.div
           key={q.id}
-          initial={reduce ? false : { opacity: 0, x: 24 }}
+          initial={reduce ? false : { opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          exit={reduce ? undefined : { opacity: 0, x: -24 }}
-          transition={{ duration: 0.35 }}
+          exit={reduce ? undefined : { opacity: 0, x: -16 }}
+          transition={{ duration: 0.32 }}
         >
-          <p className="mb-2 text-xs uppercase tracking-widest text-amber-200/60">
-            {q.category}
-          </p>
-          <h2 className="font-serif text-2xl leading-snug text-white sm:text-3xl">
+          <p className="type-chapter">{q.category}</p>
+          <h2 className="type-cinematic-title mt-3 text-2xl text-[var(--sor-ivory)] sm:text-3xl">
             {q.text}
           </h2>
 
@@ -66,13 +70,19 @@ export function QuizStage({
                         onSelect(q.id, a.id);
                       }
                     }}
-                    className={`w-full rounded-xl border px-4 py-4 text-left text-base transition ${
+                    className={`group relative w-full rounded-lg border px-4 py-4 text-left text-base transition duration-200 ${
                       active
-                        ? "border-amber-400/70 bg-amber-500/15 text-white shadow-[0_0_24px_rgba(201,162,39,0.15)]"
-                        : "border-white/10 bg-white/[0.03] text-white/85 hover:border-amber-200/30 hover:bg-white/[0.06]"
+                        ? "border-[var(--sor-gold)]/55 bg-[var(--sor-gold)]/10 text-white shadow-[0_0_20px_rgba(197,164,109,0.12)]"
+                        : "border-white/10 bg-black/25 text-white/85 hover:border-[var(--sor-mist)]/35 hover:bg-black/35"
                     }`}
                   >
-                    {a.text}
+                    {active && (
+                      <EchoMark
+                        size={14}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--sor-gold)]/70"
+                      />
+                    )}
+                    <span className="pr-8">{a.text}</span>
                   </button>
                 </li>
               );
@@ -83,7 +93,7 @@ export function QuizStage({
             type="button"
             disabled={!selected}
             onClick={onNext}
-            className="mt-8 w-full rounded-full bg-gradient-to-r from-amber-600 to-amber-400 py-3.5 text-sm font-semibold text-black disabled:opacity-40"
+            className="mt-8 w-full min-h-[48px] rounded-full border border-[var(--sor-gold)]/40 bg-[var(--sor-gold)]/12 py-3.5 text-sm font-medium text-[var(--sor-ivory)] transition hover:bg-[var(--sor-gold)]/18 disabled:opacity-35"
           >
             {index === QUESTIONS.length - 1 ? "Reveal my champion" : "Continue"}
           </button>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { Atmosphere } from "@/components/layout/Atmosphere";
+import { AtmosphereProvider } from "@/lib/journey/AtmosphereContext";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ConsentProvider } from "@/components/privacy/ConsentContext";
 import { CookieBanner } from "@/components/privacy/CookieBanner";
@@ -37,10 +38,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-full flex flex-col antialiased text-white">
         <ConsentProvider>
           <AdSenseScript />
-          <Atmosphere />
-          <main className="flex-1">{children}</main>
-          <SiteFooter />
-          <CookieBanner />
+          <AtmosphereProvider>
+            <Atmosphere />
+            <main className="flex-1">{children}</main>
+            <SiteFooter />
+            <CookieBanner />
+          </AtmosphereProvider>
         </ConsentProvider>
       </body>
     </html>

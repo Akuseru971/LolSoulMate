@@ -8,14 +8,15 @@ import { ChampionArtwork } from "@/components/champions/ChampionArtwork";
 import { getVisualFrame } from "@/data/champions/visualProfiles";
 import { revealLeadLabel, possessiveStory } from "@/lib/champions/nickname";
 import { SoulSeal } from "@/components/ornaments/SoulSeal";
+import { ConstellationComplete } from "@/components/quiz/ConstellationProgress";
 
-const PHASE_SILENCE = 0;
-const PHASE_AWAKEN = 1;
-const PHASE_NAME = 2;
-const PHASE_CONNECTION = 3;
-const PHASE_PORTRAIT = 4;
+const PHASE_CONSTELLATION = 0;
+const PHASE_SILENCE = 1;
+const PHASE_AWAKEN = 2;
+const PHASE_NAME = 3;
+const PHASE_CONNECTION = 4;
 
-const TIMINGS = [400, 900, 1500, 2200, 3000];
+const TIMINGS = [550, 1200, 1900, 2600, 3300];
 
 export function ChampionReveal({
   champion,
@@ -41,8 +42,8 @@ export function ChampionReveal({
   isDesktop: boolean;
 }) {
   const reduce = useReducedMotion();
-  const [animPhase, setAnimPhase] = useState(PHASE_SILENCE);
-  const phase = reduce || revealComplete ? PHASE_PORTRAIT : animPhase;
+  const [animPhase, setAnimPhase] = useState(PHASE_CONSTELLATION);
+  const phase = reduce || revealComplete ? PHASE_CONNECTION : animPhase;
   const completedRef = useRef(false);
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
@@ -61,7 +62,7 @@ export function ChampionReveal({
   }, [reduce, revealComplete, champion.id]);
 
   useEffect(() => {
-    if (phase >= PHASE_PORTRAIT && !completedRef.current) {
+    if (phase >= PHASE_CONNECTION && !completedRef.current) {
       completedRef.current = true;
       onRevealComplete();
     }
@@ -69,11 +70,11 @@ export function ChampionReveal({
 
   function skipAll() {
     timersRef.current.forEach(clearTimeout);
-    setAnimPhase(PHASE_PORTRAIT);
+    setAnimPhase(PHASE_CONNECTION);
     onSkip();
   }
 
-  const done = revealComplete || phase >= PHASE_PORTRAIT;
+  const done = revealComplete || phase >= PHASE_CONNECTION;
   const show = (min: number) => done || phase >= min;
 
   return (
@@ -88,13 +89,32 @@ export function ChampionReveal({
         </button>
       )}
 
+      {show(PHASE_CONSTELLATION) && !done && phase === PHASE_CONSTELLATION && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="flex min-h-[36vh] flex-col items-center justify-center px-6 py-12 text-center"
+        >
+          <ConstellationComplete />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.35, duration: 0.6 }}
+            className="mt-6"
+          >
+            <SoulSeal size={48} className="text-[var(--sor-gold)]/75" />
+          </motion.div>
+        </motion.div>
+      )}
+
       {show(PHASE_SILENCE) && !done && phase === PHASE_SILENCE && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="flex min-h-[40vh] flex-col items-center justify-center px-6 py-16 text-center"
+          className="flex min-h-[32vh] flex-col items-center justify-center px-6 py-12 text-center"
         >
-          <SoulSeal size={56} className="mb-6 text-[var(--sor-gold)]/70" />
+          <SoulSeal size={52} className="mb-5 text-[var(--sor-gold)]/70" />
           <p className="font-serif text-lg text-white/55">Every choice leaves a mark.</p>
         </motion.div>
       )}
@@ -111,52 +131,66 @@ export function ChampionReveal({
             initial={false}
             animate={{ opacity: show(PHASE_AWAKEN) ? 1 : 0 }}
             transition={{ duration: done ? 0 : 1, ease: "easeOut" }}
-            className="w-full max-w-5xl lg:max-w-none"
+            className="relative w-full max-w-5xl lg:max-w-none"
           >
+            <div
+              className="pointer-events-none absolute -inset-4 rounded-lg opacity-50 blur-2xl"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 50% 50%, rgba(113,140,139,0.15), transparent 70%)",
+              }}
+              aria-hidden
+            />
             <ChampionArtwork
               src={champion.imageUrl}
               mode="full"
               frame={frame}
               alt={champion.name}
-              className="w-full rounded-sm ring-1 ring-white/5"
+              className="relative w-full rounded-sm ring-1 ring-white/5"
             />
           </motion.div>
 
           <div className="mt-6 px-1 lg:mt-0 lg:px-0 lg:pt-4">
-            {show(PHASE_CONNECTION) && (
-              <motion.p
-                initial={done ? false : { opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="type-chapter"
-              >
-                {revealLeadLabel(nickname)}
-              </motion.p>
-            )}
-
             {show(PHASE_NAME) && (
-              <motion.h2
-                initial={done ? false : { opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="type-cinematic-title mt-3 text-[2.35rem] text-white sm:text-5xl"
-              >
-                {champion.name}
-              </motion.h2>
-            )}
-
-            {show(PHASE_PORTRAIT) && (
               <>
+                <motion.p
+                  initial={done ? false : { opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="type-chapter"
+                >
+                  {revealLeadLabel(nickname)}
+                </motion.p>
+                <motion.h2
+                  initial={done ? false : { opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="type-cinematic-title mt-3 text-[2.35rem] text-white sm:text-5xl"
+                >
+                  {champion.name}
+                </motion.h2>
                 <motion.p
                   initial={done ? false : { opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="mt-2 text-sm text-white/55"
+                  className="mt-2 text-sm uppercase tracking-[0.2em] text-white/50"
                 >
-                  {champion.region} · {champion.title}
+                  {champion.title}
                 </motion.p>
                 <motion.p
                   initial={done ? false : { opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="mt-1 text-xs uppercase tracking-widest text-white/35"
+                  className="mt-1 text-xs text-white/40"
+                >
+                  {champion.region}
+                </motion.p>
+              </>
+            )}
+
+            {show(PHASE_CONNECTION) && (
+              <>
+                <motion.p
+                  initial={done ? false : { opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="mt-4 text-xs uppercase tracking-widest text-white/35"
                 >
                   {possessiveStory(nickname)}
                 </motion.p>

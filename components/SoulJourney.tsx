@@ -27,6 +27,7 @@ import type { MatchResult } from "@/lib/matching/engine";
 import type { NarrativeResponse } from "@/lib/validation/schemas";
 import { trackEvent } from "@/lib/analytics";
 import { CONTENT_VERSION } from "@/lib/config/versions";
+import { AtmosphereSync } from "@/components/journey/AtmosphereSync";
 
 const emptyForm: PersonalFormState = {
   nickname: "",
@@ -193,7 +194,9 @@ export function SoulJourney() {
   }
 
   return (
-    <AnimatePresence mode="wait">
+    <>
+      <AtmosphereSync progress={progress} />
+      <AnimatePresence mode="wait">
       <motion.div
         key={progress.stage}
         initial={{ opacity: 0 }}
@@ -295,5 +298,6 @@ export function SoulJourney() {
         )}
       </motion.div>
     </AnimatePresence>
+    </>
   );
 }
