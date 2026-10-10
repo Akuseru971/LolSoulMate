@@ -1,33 +1,73 @@
 "use client";
 
-import { Sparkles } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ChevronRight } from "lucide-react";
 import { en } from "@/lib/i18n/en";
-import { GlassPanel } from "@/components/layout/GlassPanel";
 
 export function LandingStage({ onStart }: { onStart: () => void }) {
+  const reduce = useReducedMotion();
+
   return (
-    <section className="mx-auto flex min-h-[80vh] max-w-3xl flex-col justify-center px-4 py-16 text-center">
-      <p className="mb-4 inline-flex items-center justify-center gap-2 text-xs uppercase tracking-[0.25em] text-amber-200/70">
-        <Sparkles className="h-4 w-4" /> Soul of Runeterra
-      </p>
-      <h1 className="font-serif text-4xl leading-tight text-white sm:text-5xl md:text-6xl">
-        {en.landing.title}
-      </h1>
-      <p className="mt-6 text-lg leading-relaxed text-white/75">{en.landing.subtitle}</p>
-      <p className="mt-3 text-sm text-white/50">{en.landing.secondary}</p>
-      <p className="mt-2 text-sm text-amber-200/80">{en.landing.duration}</p>
+    <section className="landing-hero relative min-h-[100dvh] w-full overflow-hidden">
+      <div className="landing-hero__sky" aria-hidden />
+      <div className="landing-hero__mist" aria-hidden />
+      <div className="landing-hero__vignette" aria-hidden />
 
-      <button
-        type="button"
-        onClick={onStart}
-        className="mx-auto mt-10 w-full max-w-md rounded-full bg-gradient-to-r from-amber-600 via-amber-400 to-amber-500 py-4 text-base font-semibold text-black shadow-[0_0_40px_rgba(201,162,39,0.25)] transition hover:brightness-110"
-      >
-        {en.landing.cta}
-      </button>
+      <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-3xl flex-col justify-end px-5 pb-16 pt-24 sm:justify-center sm:pb-24 sm:pt-32">
+        <motion.p
+          initial={reduce ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-xs uppercase tracking-[0.35em] text-amber-200/70"
+        >
+          {en.landing.kicker}
+        </motion.p>
 
-      <GlassPanel className="mt-12 p-4 text-left text-xs leading-relaxed text-white/55">
-        {en.landing.disclaimer}
-      </GlassPanel>
+        <motion.h1
+          initial={reduce ? false : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.1, ease: "easeOut" }}
+          className="mt-5 font-serif text-[2rem] leading-[1.15] text-white sm:text-5xl md:text-[3.25rem]"
+        >
+          {en.landing.title}
+        </motion.h1>
+
+        <motion.p
+          initial={reduce ? false : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
+          className="mt-6 max-w-xl text-base leading-relaxed text-white/72 sm:text-lg"
+        >
+          {en.landing.subtitle}
+        </motion.p>
+
+        <motion.div
+          initial={reduce ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.45 }}
+          className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
+        >
+          <button
+            type="button"
+            onClick={onStart}
+            className="group inline-flex min-h-[44px] items-center gap-2 border-b border-amber-400/50 pb-1 text-left font-serif text-lg text-amber-100 transition hover:border-amber-300 hover:text-white"
+          >
+            {en.landing.cta}
+            <ChevronRight className="h-5 w-5 transition group-hover:translate-x-0.5" aria-hidden />
+          </button>
+          <button
+            type="button"
+            onClick={onStart}
+            className="min-h-[44px] text-sm text-white/45 underline-offset-4 hover:text-white/70 hover:underline"
+          >
+            {en.landing.ctaAlt}
+          </button>
+        </motion.div>
+
+        <p className="mt-16 max-w-lg text-left text-[11px] leading-relaxed text-white/40 sm:mt-24">
+          {en.landing.disclaimer}
+        </p>
+      </div>
     </section>
   );
 }

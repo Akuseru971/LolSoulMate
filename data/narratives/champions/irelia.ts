@@ -42,7 +42,7 @@ export const ireliaPack: ChampionNarrativePack = {
       id: "irelia-intro-2",
       championId: "irelia",
       type: "introduction",
-      text: "There is a dancer's patience in you: not performance for applause, but form that holds when the world breaks.",
+      text: "There is a dancer's patience in you: form that holds when the world breaks, deeper than applause or display.",
       relatedDimensions: [
         "capacityForSacrifice",
         "independence",
@@ -228,7 +228,7 @@ export const ireliaPack: ChampionNarrativePack = {
       },
       loreEventId: "ionian_resistance",
       userInterpretation: "You feel responsibility for others' safety as a quiet constant.",
-      canonicalFact: "Survivors of the invasion looked to her not only for victory, but for continuity.",
+      canonicalFact: "Survivors of the invasion looked to her for victory and for continuity of Ionian life.",
       parallelExplanation: "Protective instinct aligns with her role as living reminder of home.",
       tags: [
         "parallel-5",

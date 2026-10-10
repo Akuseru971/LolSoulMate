@@ -11,6 +11,7 @@ import {
 } from "@/lib/sharing/payload";
 import type { PersonalityDimension } from "@/lib/matching/dimensions";
 import { trackEvent } from "@/lib/analytics";
+import { en } from "@/lib/i18n/en";
 
 export function ShareActions({
   card,
@@ -136,7 +137,7 @@ export function ShareActions({
           onClick={downloadPng}
           className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-amber-500/90 px-4 py-2.5 text-sm font-medium text-black"
         >
-          <Download className="h-4 w-4" /> Download PNG
+          <Download className="h-4 w-4" /> {en.results.shareDownload}
         </button>
         <button
           type="button"
@@ -144,14 +145,14 @@ export function ShareActions({
           onClick={nativeShare}
           className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/20 px-4 py-2.5 text-sm text-white/85"
         >
-          <Share2 className="h-4 w-4" /> Share
+          <Share2 className="h-4 w-4" /> {en.results.shareNative}
         </button>
         <button
           type="button"
           onClick={copyLink}
           className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/20 px-4 py-2.5 text-sm text-white/85"
         >
-          <Link2 className="h-4 w-4" /> {copied ? "Copied!" : "Copy link"}
+          <Link2 className="h-4 w-4" /> {copied ? "Copied!" : en.results.shareCopy}
         </button>
         <button
           type="button"

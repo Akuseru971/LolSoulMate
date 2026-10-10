@@ -115,9 +115,9 @@ export function PersonalStage({
         <button
           type="button"
           onClick={onContinue}
-          className="flex-1 rounded-full bg-gradient-to-r from-amber-600 to-amber-400 py-3.5 text-sm font-semibold text-black"
+          className="flex-1 rounded-full border border-amber-500/40 bg-amber-500/15 py-3.5 text-sm font-medium text-amber-100 transition hover:bg-amber-500/25"
         >
-          Begin questionnaire
+          Continue
         </button>
         <button
           type="button"

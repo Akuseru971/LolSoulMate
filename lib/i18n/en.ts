@@ -1,30 +1,41 @@
 export const en = {
   landing: {
-    title: "Every Soul Has a Legend.",
+    kicker: "Soul of Runeterra",
+    title: "Some stories are written before we know their names.",
     subtitle:
-      "Some are born to lead. Others to protect, conquer, or defy destiny. Discover the League of Legends champion whose story mirrors your own.",
-    cta: "Discover Your Champion",
-    secondary: "An immersive personality journey through Runeterra.",
-    duration: "~6 minutes · No account required",
+      "Across Runeterra, countless lives are shaped by love, loss, ambition, and the choices that define them. Somewhere among those stories, there may be one that echoes yours.",
+    cta: "Enter Runeterra",
+    ctaAlt: "Begin",
     disclaimer:
       "Soul of Runeterra is an unofficial fan-created experience. It is not endorsed by Riot Games. League of Legends and all related properties are trademarks of Riot Games, Inc.",
   },
   personal: {
-    title: "Before the journey begins",
+    title: "Before we begin, tell us a little about yourself.",
     zodiacNote:
-      "Optional birth date and zodiac add symbolic flavor to your story—they are not scientific predictions and never decide your champion alone.",
+      "Birth date and zodiac are optional. They add a small symbolic touch to your result and never decide your champion on their own.",
   },
   loading: {
-    title: "Your Destiny Is Taking Shape...",
-    messages: [
-      "Reading the echoes of your choices...",
-      "Searching the legends of Runeterra...",
-      "Finding the soul that mirrors yours...",
-    ],
+    title: "Between the stories.",
+    subtitle: "Finding the name that fits your pattern.",
+    skip: "Continue to result",
   },
   results: {
-    compatibilityLabel: "Entertainment similarity score",
-    compatibilityNote: "Not a scientific percentage— a lore-inspired resonance score.",
+    compatibilityLabel: "Similarity score",
+    compatibilityNote: "An interpretive match for entertainment, not a scientific measure.",
+    revealKicker: "The reveal",
+    connection: "The connection",
+    parallels: "Their story, your choices",
+    strength: "What makes you strong",
+    shadow: "What may hold you back",
+    closing: "The final word",
+    shareHeading: "Some stories are worth telling.",
+    shareDownload: "Save your portrait",
+    shareNative: "Share your story",
+    shareCopy: "Copy link",
+    alsoClose: "Also close in spirit",
+    kofiTitle: "If this reading stayed with you",
+    kofiBody: "Optional support helps keep the project alive. The quiz stays free.",
+    kofiCta: "Support on Ko-fi",
   },
 } as const;
 

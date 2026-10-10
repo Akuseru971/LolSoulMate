@@ -7,6 +7,7 @@ import {
   NARRATIVE_PACKS,
 } from "@/data/narratives/packs/all";
 import type { NarrativeFragment } from "@/data/narratives/types";
+import { lintAllNarrativeEditorial } from "./editorialLint";
 
 const MIN_COUNTS: Record<string, number> = {
   introduction: 5,
@@ -109,6 +110,15 @@ export function validateNarrativeContent(): ValidationIssue[] {
     level: "warn",
     message: `Roster: ${complete} narrative-complete, ${vectorOnly} vector-only, ${CHAMPIONS.length} total`,
   });
+
+  for (const ed of lintAllNarrativeEditorial()) {
+    issues.push({
+      level: ed.level,
+      message: ed.championId
+        ? `[${ed.championId}${ed.fragmentId ? `/${ed.fragmentId}` : ""}] ${ed.message}`
+        : ed.message,
+    });
+  }
 
   return issues;
 }

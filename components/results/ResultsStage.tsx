@@ -6,10 +6,9 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { MatchResult } from "@/lib/matching/engine";
 import type { NarrativeResponse } from "@/lib/validation/schemas";
 import { en } from "@/lib/i18n/en";
-import { GlassPanel } from "@/components/layout/GlassPanel";
 import { ShareActions } from "@/components/sharing/ShareActions";
 import { siteConfig } from "@/lib/config";
-import { ExternalLink, Heart } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 export function ResultsStage({
   match,
@@ -24,136 +23,120 @@ export function ResultsStage({
   const [skippedReveal, setSkippedReveal] = useState(false);
   const { champion, compatibility } = match.primary;
 
+  const showReveal = !skippedReveal && !reduce;
+
   return (
-    <section className="mx-auto w-full max-w-3xl px-4 py-10 pb-32 sm:pb-24">
-      {!skippedReveal && !reduce && (
+    <section className="mx-auto w-full max-w-2xl px-4 py-8 pb-32 sm:pb-24">
+      {showReveal && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="relative mb-10 overflow-hidden rounded-2xl border border-amber-500/30"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="relative mb-12 overflow-hidden rounded-sm"
         >
-          <div className="relative h-64 sm:h-80">
+          <div className="relative aspect-[4/5] max-h-[420px] w-full sm:max-h-[480px]">
             <Image
               src={champion.imageUrl}
               alt=""
               fill
-              sizes="(max-width: 768px) 100vw, 768px"
+              sizes="(max-width: 768px) 100vw, 672px"
               className="object-cover object-top"
               priority
               unoptimized
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#070b12] via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050608] via-[#050608]/40 to-transparent" />
           </div>
-          <div className="absolute bottom-0 left-0 right-0 p-6">
-            <p className="text-sm uppercase tracking-widest text-amber-200/80">
-              Your Champion
+          <div className="absolute bottom-0 left-0 right-0 px-1 pb-2 pt-16">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-amber-200/75">
+              {en.results.revealKicker}
             </p>
-            <h2 className="font-serif text-3xl text-white sm:text-4xl">
-              Your soul resonates with {narrative.reveal.championName}.
-            </h2>
+            <h2 className="mt-2 font-serif text-4xl text-white">{champion.name}</h2>
+            <p className="mt-2 text-sm text-white/55">
+              {champion.region} · {champion.title}
+            </p>
             <button
               type="button"
-              className="mt-3 min-h-[44px] text-sm text-white/60 underline"
+              className="mt-4 min-h-[44px] text-xs text-white/50 underline"
               onClick={() => setSkippedReveal(true)}
             >
-              Skip reveal animation
+              Skip reveal
             </button>
           </div>
         </motion.div>
       )}
 
-      {(skippedReveal || reduce) && (
-        <header className="mb-8">
-          <p className="text-sm uppercase tracking-widest text-amber-200/70">
+      {(!showReveal || skippedReveal || reduce) && (
+        <header className="mb-10 border-b border-white/10 pb-8">
+          <p className="text-[11px] uppercase tracking-[0.3em] text-amber-200/75">
+            {en.results.revealKicker}
+          </p>
+          <h2 className="mt-2 font-serif text-4xl text-white">{champion.name}</h2>
+          <p className="mt-1 text-sm text-white/55">
             {champion.region} · {champion.title}
           </p>
-          <h2 className="font-serif text-3xl text-white sm:text-4xl">
-            Your soul resonates with {champion.name}.
-          </h2>
-          <p className="mt-2 text-lg text-amber-100/80">{narrative.reveal.oneLiner}</p>
         </header>
       )}
 
-      <GlassPanel className="mb-6 p-5">
-        <p className="text-3xl font-serif text-amber-300">{compatibility}%</p>
-        <p className="text-xs uppercase tracking-widest text-white/50">
-          {en.results.compatibilityLabel}
-        </p>
-        <p className="mt-1 text-sm text-white/55">{en.results.compatibilityNote}</p>
-      </GlassPanel>
+      <p className="font-serif text-xl leading-relaxed text-amber-50/95">
+        {narrative.reveal.oneLiner}
+      </p>
+      <p className="mt-3 text-sm text-white/45">
+        {en.results.compatibilityLabel}:{" "}
+        <span className="font-serif text-lg text-amber-200/90">{compatibility}%</span>
+        <span className="ml-2 text-white/35">{en.results.compatibilityNote}</span>
+      </p>
 
-      <article className="max-w-none space-y-8 text-white/75">
+      <article className="mt-14 space-y-14 text-[1.05rem] leading-[1.75] text-white/78">
         <section>
-          <h3 className="font-serif text-2xl text-amber-100">The Soul You Share</h3>
-          <p className="mt-3 leading-relaxed">{narrative.sharedSoul}</p>
+          <h3 className="font-serif text-2xl text-amber-100/95">{en.results.connection}</h3>
+          <p className="mt-5">{narrative.sharedSoul}</p>
         </section>
 
-        <section>
-          <h3 className="font-serif text-2xl text-amber-100">
-            Your Story, Their Legend
-          </h3>
-          <ul className="mt-4 space-y-6">
-            {narrative.parallels.map((p, i) => (
-              <li key={i} className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
-                <p className="text-sm font-medium text-amber-200/90">{p.userChoiceSummary}</p>
-                <p className="mt-3 text-sm text-white/65">
-                  <span className="text-white/40">Canonical lore: </span>
-                  {p.canonicalBeat}
+        {narrative.parallels.length > 0 && (
+          <section>
+            <h3 className="font-serif text-2xl text-amber-100/95">{en.results.parallels}</h3>
+            <div className="mt-6 space-y-8">
+              {narrative.parallels.map((p, i) => (
+                <p key={i} className="border-l border-amber-500/25 pl-5">
+                  {p.resonance}
                 </p>
-                <p className="mt-3 leading-relaxed text-white/80">{p.resonance}</p>
-              </li>
-            ))}
-          </ul>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section>
+          <h3 className="font-serif text-2xl text-amber-100/95">{en.results.strength}</h3>
+          <p className="mt-5">{narrative.greatestStrength}</p>
         </section>
 
         <section>
-          <h3 className="font-serif text-2xl text-amber-100">Your Inner Shadow</h3>
-          <p className="mt-3 leading-relaxed">{narrative.shadowWithin}</p>
+          <h3 className="font-serif text-2xl text-amber-100/95">{en.results.shadow}</h3>
+          <p className="mt-5">{narrative.shadowWithin}</p>
         </section>
 
         <section>
-          <h3 className="font-serif text-2xl text-amber-100">Your Greatest Strength</h3>
-          <p className="mt-3 leading-relaxed">{narrative.greatestStrength}</p>
-        </section>
-
-        <section>
-          <h3 className="font-serif text-2xl text-amber-100">Your Destiny</h3>
-          <p className="mt-3 font-serif text-lg italic leading-relaxed text-amber-50/90">
-            {narrative.destiny}
-          </p>
+          <h3 className="font-serif text-2xl text-amber-100/95">{en.results.closing}</h3>
+          <p className="mt-5 font-serif text-lg text-amber-50/90">{narrative.destiny}</p>
         </section>
       </article>
 
-      {(match.primarySimilarities.length > 0 || match.primaryContradictions.length > 0) && (
-        <GlassPanel className="mt-8 p-5">
-          <h4 className="text-sm uppercase tracking-widest text-white/50">
-            Personality resonance
-          </h4>
-          <p className="mt-2 text-sm text-white/70">
-            Strongest alignments: {match.primarySimilarities.join(" · ")}
-          </p>
-          <p className="mt-2 text-sm text-white/55">
-            Creative tensions: {match.primaryContradictions.join(" · ")}
-          </p>
-        </GlassPanel>
-      )}
-
       {match.alternatives.length > 0 && (
-        <GlassPanel className="mt-10 p-5">
-          <h4 className="text-sm uppercase tracking-widest text-white/50">
-            Also close in spirit
+        <aside className="mt-14 border-t border-white/10 pt-8">
+          <h4 className="text-xs uppercase tracking-[0.25em] text-white/45">
+            {en.results.alsoClose}
           </h4>
-          <ul className="mt-3 space-y-2 text-white/75">
+          <ul className="mt-4 space-y-2 text-sm text-white/65">
             {match.alternatives.map((alt) => (
               <li key={alt.championId}>
                 {alt.champion.name} ({alt.compatibility}%)
               </li>
             ))}
           </ul>
-        </GlassPanel>
+        </aside>
       )}
 
-      <div className="mt-10">
+      <div className="mt-16 border-t border-white/10 pt-10">
+        <h4 className="font-serif text-xl text-amber-100/90">{en.results.shareHeading}</h4>
         <ShareActions
           card={{
             championName: champion.name,
@@ -169,35 +152,24 @@ export function ResultsStage({
         />
       </div>
 
-      <GlassPanel className="mt-12 p-6 text-center">
-        <Heart className="mx-auto h-6 w-6 text-amber-400/80" />
-        <p className="mt-3 text-white/80">
-          Enjoyed discovering your place in Runeterra?
-        </p>
-        <p className="text-sm text-white/55">
-          Support the creator behind this experience and help keep the stories alive.
-        </p>
+      <footer className="mt-16 text-center">
+        <p className="font-serif text-white/70">{en.results.kofiTitle}</p>
+        <p className="mt-2 text-sm text-white/45">{en.results.kofiBody}</p>
         {siteConfig.kofiUrl ? (
           <a
             href={siteConfig.kofiUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-[#ff5e5b] px-5 py-2.5 text-sm font-medium text-white"
+            className="mt-5 inline-flex min-h-[44px] items-center gap-2 text-sm text-amber-200/85 underline-offset-2 hover:underline"
           >
-            Support the Creator on Ko-fi <ExternalLink className="h-4 w-4" />
+            {en.results.kofiCta} <ExternalLink className="h-3.5 w-3.5" />
           </a>
-        ) : (
-          <p className="mt-4 text-xs text-white/45">
-            Set <code className="text-amber-200/70">NEXT_PUBLIC_KOFI_URL</code> to enable
-            Ko-fi support (optional; results remain free).
-          </p>
-        )}
-      </GlassPanel>
-
-      <p className="mt-8 text-center text-xs text-white/40">
-        Interpretive fan analysis · Canonical facts sourced from Riot Universe lore ·
-        Not affiliated with Riot Games
-      </p>
+        ) : null}
+        <p className="mt-10 text-xs text-white/35">
+          Interpretive fan analysis · Canonical facts drawn from Riot Universe lore · Not
+          affiliated with Riot Games
+        </p>
+      </footer>
     </section>
   );
 }

@@ -32,3 +32,47 @@ body {
 .font-serif {
   font-family: var(--font-display), Georgia, serif;
 }
+
+.landing-hero__sky {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 100%, rgba(201, 162, 39, 0.12), transparent 55%),
+    radial-gradient(circle at 20% 20%, rgba(40, 60, 90, 0.35), transparent 45%),
+    linear-gradient(180deg, #030508 0%, #0a1220 45%, #050608 100%);
+}
+
+.landing-hero__mist {
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 35%,
+    transparent 70%
+  );
+  animation: landing-mist 28s ease-in-out infinite alternate;
+}
+
+.landing-hero__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.65) 100%);
+  pointer-events: none;
+}
+
+@keyframes landing-mist {
+  from {
+    transform: translateX(-2%) translateY(0);
+  }
+  to {
+    transform: translateX(2%) translateY(-1%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-hero__mist {
+    animation: none;
+  }
+}

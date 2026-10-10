@@ -64,19 +64,17 @@ export function composeNarrative(input: ComposeInput): ComposedNarrative {
   const name = input.nickname?.trim() || "Traveler";
   const topDims = input.match.topDimensions.slice(0, 3);
 
-  const sharedSoul = joinSentences(
-    [
-      intro.text.replace(/\bYour choices\b/, `${name}, your choices`),
-      `What rises most in your pattern is ${topDims.map((d) => d.label.toLowerCase()).join(", ")} — the same currents that shape ${champion.name}'s story as ${champion.title}.`,
-      limitSentences(champion.loreSummary, 2),
-    ],
-    5,
-  );
+  const introLine = intro.text.replace(/\bYour answers\b/, `${name}, your answers`);
+  const traitLine =
+    topDims.length > 0
+      ? `What stands out in your pattern is ${topDims.map((d) => d.label.toLowerCase()).join(", ")}. That thread runs through ${champion.name}'s life as ${champion.title}.`
+      : limitSentences(champion.loreSummary, 1);
+  const sharedSoul = joinSentences([introLine, traitLine, limitSentences(champion.loreSummary, 2)], 5);
 
   const narrativeParallels = parallels.map((p) => ({
     userChoiceSummary: parallelToUserSummary(p, ctx.answerKeys),
     canonicalBeat: p.canonicalFact,
-    resonance: p.parallelExplanation,
+    resonance: joinSentences([p.userInterpretation, p.canonicalFact, p.parallelExplanation], 8),
   }));
 
   const definingTraits = topDims.map((d) => d.label);
@@ -97,9 +95,16 @@ export function composeNarrative(input: ComposeInput): ComposedNarrative {
           ? narrativeParallels
           : [
               {
-                userChoiceSummary: "Your overall pattern emphasizes conviction under pressure.",
+                userChoiceSummary: limitSentences(intro.text, 2),
                 canonicalBeat: limitSentences(champion.loreSummary, 2),
-                resonance: `With ${champion.name}, that conviction is written into canon—not as borrowed trauma, but as a shared way of choosing responsibility.`,
+                resonance: joinSentences(
+                  [
+                    intro.text,
+                    champion.loreSummary,
+                    `The comparison is thematic: you need not have lived ${champion.name}'s wars to recognize a similar way of choosing what matters.`,
+                  ],
+                  6,
+                ),
               },
             ],
     shadowWithin: weakness.text,

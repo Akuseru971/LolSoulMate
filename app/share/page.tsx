@@ -50,7 +50,7 @@ export default async function SharePage({
           href="/"
           className="mt-10 inline-block min-h-[44px] rounded-full bg-amber-500 px-6 py-3 text-sm font-semibold text-black"
         >
-          Discover your champion
+          Enter Soul of Runeterra
         </Link>
         <p className="mt-8 text-xs text-white/40">{siteConfig.creatorName}</p>
       </div>

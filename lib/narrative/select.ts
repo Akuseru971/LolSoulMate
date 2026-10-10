@@ -111,17 +111,6 @@ export function selectLoreParallels(
     f.tags?.forEach((t) => ctx.usedThemes.add(t));
   }
 
-  if (selected.length < Math.min(3, maxCount)) {
-    const fallback = pool
-      .filter((f): f is LoreParallelFragment => f.type === "lore_parallel")
-      .filter((f) => !ctx.usedIds.has(f.id) && meetsThresholds(f, ctx.percentScores))
-      .slice(0, maxCount - selected.length);
-    for (const f of fallback) {
-      selected.push(f);
-      ctx.usedIds.add(f.id);
-    }
-  }
-
   return selected;
 }
 
@@ -159,7 +148,7 @@ export function parallelToUserSummary(
     if (answerKeys.has(key)) {
       const [qid, aid] = key.split(":");
       const label = getAnswerLabel(qid, aid);
-      return `Your answer — "${label}" — suggests: ${parallel.userInterpretation}`;
+      return `When you chose "${label}", you showed a preference that maps cleanly to this comparison. ${parallel.userInterpretation}`;
     }
   }
   return parallel.userInterpretation;

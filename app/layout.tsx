@@ -20,9 +20,9 @@ const body = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: `${siteConfig.name} | Discover Your Champion Soul`,
+  title: `${siteConfig.name} | An interactive Runeterra story`,
   description:
-    "An immersive unofficial fan journey through Runeterra to find the League of Legends champion whose lore mirrors your soul.",
+    "An unofficial fan experience that pairs your choices with League of Legends champions through canonical lore, computed locally in your browser.",
   metadataBase: new URL(siteConfig.siteUrl),
   openGraph: {
     title: siteConfig.name,
