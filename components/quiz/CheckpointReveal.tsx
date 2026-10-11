@@ -2,9 +2,8 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { Compass, Swords, Scale, ArrowRight } from "lucide-react";
+import { CheckpointSigil } from "./CheckpointSigil";
 
-import { ChampionArtwork } from "@/components/champions/ChampionArtwork";
-import { getVisualFrame } from "@/data/champions/visualProfiles";
 import { progressiveMatch } from "@/lib/quiz/progressiveMatch";
 
 import type { ZodiacSign } from "@/lib/zodiac";
@@ -93,7 +92,7 @@ export function CheckpointReveal({ count, answers, zodiac, onContinue }: {
   onContinue: () => void;
 }) {
   const reduce = useReducedMotion();
-  const { region, role, moral, result } = progressiveMatch(answers, zodiac, count);
+  const { region, role, moral } = progressiveMatch(answers, zodiac, count);
   const label = count === 5 ? region : count === 10 ? role : moral;
   const typeLabel = count === 5 ? "THE LAND THAT CALLS YOU" : count === 10 ? "THE PATH OF YOUR POWER" : "HOW LEGENDS MAY SEE YOU";
   const description = count === 5
@@ -102,7 +101,6 @@ export function CheckpointReveal({ count, answers, zodiac, onContinue }: {
       ? "A fighting spirit has emerged from your choices. Its true form is still unfolding."
       : "Every legend looks different depending on who tells the story. Your final identity lies ahead.";
   const Icon = count === 5 ? Compass : count === 10 ? Swords : Scale;
-  const previewChampion = result.primary.champion;
   return (
     <section className="relative mx-auto flex min-h-[calc(100dvh-7rem)] w-full max-w-3xl flex-col items-center justify-center px-5 py-16 text-center">
       <motion.div initial={reduce ? false : {opacity:0, scale:0.8, rotate:-15}} animate={{opacity:1, scale:1, rotate:0}} transition={{duration:1.1, ease:[0.19,1,0.22,1]}}
@@ -122,17 +120,11 @@ export function CheckpointReveal({ count, answers, zodiac, onContinue }: {
       >
         <div className="pointer-events-none absolute -inset-5 rounded-full bg-amber-200/[0.08] blur-3xl" aria-hidden />
         <div className="relative overflow-hidden rounded-md border border-amber-200/20 bg-[#080b12] shadow-[0_24px_90px_rgba(0,0,0,0.65)]">
-          {count === 5 ? <RegionArtwork region={label} /> : <ChampionArtwork
-            src={previewChampion.imageUrl}
-            mode="full"
-            frame={getVisualFrame(previewChampion.id, "revealDesktop")}
-            alt="A glimpse of the legend taking shape"
-            className="w-full"
-          />}
+          {count === 5 ? <RegionArtwork region={label} /> : <CheckpointSigil kind={count === 10 ? "role" : "alignment"} label={label} />}
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#080b12]/60 via-transparent to-[#080b12]/10" aria-hidden />
           <div className="pointer-events-none absolute inset-x-[8%] bottom-0 h-px bg-gradient-to-r from-transparent via-amber-200/60 to-transparent" aria-hidden />
         </div>
-        <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-white/35">{count === 5 ? "A glimpse of your homeland" : "A vision still taking shape"}</p>
+        <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-white/35">{count === 5 ? "A glimpse of your homeland" : count === 10 ? "The sigil of your calling" : "The sigil of your legend"}</p>
       </motion.div>
       <motion.p initial={reduce ? false : {opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{delay:0.42,duration:0.85}}
         className="mt-7 text-xs uppercase tracking-[0.27em] text-white/60">{typeLabel}</motion.p>
