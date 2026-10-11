@@ -1,6 +1,6 @@
-import { getMatchableChampions } from "@/data/champions/matchable";
+import { progressiveMatch } from "@/lib/quiz/progressiveMatch";
 import { QUESTIONS } from "@/data/questions";
-import { matchChampions, type QuizAnswerSelection } from "@/lib/matching/engine";
+import type { QuizAnswerSelection } from "@/lib/matching/engine";
 import type { ZodiacSign } from "@/lib/zodiac";
 
 export function buildAnswerSelections(
@@ -22,5 +22,5 @@ export function computeMatch(
   zodiac?: ZodiacSign | null,
 ) {
   const selections = buildAnswerSelections(answers);
-  return matchChampions(getMatchableChampions(), { answers: selections, zodiac });
+  return progressiveMatch(answers, zodiac, 20).result;
 }
