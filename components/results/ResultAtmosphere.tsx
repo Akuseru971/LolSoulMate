@@ -21,7 +21,7 @@ function Particles({
 }) {
   if (reduce || intensity < 0.08) return null;
   const count =
-    type === "stars" ? 32 : type === "petals" ? 24 : type === "embers" ? 26 : 16;
+    type === "stars" ? 12 : type === "petals" ? 10 : type === "embers" ? 10 : 6;
 
   return (
     <>
@@ -136,7 +136,7 @@ export function ResultAtmosphere({
             animate={{ x: ["8%", "-16%", "8%"], y: ["10%", "-12%", "10%"], scale: [1.1, 0.9, 1.1] }}
             transition={{ duration: 29, repeat: Infinity, ease: "easeInOut" }}
           />
-          {[0, 1, 2].map((i) => (
+          {[0].map((i) => (
             <motion.div
               key={i}
               className="absolute left-[-25%] h-28 w-[150%] rotate-[-8deg] bg-gradient-to-r from-transparent via-white/[0.045] to-transparent blur-2xl"
