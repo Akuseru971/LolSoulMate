@@ -17,7 +17,7 @@ const PHASE_AWAKEN = 2;
 const PHASE_NAME = 3;
 const PHASE_CONNECTION = 4;
 
-const TIMINGS = [600, 1300, 2000, 2700, 3400];
+const TIMINGS = [650, 1450, 3150, 4050];
 
 export function ChampionReveal({
   champion,
@@ -125,9 +125,9 @@ export function ChampionReveal({
 
           <div className="relative flex flex-col items-center">
             <motion.div
-              initial={false}
-              animate={{ opacity: show(PHASE_AWAKEN) ? 1 : 0 }}
-              transition={{ duration: done ? 0 : 1.05, ease: "easeOut" }}
+              initial={reduce || revealComplete ? false : { opacity: 0, y: 28, scale: 1.035, filter: "blur(16px)" }}
+              animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              transition={{ duration: reduce || revealComplete ? 0 : 1.7, ease: [0.19, 1, 0.22, 1] }}
               className="relative w-full max-w-[1100px] overflow-visible"
             >
               {!reduce && (
@@ -166,9 +166,9 @@ export function ChampionReveal({
                     {soulRevealLabel(nickname)}
                   </motion.p>
                   <motion.h1
-                    initial={done ? false : { opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.55 }}
+                    initial={reduce || revealComplete ? false : { opacity: 0, y: 22, filter: "blur(5px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    transition={{ duration: 0.9, ease: "easeOut" }}
                     className="type-cinematic-title mt-4 text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.05]"
                     style={{ color: theme.palette.text }}
                   >
