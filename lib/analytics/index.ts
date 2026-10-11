@@ -3,6 +3,7 @@ export type AnalyticsEvent =
   | "quiz_started"
   | "personal_step_completed"
   | "question_answered"
+  | "quiz_checkpoint_revealed"
   | "quiz_completed"
   | "quiz_abandoned"
   | "result_view"
