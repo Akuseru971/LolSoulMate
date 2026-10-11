@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { ShareExportCard } from "./ShareExportCard";
 import type { ShareStudioData } from "./ShareStudio";
 import { getVisualFrame } from "@/data/champions/visualProfiles";
@@ -19,10 +20,21 @@ export function ResultCardPreview({
   const artFrame = getVisualFrame(data.championId, shareContextForFormat(PREVIEW_FORMAT));
   const width = 1920;
   const height = 1080;
-  const previewScale = Math.min(1, 640 / width);
+  const previewRef = useRef<HTMLDivElement>(null);
+  const [availableWidth, setAvailableWidth] = useState(640);
+  useEffect(() => {
+    const node = previewRef.current;
+    if (!node) return;
+    const measure = () => setAvailableWidth(Math.min(640, node.clientWidth));
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+  const previewScale = Math.min(1, availableWidth / width);
 
   return (
-    <div className="mt-10 w-full">
+    <div ref={previewRef} className="mx-auto mt-10 w-full max-w-[640px]">
       <div
         className="mx-auto overflow-hidden rounded-sm shadow-[0_32px_100px_rgba(0,0,0,0.5)] ring-1 ring-white/10"
         style={{ width: width * previewScale, maxWidth: "100%" }}
