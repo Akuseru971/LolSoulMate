@@ -104,3 +104,10 @@ input, select, textarea { font-size: 16px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Keep policy content available on the landing and results, out of the active quiz. */
+body:has([data-journey-stage="quiz"]) > * main ~ footer,
+body:has([data-journey-stage="personal"]) > * main ~ footer { display: none; }
+@media (max-width: 767px) {
+  [data-journey-stage="quiz"] { min-height: 100svh; }
+}
