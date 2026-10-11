@@ -155,8 +155,8 @@ function ActLayer({
 
 export function RuneterraAtmosphere() {
   const reduce = useReducedMotion() ?? false;
-  const { stage, act, actProgress } = useAtmosphereSnapshot();
-  const questionIndex = Math.max(0, Math.min(19, Math.round(actProgress * 4) + (act - 1) * 4));
+  const { stage, act, actProgress, quizIndex } = useAtmosphereSnapshot();
+  const questionIndex = Math.max(0, Math.min(19, quizIndex));
   const questionHue = (questionIndex * 41 + 164) % 360;
   const questionColor = `hsla(${questionHue}, 62%, 54%, 0.32)`;
 
