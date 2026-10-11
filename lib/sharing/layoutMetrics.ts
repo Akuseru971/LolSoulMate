@@ -132,7 +132,7 @@ function soulLayout(format: ShareFormatId): CardLayoutSpec {
     footer: box(pad, pad + Math.round(H * 0.12) + artH + pad, W - pad * 2, H - artH - Math.round(H * 0.12) - pad * 3),
     type: scaleType(
       BASE_TYPE,
-      format === "story" ? 0.7 : format === "portrait" ? 0.68 : 0.64,
+      format === "story" ? 1.16 : format === "portrait" ? 1.04 : 0.92,
     ),
   };
 }
@@ -166,7 +166,7 @@ function legendLayout(format: ShareFormatId): CardLayoutSpec {
     pad,
     art: box(pad, Math.round(H * 0.1), W - pad * 2, artH),
     footer: box(pad, pad + Math.round(H * 0.1) + artH + pad, W - pad * 2, H - artH - Math.round(H * 0.1) - pad * 3),
-    type: scaleType(BASE_TYPE, format === "square" ? 0.62 : 0.7),
+    type: scaleType(BASE_TYPE, format === "square" ? 0.88 : format === "story" ? 1.12 : 0.98),
   };
 }
 
