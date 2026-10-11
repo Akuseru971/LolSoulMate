@@ -141,7 +141,7 @@ export function CheckpointReveal({ count, answers, zodiac, onContinue }: {
         className="mt-5 font-serif text-[clamp(3rem,9vw,6rem)] leading-[1.06] text-[#F2E6D4]">{label}</motion.h2>
       <motion.p initial={reduce ? false : {opacity:0,y:12}} animate={{opacity:1,y:0}} transition={{delay:0.95,duration:0.8}}
         className="mx-auto mt-8 max-w-lg text-base leading-[1.85] text-white/70">{description}</motion.p>
-      <p className="mt-4 text-xs italic text-white/40">A glimpse, not a final verdict. Your remaining choices may change the path.</p>
+      <p className="mt-4 text-xs italic text-white/40">Your path is taking shape. Each revelation will remain part of your final legend.</p>
       <motion.button initial={reduce ? false : {opacity:0}} animate={{opacity:1}} transition={{delay:1.2,duration:0.7}}
         type="button" onClick={onContinue}
         className="mt-12 inline-flex min-h-12 items-center gap-3 rounded-full border border-amber-200/40 bg-amber-200/10 px-8 py-3 font-serif text-lg text-amber-100 transition hover:border-amber-200/80 hover:bg-amber-200/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-200">
