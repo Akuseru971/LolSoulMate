@@ -172,6 +172,31 @@ export function RuneterraAtmosphere() {
           reduce={reduce}
         />
       ))}
+      {!reduce && (
+        <>
+          <motion.div
+            className="absolute -left-[35%] top-[-25%] h-[95vh] w-[95vw] rounded-full"
+            style={{ background: "radial-gradient(circle, rgba(168,139,202,0.09), transparent 65%)" }}
+            animate={{ x: ["-5%", "22%", "-5%"], y: ["0%", "22%", "0%"], scale: [0.92, 1.15, 0.92] }}
+            transition={{ duration: 27, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute -right-[40%] bottom-[-30%] h-[105vh] w-[110vw] rounded-full"
+            style={{ background: "radial-gradient(circle, rgba(197,164,109,0.085), transparent 66%)" }}
+            animate={{ x: ["8%", "-18%", "8%"], y: ["6%", "-14%", "6%"], scale: [1.1, 0.9, 1.1] }}
+            transition={{ duration: 34, repeat: Infinity, ease: "easeInOut" }}
+          />
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              className="absolute -left-[20%] h-[18vh] w-[140%] rotate-[-11deg] bg-gradient-to-r from-transparent via-white/[0.028] to-transparent blur-2xl"
+              style={{ top: `${12 + i * 31}%` }}
+              animate={{ x: ["-10%", "12%", "-10%"], y: [0, i % 2 ? -38 : 38, 0] }}
+              transition={{ duration: 21 + i * 8, repeat: Infinity, ease: "easeInOut" }}
+            />
+          ))}
+        </>
+      )}
       <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/45" />
     </div>
   );
