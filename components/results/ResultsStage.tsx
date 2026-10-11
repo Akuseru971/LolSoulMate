@@ -147,18 +147,18 @@ export function ResultsStage({
           />
         </SceneSection>
 
-        <div className="mx-auto max-w-[var(--sor-read-max)] space-y-20 sm:space-y-24">
-          <SceneSection scene="connection" ref={connectionRef}>
-            <p className="font-serif text-sm text-white/50">{en.results.connection}</p>
-            <p className="type-body-narrative mt-8 text-[1.1rem] leading-[1.88] sm:text-[1.12rem]">
+        <div className="mx-auto max-w-[var(--sor-read-max)] space-y-14 sm:space-y-20">
+          <SceneSection scene="connection" ref={connectionRef} className="relative rounded-2xl px-3 py-10 sm:px-10 sm:py-14" >
+            <p className="text-center text-[11px] uppercase tracking-[0.32em]" style={{ color: theme.palette.accent }}>I · THE CONNECTION</p>
+            <p className="type-body-narrative mx-auto mt-7 max-w-[44rem] text-center font-serif text-[1.2rem] leading-[1.85] sm:text-[1.5rem]">
               {narrative.sharedSoul}
             </p>
-            <p className="mt-6 text-xs text-white/38">{en.results.compatibilityNote}</p>
+            <p className="mt-7 text-center text-xs text-white/45">{en.results.compatibilityNote}</p>
           </SceneSection>
 
           {narrative.parallels.length > 0 && (
-            <SceneSection scene="fragments" ref={fragmentsRef}>
-              <p className="font-serif text-sm text-white/50">{en.results.parallels}</p>
+            <SceneSection scene="fragments" ref={fragmentsRef} className="relative px-2 py-8 sm:px-6">
+              <p className="text-center text-[11px] uppercase tracking-[0.32em]" style={{ color: theme.palette.accent }}>II · ECHOES OF A LEGEND</p>
               <div className="mt-10 space-y-14 sm:space-y-16">
                 {narrative.parallels.map((p, i) => (
                   <LoreFragment
@@ -175,7 +175,7 @@ export function ResultsStage({
           )}
 
           <SceneSection scene="inner" ref={innerRef}>
-            <p className="mb-10 font-serif text-sm text-white/50">The inner truth</p>
+            <p className="mb-10 text-center text-[11px] uppercase tracking-[0.32em]" style={{ color: theme.palette.accent }}>III · THE INNER TRUTH</p>
             <InnerTruth
               strength={narrative.greatestStrength}
               shadow={narrative.shadowWithin}
