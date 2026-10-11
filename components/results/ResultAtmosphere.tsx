@@ -100,7 +100,7 @@ export function ResultAtmosphere({
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-0 -z-[5] overflow-hidden transition-[background] duration-[1.2s]"
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden transition-[background] duration-[1.2s]"
       style={
         {
           "--chamber-accent": palette.accent,
