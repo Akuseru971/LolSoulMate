@@ -39,7 +39,7 @@ export function ConstellationProgress({
   const answeredCount = QUESTIONS.filter((q) => answers[q.id]).length;
 
   return (
-    <div className="mx-auto mb-8 w-full max-w-[720px]" role="group" aria-label="Questionnaire progress">
+    <div className="mx-auto mb-4 w-full max-w-[720px]" role="group" aria-label="Questionnaire progress">
       <div className="mb-2 flex items-end justify-between gap-2">
         <div>
           <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--sor-mist)]/90">
@@ -56,7 +56,7 @@ export function ConstellationProgress({
 
       <svg
         viewBox="0 0 320 56"
-        className="mx-auto block h-auto max-h-24 w-full max-w-[680px] overflow-visible"
+        className="mx-auto block h-auto max-h-14 w-full max-w-[680px] overflow-visible"
         aria-hidden={false}
         role="img"
         aria-label={`${answeredCount} of ${QUESTIONS.length} questions answered. Currently on question ${currentIndex + 1}.`}
