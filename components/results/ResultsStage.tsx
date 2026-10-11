@@ -129,7 +129,7 @@ export function ResultsStage({
     <>
       <ResultAtmosphere championId={champion.id} scene={activeScene} />
       <div
-        className="relative mx-auto w-full max-w-[var(--sor-visual-max)] px-4 py-6 pb-[max(8rem,env(safe-area-inset-bottom))] sm:pb-24"
+        className="relative z-10 mx-auto w-full max-w-[var(--sor-visual-max)] px-4 py-6 pb-[max(8rem,env(safe-area-inset-bottom))] sm:pb-24"
         style={{ color: theme.palette.text }}
       >
         <SceneSection scene="reveal" ref={revealRef}>
