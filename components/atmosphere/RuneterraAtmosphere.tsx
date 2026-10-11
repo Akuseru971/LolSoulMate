@@ -166,7 +166,7 @@ export function RuneterraAtmosphere() {
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-[#050608]">
       <div className="absolute inset-0 bg-[#050608]" />
-      {([1, 2, 3, 4, 5] as RuneterraAct[]).map((a) => (
+      {([1, 2, 3, 4, 5] as RuneterraAct[]).filter((a) => a === activeAct).map((a) => (
         <ActLayer
           key={a}
           act={a}
@@ -182,7 +182,7 @@ export function RuneterraAtmosphere() {
           transition={{ duration: reduce ? 0 : 1.05, ease: "easeInOut" }}
         />
       )}
-      {!reduce && (
+      {!reduce && !showQuizActs && (
         <>
           <motion.div
             className="absolute -left-[35%] top-[-25%] h-[95vh] w-[95vw] rounded-full"
