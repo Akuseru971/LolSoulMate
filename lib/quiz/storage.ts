@@ -22,6 +22,8 @@ export interface StoredProgress {
   personalityKeywords?: string;
   answers: Record<string, string>;
   quizIndex: number;
+  /** Reveal currently displayed, restored after page refresh. */
+  pendingCheckpoint?: 5 | 10 | 15;
   /** Cached primary champion for quick restore validation */
   resultChampionId?: string;
 }
@@ -76,6 +78,8 @@ export function validateStoredProgress(data: StoredProgress): LoadProgressResult
     "results",
   ];
   if (!validStages.includes(data.stage)) return "corrupt";
+  if (!Number.isInteger(data.quizIndex) || data.quizIndex < 0 || data.quizIndex >= QUESTIONS.length) return "corrupt";
+  if (data.pendingCheckpoint !== undefined && (![5, 10, 15].includes(data.pendingCheckpoint) || data.stage !== "quiz" || data.quizIndex !== data.pendingCheckpoint - 1 || !QUESTIONS.slice(0, data.pendingCheckpoint).every(q => q.answers[q.id]))) return "corrupt";
   if (data.stage === "results" && !isQuizComplete(data.answers)) return "incomplete";
   if (data.stage === "analyzing" && !isQuizComplete(data.answers)) return "incomplete";
   return null;
