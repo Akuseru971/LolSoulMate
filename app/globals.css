@@ -86,3 +86,21 @@ body {
     transform: scale(1.06) translate(-1%, -0.5%);
   }
 }
+
+/* Mobile app shell: safe areas, responsive touch interaction, and smooth native-feeling scrolling. */
+html { -webkit-text-size-adjust: 100%; }
+body { width: 100%; min-width: 320px; overflow-x: clip; overscroll-behavior-x: none; }
+main { min-width: 0; }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+button { touch-action: manipulation; }
+input, select, textarea { font-size: 16px; }
+@media (max-width: 767px) {
+  html { scroll-behavior: auto; }
+  main { width: 100%; }
+  .landing-hero { min-height: 100svh; }
+  .landing-hero__mist { animation-duration: 45s; }
+  [data-result-scene] { scroll-margin-top: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
