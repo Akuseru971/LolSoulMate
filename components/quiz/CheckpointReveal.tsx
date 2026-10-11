@@ -3,6 +3,8 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { Compass, Swords, Scale, ArrowRight } from "lucide-react";
 import { QUESTIONS } from "@/data/questions";
+import { ChampionArtwork } from "@/components/champions/ChampionArtwork";
+import { getVisualFrame } from "@/data/champions/visualProfiles";
 import { getMatchableChampions } from "@/data/champions/matchable";
 import { matchChampions } from "@/lib/matching/engine";
 import type { ZodiacSign } from "@/lib/zodiac";
@@ -49,6 +51,7 @@ export function CheckpointReveal({ count, answers, zodiac, onContinue }: {
       ? "A fighting spirit has emerged from your choices. Its true form is still unfolding."
       : "Every legend looks different depending on who tells the story. Your final identity lies ahead.";
   const Icon = count === 5 ? Compass : count === 10 ? Swords : Scale;
+  const previewChampion = result.primary.champion;
   return (
     <section className="relative mx-auto flex min-h-[calc(100dvh-7rem)] w-full max-w-3xl flex-col items-center justify-center px-5 py-16 text-center">
       <motion.div initial={reduce ? false : {opacity:0, scale:0.8, rotate:-15}} animate={{opacity:1, scale:1, rotate:0}} transition={{duration:1.1, ease:[0.19,1,0.22,1]}}
@@ -60,6 +63,26 @@ export function CheckpointReveal({ count, answers, zodiac, onContinue }: {
       </motion.div>
       <motion.p initial={reduce ? false : {opacity:0,y:12}} animate={{opacity:1,y:0}} transition={{delay:0.2,duration:0.8}}
         className="text-[11px] uppercase tracking-[0.38em] text-amber-200/75">REVELATION {count / 5} · {count} OF 20</motion.p>
+      <motion.div
+        initial={reduce ? false : { opacity: 0, y: 24, scale: 1.025, filter: "blur(12px)" }}
+        animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+        transition={{ delay: reduce ? 0 : 0.4, duration: 1.45, ease: [0.19, 1, 0.22, 1] }}
+        className="relative mt-9 w-full max-w-2xl"
+      >
+        <div className="pointer-events-none absolute -inset-5 rounded-full bg-amber-200/[0.08] blur-3xl" aria-hidden />
+        <div className="relative overflow-hidden rounded-md border border-amber-200/20 bg-[#080b12] shadow-[0_24px_90px_rgba(0,0,0,0.65)]">
+          <ChampionArtwork
+            src={previewChampion.imageUrl}
+            mode="full"
+            frame={getVisualFrame(previewChampion.id, "revealDesktop")}
+            alt="A glimpse of the legend taking shape"
+            className="w-full"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#080b12]/60 via-transparent to-[#080b12]/10" aria-hidden />
+          <div className="pointer-events-none absolute inset-x-[8%] bottom-0 h-px bg-gradient-to-r from-transparent via-amber-200/60 to-transparent" aria-hidden />
+        </div>
+        <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-white/35">A vision still taking shape</p>
+      </motion.div>
       <motion.p initial={reduce ? false : {opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{delay:0.42,duration:0.85}}
         className="mt-7 text-xs uppercase tracking-[0.27em] text-white/60">{typeLabel}</motion.p>
       <motion.h2 initial={reduce ? false : {opacity:0,y:26,filter:"blur(9px)"}} animate={{opacity:1,y:0,filter:"blur(0px)"}}
