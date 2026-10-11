@@ -21,6 +21,5 @@ export function computeMatch(
   answers: Record<string, string>,
   zodiac?: ZodiacSign | null,
 ) {
-  const selections = buildAnswerSelections(answers);
   return progressiveMatch(answers, zodiac, 20).result;
 }
