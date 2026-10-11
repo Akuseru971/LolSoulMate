@@ -4,8 +4,6 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { X, Download, Share2, Link2, RotateCcw } from "lucide-react";
 import { ShareExportCard, type ShareExportCardProps } from "./ShareExportCard";
 import {
-  SHARE_FORMATS,
-  SHARE_TEMPLATE_LABELS,
   type ShareFormatId,
   type ShareTemplateId,
 } from "@/lib/sharing/formats";
@@ -65,8 +63,8 @@ export function ShareStudio({
   });
   const nicknameBase = sanitizeNickname(data.nickname);
 
-  const [template, setTemplate] = useState<ShareTemplateId>("cinematic");
-  const [format, setFormat] = useState<ShareFormatId>("cinematic");
+  const template: ShareTemplateId = "cinematic";
+  const format: ShareFormatId = "story";
   const [artworkMode, setArtworkMode] = useState<ArtworkDisplayMode>("full");
   const [imageSrc, setImageSrc] = useState(data.imageUrl);
   const [busy, setBusy] = useState(false);
@@ -130,7 +128,7 @@ export function ShareStudio({
   };
 
   const { width, height } = getShareFormat(format);
-  const previewScale = Math.min(1, 520 / width, 560 / height);
+  const previewScale = Math.min(1, 320 / width, 560 / height);
   const cropEnabled = artworkMode === "artisticCrop";
 
   const buildUrl = useCallback((): string | null => {
@@ -447,50 +445,7 @@ export function ShareStudio({
             </>
           )}
 
-          <div className="mt-4">
-            <p className="text-xs uppercase tracking-widest text-white/40">Template</p>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {(Object.keys(SHARE_TEMPLATE_LABELS) as ShareTemplateId[]).map((id) => (
-                <button
-                  key={id}
-                  type="button"
-                  onClick={() => {
-                    setTemplate(id);
-                    trackEvent("share_template_selected", { template: id });
-                  }}
-                  className={`min-h-[44px] rounded-full px-4 py-2 text-sm ${
-                    template === id
-                      ? "bg-amber-500/20 text-amber-100 ring-1 ring-amber-500/40"
-                      : "border border-white/15 text-white/70"
-                  }`}
-                >
-                  {SHARE_TEMPLATE_LABELS[id]}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-4">
-            <p className="text-xs uppercase tracking-widest text-white/40">Format</p>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {SHARE_FORMATS.map((f) => (
-                <button
-                  key={f.id}
-                  type="button"
-                  onClick={() => {
-                    setFormat(f.id);
-                    trackEvent("share_format_selected", { format: f.id });
-                  }}
-                  className={`min-h-[44px] rounded-full px-4 py-2 text-sm ${
-                    format === f.id
-                      ? "bg-amber-500/20 text-amber-100 ring-1 ring-amber-500/40"
-                      : "border border-white/15 text-white/70"
-                  }`}
-                >
-                  {f.label}
-                </button>
-              ))}
-            </div>
+          <p className="mt-5 text-center text-xs uppercase tracking-widest text-amber-100/70">Your Story · 1080 × 1920</p>
           </div>
 
           {error && (
