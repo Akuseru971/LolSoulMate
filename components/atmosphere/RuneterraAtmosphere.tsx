@@ -156,6 +156,9 @@ function ActLayer({
 export function RuneterraAtmosphere() {
   const reduce = useReducedMotion() ?? false;
   const { stage, act, actProgress } = useAtmosphereSnapshot();
+  const questionIndex = Math.max(0, Math.min(19, Math.round(actProgress * 4) + (act - 1) * 4));
+  const questionHue = (questionIndex * 41 + 164) % 360;
+  const questionColor = `hsla(${questionHue}, 62%, 54%, 0.32)`;
 
   const showQuizActs = stage === "quiz" || stage === "analyzing";
   const activeAct = showQuizActs ? act : stage === "results" ? 5 : 1;
@@ -172,6 +175,13 @@ export function RuneterraAtmosphere() {
           reduce={reduce}
         />
       ))}
+      {showQuizActs && (
+        <motion.div
+          className="absolute inset-0"
+          animate={{ background: `radial-gradient(ellipse 75% 66% at 50% 42%, ${questionColor}, transparent 72%)` }}
+          transition={{ duration: reduce ? 0 : 1.05, ease: "easeInOut" }}
+        />
+      )}
       {!reduce && (
         <>
           <motion.div
