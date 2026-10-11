@@ -54,22 +54,15 @@ export function QuizStage({
             {q.text}
           </h2>
 
-          <ul className="mt-6 flex flex-col gap-2.5" role="listbox" aria-label={q.text}>
+          <ul className="mt-6 flex flex-col gap-2.5" aria-label={q.text}>
             {q.answers.map((a) => {
               const active = selected === a.id;
               return (
                 <li key={a.id}>
                   <button
                     type="button"
-                    role="option"
-                    aria-selected={active}
+                    aria-pressed={active}
                     onClick={() => onSelect(q.id, a.id)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        onSelect(q.id, a.id);
-                      }
-                    }}
                     className={`group relative w-full rounded-2xl border px-4 py-3.5 text-left text-[15px] leading-snug min-h-[56px] transition-colors duration-200 active:scale-[0.99] ${
                       active
                         ? "border-[var(--sor-gold)]/55 bg-[var(--sor-gold)]/10 text-white shadow-[0_0_20px_rgba(197,164,109,0.12)]"
