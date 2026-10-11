@@ -2,13 +2,13 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { Compass, Swords, Scale, ArrowRight } from "lucide-react";
-import { QUESTIONS } from "@/data/questions";
+
 import { ChampionArtwork } from "@/components/champions/ChampionArtwork";
 import { getVisualFrame } from "@/data/champions/visualProfiles";
-import { getMatchableChampions } from "@/data/champions/matchable";
-import { matchChampions } from "@/lib/matching/engine";
+import { progressiveMatch } from "@/lib/quiz/progressiveMatch";
+
 import type { ZodiacSign } from "@/lib/zodiac";
-import type { PersonalityVector } from "@/lib/matching/dimensions";
+
 
 
 const REGION_SCENES: Record<string, { sky: string; glow: string; terrain: string; motif: "temple" | "citadel" | "mountain" | "desert" | "sea" | "city" | "ruins" | "jungle" | "cosmos" }> = {
@@ -86,25 +86,6 @@ function RegionLandscape({ region }: {region:string}) {
 
 export type CheckpointCount = 5 | 10 | 15;
 
-function classifyArchetype(v: PersonalityVector): string {
-  const options = [
-    { label: "Assassin", score: v.independence + v.impulsivity + v.desireForFreedom + v.moralFlexibility },
-    { label: "Mage", score: v.relationshipWithDestiny + v.emotionalSensitivity + v.idealism + v.desireForPower },
-    { label: "Fighter", score: v.courage + v.resilience + v.ambition + v.independence },
-    { label: "Tank", score: v.protectiveInstinct + v.discipline + v.loyalty + v.resilience },
-    { label: "Support", score: v.empathy + v.socialConnection + v.capacityForSacrifice + v.protectiveInstinct },
-    { label: "Strategist", score: v.pragmatism + v.discipline + v.relationshipWithAuthority + v.ambition },
-  ];
-  return options.sort((a,b) => b.score - a.score)[0].label;
-}
-
-function alignment(v: PersonalityVector): string {
-  const heroic = v.empathy + v.protectiveInstinct + v.idealism + v.capacityForSacrifice + v.loyalty;
-  const ruthless = v.moralFlexibility + v.desireForPower + v.ambition + v.pragmatism + v.needForRecognition;
-  if (Math.abs(heroic - ruthless) < 0.32) return "The Antihero";
-  return heroic > ruthless ? "The Hero" : "The Villain";
-}
-
 export function CheckpointReveal({ count, answers, zodiac, onContinue }: {
   count: CheckpointCount;
   answers: Record<string, string>;
@@ -112,12 +93,8 @@ export function CheckpointReveal({ count, answers, zodiac, onContinue }: {
   onContinue: () => void;
 }) {
   const reduce = useReducedMotion();
-  const selections = QUESTIONS.slice(0,count).flatMap(q => {
-    const answer = q.answers.find(a => a.id === answers[q.id]);
-    return answer ? [{ questionId:q.id, answerId:answer.id, weights:answer.weights }] : [];
-  });
-  const result = matchChampions(getMatchableChampions(), {answers:selections, zodiac});
-  const label = count === 5 ? result.primary.champion.region : count === 10 ? classifyArchetype(result.blendedVector) : alignment(result.blendedVector);
+  const { region, role, moral, result } = progressiveMatch(answers, zodiac, count);
+  const label = count === 5 ? region : count === 10 ? role : moral;
   const typeLabel = count === 5 ? "THE LAND THAT CALLS YOU" : count === 10 ? "THE PATH OF YOUR POWER" : "HOW LEGENDS MAY SEE YOU";
   const description = count === 5
     ? "Your first choices echo through a corner of Runeterra. The path is taking shape."
