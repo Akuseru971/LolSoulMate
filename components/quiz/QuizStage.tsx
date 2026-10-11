@@ -26,7 +26,7 @@ export function QuizStage({
   const selected = answers[q.id];
 
   return (
-    <div className="relative mx-auto flex min-h-[calc(100dvh-6rem)] w-full max-w-3xl flex-col justify-center px-4 py-10 sm:px-8">
+    <div className="relative mx-auto flex min-h-[100svh] w-full max-w-[560px] flex-col px-5 pb-[calc(108px+env(safe-area-inset-bottom))] pt-[max(20px,env(safe-area-inset-top))] sm:justify-center sm:py-10">
       <div
         className="pointer-events-none absolute inset-x-0 top-12 -z-[1] h-[min(70vh,520px)] bg-gradient-to-b from-black/55 via-black/35 to-transparent"
         aria-hidden
@@ -36,7 +36,7 @@ export function QuizStage({
       <button
         type="button"
         onClick={onBack}
-        className="mb-5 inline-flex min-h-[44px] w-fit items-center gap-1 text-sm text-white/60 transition hover:text-white/85"
+        className="mb-3 inline-flex min-h-[44px] w-fit items-center gap-1 text-sm text-white/60 transition hover:text-white/85"
       >
         <ChevronLeft className="h-4 w-4" /> Previous
       </button>
@@ -44,17 +44,17 @@ export function QuizStage({
       <AnimatePresence mode="wait">
         <motion.div
           key={q.id}
-          initial={reduce ? false : { opacity: 0, y: 20, filter: "blur(4px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          exit={reduce ? undefined : { opacity: 0, y: -16, filter: "blur(3px)" }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          initial={reduce ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={reduce ? undefined : { opacity: 0, y: -10 }}
+          transition={{ duration: reduce ? 0 : 0.28, ease: [0.22, 1, 0.36, 1] }}
         >
           <p className="type-chapter">{q.category}</p>
-          <h2 className="type-cinematic-title mt-3 text-2xl text-[var(--sor-ivory)] sm:text-3xl">
+          <h2 className="type-cinematic-title mt-2 text-[clamp(1.65rem,6.4vw,2.25rem)] leading-tight text-[var(--sor-ivory)] sm:text-3xl">
             {q.text}
           </h2>
 
-          <ul className="mt-9 flex flex-col gap-3" role="listbox" aria-label={q.text}>
+          <ul className="mt-6 flex flex-col gap-2.5" role="listbox" aria-label={q.text}>
             {q.answers.map((a) => {
               const active = selected === a.id;
               return (
@@ -70,7 +70,7 @@ export function QuizStage({
                         onSelect(q.id, a.id);
                       }
                     }}
-                    className={`group relative w-full rounded-xl border px-5 py-4 text-left text-base transition-all duration-300 hover:-translate-y-0.5 ${
+                    className={`group relative w-full rounded-2xl border px-4 py-3.5 text-left text-[15px] leading-snug min-h-[56px] transition-colors duration-200 active:scale-[0.99] ${
                       active
                         ? "border-[var(--sor-gold)]/55 bg-[var(--sor-gold)]/10 text-white shadow-[0_0_20px_rgba(197,164,109,0.12)]"
                         : "border-white/10 bg-black/25 text-white/85 hover:border-[var(--sor-mist)]/35 hover:bg-black/35"
@@ -93,7 +93,7 @@ export function QuizStage({
             type="button"
             disabled={!selected}
             onClick={onNext}
-            className="mt-9 w-full min-h-[48px] rounded-full border border-[var(--sor-gold)]/40 bg-[var(--sor-gold)]/12 py-3.5 text-sm font-medium text-[var(--sor-ivory)] transition hover:bg-[var(--sor-gold)]/18 disabled:opacity-35"
+            className="fixed inset-x-4 bottom-[calc(16px+env(safe-area-inset-bottom))] z-40 mx-auto max-w-[528px] min-h-[56px] rounded-2xl shadow-[0_12px_45px_rgba(0,0,0,.65)] backdrop-blur-xl sm:static sm:mt-8 sm:w-full border border-[var(--sor-gold)]/40 bg-[var(--sor-gold)]/12 py-3.5 text-sm font-medium text-[var(--sor-ivory)] transition hover:bg-[var(--sor-gold)]/18 disabled:opacity-35"
           >
             {index === QUESTIONS.length - 1 ? "Reveal my champion" : "Continue"}
           </button>
