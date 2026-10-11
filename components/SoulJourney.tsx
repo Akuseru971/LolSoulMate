@@ -9,6 +9,7 @@ import {
   type PersonalFormState,
 } from "@/components/stages/PersonalStage";
 import { QuizStage } from "@/components/quiz/QuizStage";
+import { CheckpointReveal, type CheckpointCount } from "@/components/quiz/CheckpointReveal";
 import { AnalyzingStage } from "@/components/stages/AnalyzingStage";
 import { ResultsStage } from "@/components/results/ResultsStage";
 import { RecoveryStage } from "@/components/stages/RecoveryStage";
@@ -49,6 +50,7 @@ export function SoulJourney() {
   const [match, setMatch] = useState<MatchResult | null>(null);
   const [narrative, setNarrative] = useState<NarrativeResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [checkpoint, setCheckpoint] = useState<CheckpointCount | null>(null);
   const analysisLock = useRef(false);
   const hydrated = useRef(false);
 
@@ -167,6 +169,7 @@ export function SoulJourney() {
     setMatch(null);
     setNarrative(null);
     setError(null);
+    setCheckpoint(null);
     setBootState("ready");
     trackEvent("restart");
   }
@@ -234,7 +237,19 @@ export function SoulJourney() {
           />
         )}
 
-        {progress.stage === "quiz" && (
+        {progress.stage === "quiz" && checkpoint !== null && (
+          <CheckpointReveal
+            count={checkpoint}
+            answers={progress.answers}
+            zodiac={progress.zodiac}
+            onContinue={() => {
+              persist({ ...progress, quizIndex: checkpoint });
+              setCheckpoint(null);
+            }}
+          />
+        )}
+
+        {progress.stage === "quiz" && checkpoint === null && (
           <QuizStage
             index={progress.quizIndex}
             answers={progress.answers}
@@ -261,6 +276,12 @@ export function SoulJourney() {
               setError(null);
               if (progress.quizIndex >= QUESTIONS.length - 1) {
                 startAnalyzing(progress);
+                return;
+              }
+              const completed = progress.quizIndex + 1;
+              if (completed === 5 || completed === 10 || completed === 15) {
+                setCheckpoint(completed as CheckpointCount);
+                trackEvent("quiz_checkpoint_revealed", { questionsCompleted: completed });
                 return;
               }
               persist({ ...progress, quizIndex: progress.quizIndex + 1 });
