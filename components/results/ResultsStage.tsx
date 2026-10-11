@@ -129,7 +129,7 @@ export function ResultsStage({
     <>
       <ResultAtmosphere championId={champion.id} scene={activeScene} />
       <div
-        className="relative z-10 mx-auto w-full max-w-[var(--sor-visual-max)] px-4 py-6 pb-[max(8rem,env(safe-area-inset-bottom))] sm:pb-24"
+        className="relative z-10 mx-auto w-full max-w-[var(--sor-visual-max)] px-3 pt-3 pb-[calc(6rem+env(safe-area-inset-bottom))] sm:pb-24"
         style={{ color: theme.palette.text }}
       >
         <SceneSection scene="reveal" ref={revealRef}>
@@ -147,10 +147,10 @@ export function ResultsStage({
           />
         </SceneSection>
 
-        <div className="mx-auto max-w-[var(--sor-read-max)] space-y-14 sm:space-y-20">
-          <SceneSection scene="connection" ref={connectionRef} className="relative rounded-2xl px-3 py-10 sm:px-10 sm:py-14" >
+        <div className="mx-auto max-w-[var(--sor-read-max)] space-y-10 sm:space-y-20">
+          <SceneSection scene="connection" ref={connectionRef} className="relative rounded-2xl px-3 py-7 sm:px-10 sm:py-14" >
             <p className="text-center text-[11px] uppercase tracking-[0.32em]" style={{ color: theme.palette.accent }}>I · THE CONNECTION</p>
-            <p className="type-body-narrative mx-auto mt-7 max-w-[44rem] text-center font-serif text-[1.2rem] leading-[1.85] sm:text-[1.5rem]">
+            <p className="type-body-narrative mx-auto mt-5 max-w-[44rem] text-center font-serif text-[1.2rem] leading-[1.85] sm:text-[1.5rem]">
               {narrative.sharedSoul}
             </p>
             <p className="mt-7 text-center text-xs text-white/45">{en.results.compatibilityNote}</p>
@@ -159,7 +159,7 @@ export function ResultsStage({
           {narrative.parallels.length > 0 && (
             <SceneSection scene="fragments" ref={fragmentsRef} className="relative px-2 py-8 sm:px-6">
               <p className="text-center text-[11px] uppercase tracking-[0.32em]" style={{ color: theme.palette.accent }}>II · ECHOES OF A LEGEND</p>
-              <div className="mt-10 space-y-14 sm:space-y-16">
+              <div className="mt-7 space-y-10 sm:space-y-16">
                 {narrative.parallels.map((p, i) => (
                   <LoreFragment
                     key={i}
@@ -175,7 +175,7 @@ export function ResultsStage({
           )}
 
           <SceneSection scene="inner" ref={innerRef}>
-            <p className="mb-10 text-center text-[11px] uppercase tracking-[0.32em]" style={{ color: theme.palette.accent }}>III · THE INNER TRUTH</p>
+            <p className="mb-7 text-center text-[11px] uppercase tracking-[0.32em]" style={{ color: theme.palette.accent }}>III · THE INNER TRUTH</p>
             <InnerTruth
               strength={narrative.greatestStrength}
               shadow={narrative.shadowWithin}
@@ -189,7 +189,7 @@ export function ResultsStage({
 
           <SceneSection scene="legacy" ref={legacyRef}>
             <AlternativeMatches match={match} />
-            <div className="mt-20 border-t border-white/[0.08] pt-14 text-center">
+            <div className="mt-12 border-t border-white/[0.08] pt-9 text-center">
               <h4 className="font-serif text-xl text-[var(--sor-ivory)]/92 sm:text-2xl">
                 Your legend, preserved.
               </h4>
@@ -211,7 +211,7 @@ export function ResultsStage({
               </button>
             </div>
 
-            <footer className="mt-20 text-center">
+            <footer className="mt-12 text-center">
               <p className="font-serif text-white/70">{en.results.kofiTitle}</p>
               <p className="mt-2 text-sm text-white/45">{en.results.kofiBody}</p>
               {siteConfig.kofiUrl ? (
