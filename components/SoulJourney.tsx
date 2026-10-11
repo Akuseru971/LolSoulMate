@@ -51,7 +51,6 @@ export function SoulJourney() {
   const [match, setMatch] = useState<MatchResult | null>(null);
   const [narrative, setNarrative] = useState<NarrativeResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [checkpoint, setCheckpoint] = useState<CheckpointCount | null>(null);
   const analysisLock = useRef(false);
   const hydrated = useRef(false);
 
@@ -170,7 +169,6 @@ export function SoulJourney() {
     setMatch(null);
     setNarrative(null);
     setError(null);
-    setCheckpoint(null);
     setBootState("ready");
     trackEvent("restart");
   }
@@ -238,19 +236,18 @@ export function SoulJourney() {
           />
         )}
 
-        {progress.stage === "quiz" && checkpoint !== null && (
+        {progress.stage === "quiz" && progress.pendingCheckpoint !== undefined && (
           <CheckpointReveal
-            count={checkpoint}
+            count={progress.pendingCheckpoint!}
             answers={progress.answers}
             zodiac={progress.zodiac}
             onContinue={() => {
-              persist({ ...progress, quizIndex: checkpoint });
-              setCheckpoint(null);
+              persist({ ...progress, quizIndex: progress.pendingCheckpoint!, pendingCheckpoint: undefined });
             }}
           />
         )}
 
-        {progress.stage === "quiz" && checkpoint === null && (
+        {progress.stage === "quiz" && progress.pendingCheckpoint === undefined && (
           <QuizStage
             index={progress.quizIndex}
             answers={progress.answers}
@@ -266,7 +263,7 @@ export function SoulJourney() {
                 persist({ ...progress, stage: "personal" });
                 return;
               }
-              persist({ ...progress, quizIndex: progress.quizIndex - 1 });
+              persist({ ...progress, quizIndex: progress.quizIndex - 1, pendingCheckpoint: undefined });
             }}
             onNext={() => {
               const q = QUESTIONS[progress.quizIndex];
@@ -281,7 +278,7 @@ export function SoulJourney() {
               }
               const completed = progress.quizIndex + 1;
               if (completed === 5 || completed === 10 || completed === 15) {
-                setCheckpoint(completed as CheckpointCount);
+                persist({ ...progress, pendingCheckpoint: completed as CheckpointCount });
                 trackEvent("quiz_checkpoint_revealed", { questionsCompleted: completed });
                 return;
               }
