@@ -82,7 +82,7 @@ export function ChampionReveal({
   const showHero = show(PHASE_AWAKEN) || done;
 
   return (
-    <header className="relative mb-4 w-full pb-6 sm:mb-8">
+    <header className="relative mb-6 w-full overflow-hidden pb-8 sm:mb-12">
       {!done && (
         <button
           type="button"
@@ -128,14 +128,23 @@ export function ChampionReveal({
               initial={false}
               animate={{ opacity: show(PHASE_AWAKEN) ? 1 : 0 }}
               transition={{ duration: done ? 0 : 1.05, ease: "easeOut" }}
-              className="relative w-full max-w-[1100px]"
+              className="relative w-full max-w-[1100px] overflow-visible"
             >
+              {!reduce && (
+                <motion.div
+                  aria-hidden
+                  className="pointer-events-none absolute -inset-8 rounded-full"
+                  style={{ background: `radial-gradient(ellipse at center, ${theme.palette.glow}, transparent 68%)` }}
+                  animate={{ opacity: [0.25, 0.65, 0.25], scale: [0.96, 1.08, 0.96] }}
+                  transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+                />
+              )}
               <ChampionArtwork
                 src={champion.imageUrl}
                 mode="full"
                 frame={frame}
                 alt={champion.name}
-                className="w-full rounded-lg shadow-[0_40px_120px_rgba(0,0,0,0.55)] ring-1 ring-white/10"
+                className="w-full rounded-sm shadow-[0_40px_120px_rgba(0,0,0,0.55)] ring-1 ring-white/10"
               />
               <div
                 className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-[var(--sor-bg-primary,#050608)] via-[var(--sor-bg-primary,#050608)]/60 to-transparent lg:hidden"
@@ -144,7 +153,7 @@ export function ChampionReveal({
             </motion.div>
 
             <div
-              className="relative z-10 mx-auto -mt-3 w-full max-w-3xl px-4 pb-4 pt-7 text-center sm:-mt-6 sm:px-8 sm:pt-10"
+              className="relative z-10 mx-auto -mt-3 w-full max-w-3xl px-4 pb-6 pt-8 text-center sm:-mt-6 sm:px-8 sm:pt-12"
             >
               {show(PHASE_NAME) && (
                 <>
