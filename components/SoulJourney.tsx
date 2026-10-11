@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { LandingStage } from "@/components/stages/LandingStage";
 import {
   PersonalStage,
@@ -41,6 +41,7 @@ const emptyForm: PersonalFormState = {
 type BootState = "hydrating" | "ready" | "recovery";
 
 export function SoulJourney() {
+  const reduceMotion = useReducedMotion();
   const [bootState, setBootState] = useState<BootState>("hydrating");
   const [recoveryReason, setRecoveryReason] = useState<
     "corrupt" | "incompatible" | "incomplete"
@@ -202,10 +203,10 @@ export function SoulJourney() {
       <AnimatePresence mode="wait">
       <motion.div
         key={progress.stage}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}
+        transition={{ duration: reduceMotion ? 0 : 0.22 }}
       >
         {progress.stage === "landing" && (
           <LandingStage
