@@ -29,16 +29,16 @@ export function PersonalStage({
     month && day ? zodiacFromDate(month, day) : null;
 
   return (
-    <section className="mx-auto w-full max-w-xl px-4 py-10">
+    <section className="mx-auto w-full max-w-[560px] px-5 pb-[calc(32px+env(safe-area-inset-bottom))] pt-8">
       <p className="type-chapter">Before the questions</p>
       <h2 className="mt-3 font-serif text-3xl text-[var(--sor-ivory)]">{en.personal.title}</h2>
       <p className="mt-3 text-sm text-white/65">{en.personal.zodiacNote}</p>
 
-      <GlassPanel className="mt-8 space-y-6 p-6 sm:p-8">
+      <GlassPanel className="mt-6 space-y-5 p-5 sm:p-8">
         <label className="block text-sm text-white/70">
           Preferred name (optional)
           <input
-            className="mt-2 w-full rounded-lg border border-white/15 bg-black/30 px-3 py-3 text-white outline-none transition focus:border-[var(--sor-gold)]/50 focus:ring-2 focus:ring-[var(--sor-focus-ring)]/30"
+            className="mt-2 w-full rounded-lg border border-white/15 bg-black/30 px-4 py-3.5 text-base text-white outline-none transition focus:border-[var(--sor-gold)]/50 focus:ring-2 focus:ring-[var(--sor-focus-ring)]/30"
             value={form.nickname}
             onChange={(e) => onChange({ ...form, nickname: e.target.value })}
             maxLength={40}
@@ -54,7 +54,7 @@ export function PersonalStage({
               min={1}
               max={12}
               placeholder="MM"
-              className="mt-2 w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2.5 text-white outline-none focus:border-amber-400/50"
+              className="mt-2 w-full rounded-lg border border-white/15 bg-black/30 px-3 py-3 text-base text-white outline-none focus:border-amber-400/50"
               value={form.birthMonth}
               onChange={(e) => onChange({ ...form, birthMonth: e.target.value })}
             />
@@ -116,14 +116,14 @@ export function PersonalStage({
         <button
           type="button"
           onClick={onContinue}
-          className="flex-1 rounded-full border border-amber-500/40 bg-amber-500/15 py-3.5 text-sm font-medium text-amber-100 transition hover:bg-amber-500/25"
+          className="flex-1 min-h-[56px] rounded-2xl border border-amber-500/40 bg-amber-500/15 py-3.5 text-sm font-medium text-amber-100 transition hover:bg-amber-500/25"
         >
           Continue
         </button>
         <button
           type="button"
           onClick={onSkip}
-          className="rounded-full border border-white/20 px-6 py-3.5 text-sm text-white/75"
+          className="min-h-[48px] rounded-2xl border border-white/20 px-6 py-3.5 text-sm text-white/75"
         >
           Skip optional fields
         </button>
