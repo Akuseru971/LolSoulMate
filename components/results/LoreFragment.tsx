@@ -41,14 +41,14 @@ export function LoreFragment({
       >
         Fragment {marker}
       </p>
-      <h4 className="mt-2 font-serif text-xl leading-snug text-[var(--sor-ivory)] sm:text-[1.35rem]">
+      <h4 className="mt-3 font-serif text-[1.35rem] leading-snug text-[var(--sor-ivory)] sm:text-[1.55rem]">
         {epigraph}
       </h4>
-      <p className="type-body-narrative mt-5 text-[1.02rem]">{userChoiceSummary}</p>
-      <p className="mt-6 font-serif text-[1.05rem] italic leading-relaxed text-white/52">
+      <p className="mt-5 text-sm leading-relaxed text-[var(--sor-ivory)]/65">{userChoiceSummary}</p>
+      <p className="mt-6 font-serif text-[1.05rem] italic leading-relaxed text-white/65">
         {canonicalBeat}
       </p>
-      <p className="type-body-narrative mt-5 border-l border-white/10 pl-4 text-[1.02rem] leading-[1.82]">
+      <p className="type-body-narrative mt-6 text-[1.06rem] leading-[1.85]">
         {resonance}
       </p>
     </article>
