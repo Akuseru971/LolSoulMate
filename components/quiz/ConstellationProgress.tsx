@@ -27,7 +27,7 @@ export function ConstellationProgress({
     const segments: { x1: number; y1: number; x2: number; y2: number; lit: boolean }[] = [];
     for (let i = 0; i < STAR_POINTS.length - 1; i++) {
       const qId = QUESTIONS[i].id;
-      const lit = Boolean(answers[qId]);
+      const lit = Boolean(answers[qId] && answers[QUESTIONS[i + 1].id]);
       if (!lit) continue;
       const a = STAR_POINTS[i];
       const b = STAR_POINTS[i + 1];
@@ -39,7 +39,7 @@ export function ConstellationProgress({
   const answeredCount = QUESTIONS.filter((q) => answers[q.id]).length;
 
   return (
-    <div className="mb-6" role="group" aria-label="Questionnaire progress">
+    <div className="mx-auto mb-8 w-full max-w-[720px]" role="group" aria-label="Questionnaire progress">
       <div className="mb-2 flex items-end justify-between gap-2">
         <div>
           <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--sor-mist)]/90">
@@ -56,7 +56,7 @@ export function ConstellationProgress({
 
       <svg
         viewBox="0 0 320 56"
-        className="h-14 w-full max-w-md"
+        className="mx-auto block h-auto max-h-24 w-full max-w-[680px] overflow-visible"
         aria-hidden={false}
         role="img"
         aria-label={`${answeredCount} of ${QUESTIONS.length} questions answered. Currently on question ${currentIndex + 1}.`}
@@ -113,7 +113,7 @@ export function ConstellationComplete({ className = "" }: { className?: string }
   return (
     <svg
       viewBox="0 0 320 56"
-      className={`h-16 w-full max-w-sm ${className}`}
+      className={`mx-auto block h-20 w-full max-w-xl ${className}`}
       aria-hidden
     >
       {segments.map((seg, idx) => (
