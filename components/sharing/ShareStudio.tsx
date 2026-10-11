@@ -128,7 +128,7 @@ export function ShareStudio({
   };
 
   const { width, height } = getShareFormat(format);
-  const previewScale = Math.min(1, 320 / width, 560 / height);
+  const previewScale = Math.min(1, 240 / width, 425 / height);
   const cropEnabled = artworkMode === "artisticCrop";
 
   const buildUrl = useCallback((): string | null => {
@@ -307,7 +307,7 @@ export function ShareStudio({
         role="dialog"
         aria-modal="true"
         aria-labelledby={labelId}
-        className="flex max-h-[96dvh] w-full max-w-lg flex-col overflow-hidden rounded-t-2xl border border-white/10 bg-[#0a0e14] pb-[env(safe-area-inset-bottom)] sm:max-w-6xl sm:rounded-2xl lg:flex-row lg:max-h-[92dvh]"
+        className="flex max-h-[100dvh] w-full max-w-lg flex-col overflow-hidden rounded-t-2xl border border-white/10 bg-[#0a0e14] pb-[env(safe-area-inset-bottom)] sm:max-w-6xl sm:rounded-2xl lg:flex-row lg:max-h-[92dvh]"
       >
         <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 lg:absolute lg:left-0 lg:right-0 lg:top-0 lg:z-10 lg:bg-[#0a0e14]/95">
           <h2 id={labelId} className="font-serif text-lg text-amber-100">
@@ -324,7 +324,7 @@ export function ShareStudio({
           </button>
         </div>
 
-        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-4 py-4 lg:flex-row lg:gap-6 lg:px-6 lg:pb-6 lg:pt-16">
+        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-4 py-3 lg:flex-row lg:gap-6 lg:px-6 lg:pb-6 lg:pt-16">
           <div className="lg:min-w-0 lg:flex-1">
             <div
               className={`relative mx-auto overflow-hidden rounded-lg border border-white/10 bg-black/50 py-3 ${cropEnabled ? "touch-none" : ""}`}
@@ -402,7 +402,7 @@ export function ShareStudio({
             </label>
             {showNickname && (
               <input
-                className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-white"
+                className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-3 text-base text-white"
                 value={displayNickname}
                 maxLength={40}
                 onChange={(e) => setDisplayNickname(e.target.value)}
@@ -459,7 +459,7 @@ export function ShareStudio({
             </p>
           )}
 
-          <div className="mt-6 flex flex-col gap-2 pb-2">
+          <div className="sticky bottom-0 z-10 mt-6 flex flex-col gap-2 border-t border-white/10 bg-[#0a0e14]/95 pb-[calc(12px+env(safe-area-inset-bottom))] pt-3 backdrop-blur-xl">
             <button
               type="button"
               disabled={busy}
