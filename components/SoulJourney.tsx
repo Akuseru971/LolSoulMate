@@ -201,6 +201,7 @@ export function SoulJourney() {
       <AnimatePresence mode="wait">
       <motion.div
         key={progress.stage}
+        data-journey-stage={progress.stage}
         initial={reduceMotion ? false : { opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}
