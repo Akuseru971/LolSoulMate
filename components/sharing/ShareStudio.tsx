@@ -446,7 +446,6 @@ export function ShareStudio({
           )}
 
           <p className="mt-5 text-center text-xs uppercase tracking-widest text-amber-100/70">Your Story · 1080 × 1920</p>
-          </div>
 
           {error && (
             <p className="mt-4 text-sm text-amber-200/90" role="alert">
