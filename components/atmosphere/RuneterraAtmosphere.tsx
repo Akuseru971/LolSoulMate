@@ -38,7 +38,7 @@ function ActLayer({
           }}
         />
         {!reduce &&
-          Array.from({ length: 8 }).map((_, i) => (
+          Array.from({ length: 5 }).map((_, i) => (
             <motion.span
               key={i}
               className="absolute h-2 w-1.5 rounded-full bg-teal-200/25"
@@ -80,7 +80,7 @@ function ActLayer({
           style={{ clipPath: "polygon(0 100%, 15% 20%, 85% 10%, 100% 100%)" }}
         />
         {!reduce &&
-          Array.from({ length: 10 }).map((_, i) => (
+          Array.from({ length: 6 }).map((_, i) => (
             <motion.span
               key={i}
               className="absolute h-1 w-1 rounded-full bg-orange-400/35"
@@ -125,7 +125,7 @@ function ActLayer({
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_15%,rgba(120,90,200,0.22),transparent_55%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(230,221,206,0.06),transparent_35%)]" />
       {!reduce &&
-        Array.from({ length: 28 }).map((_, i) => (
+        Array.from({ length: 12 }).map((_, i) => (
           <motion.span
             key={i}
             className="absolute rounded-full bg-white"
