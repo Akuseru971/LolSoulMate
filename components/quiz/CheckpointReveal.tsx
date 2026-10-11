@@ -28,6 +28,31 @@ const REGION_SCENES: Record<string, { sky: string; glow: string; terrain: string
   "bandle-city": { sky:"#253c50",glow:"#c9c1ff",terrain:"#385852",motif:"jungle" },
   runeterra: { sky:"#192b3d",glow:"#aac9d7",terrain:"#293c4b",motif:"mountain" },
 };
+const REGION_ART: Record<string, string> = {
+  ionia: "https://cmsassets.rgpub.io/sanity/images/dsfx7636/universe_live/5b2f763df14096727e8b38405392126034ab9899-1920x888.jpg",
+  noxus: "https://media.esports.gg/uploads/2024/07/noxus_splash-1568x882.jpg",
+  demacia: "https://vignette.wikia.nocookie.net/leagueoflegends/images/e/e8/Demacia_Hall_Of_Valor.jpg/revision/latest?cb=20190415152320",
+  freljord: "https://pbs.twimg.com/media/FPL_9AXXwAEjyAH.jpg",
+  shurima: "https://cdn.wallpapersafari.com/39/2/oSq7XC.png",
+  "shadow-isles": "https://i.pinimg.com/originals/24/de/49/24de4981e702f5c953d8db7617aa0740.jpg",
+  targon: "https://cmsassets.rgpub.io/sanity/images/dsfx7636/universe/df7b47a1c0aee886ffc9fcf263e0b7c810f9fac8-1920x1067.jpg",
+  bilgewater: "https://cdn.exp.gg/2018/05/bilgewater.jpg",
+  piltover: "https://uploads.worldanvil.com/uploads/images/392df19351e2411cf9155da6eeebfe39.jpg",
+  zaun: "https://prod.assets.earlygamecdn.com/images/Zaun-underground.jpeg",
+  ixtal: "https://vignette.wikia.nocookie.net/leagueoflegends/images/d/db/Ixtal_An_Unexplored_Frontier.jpg/revision/latest?cb=20190610205709",
+  "bandle-city": "https://wa-cdn.nyc3.cdn.digitaloceanspaces.com/user-data/production/3d60da4a-6429-4f3c-b833-a6f5db4a3916/uploads/images/bb5be4ce47c8ce5db3b9ac2222bfef79.jpeg",
+  void: "https://cmsassets.rgpub.io/sanity/images/dsfx7636/universe_live/0201dc831ca0c28855514831cbe1cc5f825f20f8-1920x839.jpg",
+};
+function RegionArtwork({ region }: {region:string}) {
+  const key = region.toLowerCase().replace(/^the\\s+/,"").replace(/[^a-z0-9]+/g,"-").replace(/-$/,"");
+  const src = REGION_ART[key] ?? REGION_ART.ionia;
+  return <div className="relative aspect-video w-full overflow-hidden">
+    <div className="absolute inset-0"><RegionLandscape region={region}/></div>
+    {/* Original regional environment artwork; the illustrated backdrop remains if loading fails. */}
+    <img src={src} alt={`Landscape of ${region}`} loading="eager" referrerPolicy="no-referrer"
+      className="absolute inset-0 h-full w-full object-cover" onError={e => { e.currentTarget.style.display = "none"; }} />
+  </div>;
+}
 function RegionLandscape({ region }: {region:string}) {
   const key = region.toLowerCase().replace(/^the\s+/,"").replace(/[^a-z0-9]+/g,"-").replace(/-$/,"");
   const scene = REGION_SCENES[key] ?? REGION_SCENES.runeterra;
@@ -120,7 +145,7 @@ export function CheckpointReveal({ count, answers, zodiac, onContinue }: {
       >
         <div className="pointer-events-none absolute -inset-5 rounded-full bg-amber-200/[0.08] blur-3xl" aria-hidden />
         <div className="relative overflow-hidden rounded-md border border-amber-200/20 bg-[#080b12] shadow-[0_24px_90px_rgba(0,0,0,0.65)]">
-          {count === 5 ? <RegionLandscape region={label} /> : <ChampionArtwork
+          {count === 5 ? <RegionArtwork region={label} /> : <ChampionArtwork
             src={previewChampion.imageUrl}
             mode="full"
             frame={getVisualFrame(previewChampion.id, "revealDesktop")}
