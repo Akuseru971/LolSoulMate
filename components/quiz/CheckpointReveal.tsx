@@ -102,11 +102,11 @@ export function CheckpointReveal({ count, answers, zodiac, onContinue }: {
       : "Every legend looks different depending on who tells the story. Your final identity lies ahead.";
   const Icon = count === 5 ? Compass : count === 10 ? Swords : Scale;
   return (
-    <section className="relative mx-auto flex min-h-[calc(100dvh-7rem)] w-full max-w-3xl flex-col items-center justify-center px-5 py-16 text-center">
+    <section className="relative mx-auto flex min-h-[100svh] w-full max-w-[560px] flex-col items-center justify-center px-5 pb-[calc(36px+env(safe-area-inset-bottom))] pt-10 text-center">
       <motion.div initial={reduce ? false : {opacity:0, scale:0.8, rotate:-15}} animate={{opacity:1, scale:1, rotate:0}} transition={{duration:1.1, ease:[0.19,1,0.22,1]}}
-        className="relative mb-10 flex h-28 w-28 items-center justify-center rounded-full border border-amber-200/25 bg-amber-300/[0.045]">
+        className="relative mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-amber-200/25 bg-amber-300/[0.045]">
         <div className="absolute inset-3 rounded-full border border-amber-200/15" />
-        <Icon className="h-10 w-10 text-amber-200/85" strokeWidth={1.1} />
+        <Icon className="h-8 w-8 text-amber-200/85" strokeWidth={1.1} />
         {!reduce && <motion.div aria-hidden className="pointer-events-none absolute -inset-8 rounded-full border border-amber-200/10"
           animate={{rotate:360, opacity:[0.2,0.7,0.2]}} transition={{rotate:{duration:45,repeat:Infinity,ease:"linear"},opacity:{duration:5,repeat:Infinity}}}/>}
       </motion.div>
@@ -116,7 +116,7 @@ export function CheckpointReveal({ count, answers, zodiac, onContinue }: {
         initial={reduce ? false : { opacity: 0, y: 24, scale: 1.025, filter: "blur(12px)" }}
         animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         transition={{ delay: reduce ? 0 : 0.4, duration: 1.45, ease: [0.19, 1, 0.22, 1] }}
-        className="relative mt-9 w-full max-w-2xl"
+        className="relative mt-6 w-full max-w-2xl"
       >
         <div className="pointer-events-none absolute -inset-5 rounded-full bg-amber-200/[0.08] blur-3xl" aria-hidden />
         <div className="relative overflow-hidden rounded-md border border-amber-200/20 bg-[#080b12] shadow-[0_24px_90px_rgba(0,0,0,0.65)]">
@@ -127,16 +127,16 @@ export function CheckpointReveal({ count, answers, zodiac, onContinue }: {
         <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-white/35">{count === 5 ? "A glimpse of your homeland" : count === 10 ? "The sigil of your calling" : "The sigil of your legend"}</p>
       </motion.div>
       <motion.p initial={reduce ? false : {opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{delay:0.42,duration:0.85}}
-        className="mt-7 text-xs uppercase tracking-[0.27em] text-white/60">{typeLabel}</motion.p>
+        className="mt-5 text-xs uppercase tracking-[0.27em] text-white/60">{typeLabel}</motion.p>
       <motion.h2 initial={reduce ? false : {opacity:0,y:26,filter:"blur(9px)"}} animate={{opacity:1,y:0,filter:"blur(0px)"}}
         transition={{delay:0.65,duration:1.25,ease:[0.19,1,0.22,1]}}
-        className="mt-5 font-serif text-[clamp(3rem,9vw,6rem)] leading-[1.06] text-[#F2E6D4]">{label}</motion.h2>
+        className="mt-3 font-serif text-[clamp(2.7rem,9vw,5rem)] leading-[1.06] text-[#F2E6D4]">{label}</motion.h2>
       <motion.p initial={reduce ? false : {opacity:0,y:12}} animate={{opacity:1,y:0}} transition={{delay:0.95,duration:0.8}}
-        className="mx-auto mt-8 max-w-lg text-base leading-[1.85] text-white/70">{description}</motion.p>
+        className="mx-auto mt-5 max-w-lg text-base leading-[1.85] text-white/70">{description}</motion.p>
       <p className="mt-4 text-xs italic text-white/40">Your path is taking shape. Each revelation will remain part of your final legend.</p>
       <motion.button initial={reduce ? false : {opacity:0}} animate={{opacity:1}} transition={{delay:1.2,duration:0.7}}
         type="button" onClick={onContinue}
-        className="mt-12 inline-flex min-h-12 items-center gap-3 rounded-full border border-amber-200/40 bg-amber-200/10 px-8 py-3 font-serif text-lg text-amber-100 transition hover:border-amber-200/80 hover:bg-amber-200/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-200">
+        className="mt-7 inline-flex min-h-[56px] w-full justify-center sm:w-auto items-center gap-3 rounded-full border border-amber-200/40 bg-amber-200/10 px-8 py-3 font-serif text-lg text-amber-100 transition hover:border-amber-200/80 hover:bg-amber-200/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-200">
         Continue the ritual <ArrowRight className="h-5 w-5" />
       </motion.button>
     </section>
