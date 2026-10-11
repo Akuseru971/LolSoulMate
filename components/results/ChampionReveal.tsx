@@ -123,25 +123,19 @@ export function ChampionReveal({
             aria-hidden
           />
 
-          <div
-            className={
-              isDesktop
-                ? "relative grid items-end gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.75fr)] lg:gap-10"
-                : "relative flex flex-col"
-            }
-          >
+          <div className="relative flex flex-col items-center">
             <motion.div
               initial={false}
               animate={{ opacity: show(PHASE_AWAKEN) ? 1 : 0 }}
               transition={{ duration: done ? 0 : 1.05, ease: "easeOut" }}
-              className="relative w-full"
+              className="relative w-full max-w-[1100px]"
             >
               <ChampionArtwork
                 src={champion.imageUrl}
                 mode="full"
                 frame={frame}
                 alt={champion.name}
-                className="w-full shadow-[0_40px_120px_rgba(0,0,0,0.55)] ring-1 ring-white/10"
+                className="w-full rounded-lg shadow-[0_40px_120px_rgba(0,0,0,0.55)] ring-1 ring-white/10"
               />
               <div
                 className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-[var(--sor-bg-primary,#050608)] via-[var(--sor-bg-primary,#050608)]/60 to-transparent lg:hidden"
@@ -150,7 +144,7 @@ export function ChampionReveal({
             </motion.div>
 
             <div
-              className={`relative z-10 px-1 ${isDesktop ? "pb-6 lg:px-0" : "-mt-2 px-2 pb-2 sm:mt-4"}`}
+              className="relative z-10 mx-auto -mt-3 w-full max-w-3xl px-4 pb-4 pt-7 text-center sm:-mt-6 sm:px-8 sm:pt-10"
             >
               {show(PHASE_NAME) && (
                 <>
@@ -166,7 +160,7 @@ export function ChampionReveal({
                     initial={done ? false : { opacity: 0, y: 14 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.55 }}
-                    className="type-cinematic-title mt-3 text-[2.5rem] leading-[0.95] sm:text-6xl"
+                    className="type-cinematic-title mt-4 text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.05]"
                     style={{ color: theme.palette.text }}
                   >
                     {champion.name}
@@ -193,7 +187,7 @@ export function ChampionReveal({
                   <motion.p
                     initial={done ? false : { opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="mt-6 font-serif text-lg leading-relaxed sm:text-xl"
+                    className="mx-auto mt-7 max-w-2xl font-serif text-xl leading-relaxed sm:text-2xl"
                     style={{ color: theme.palette.text }}
                   >
                     {oneLiner}
@@ -211,12 +205,12 @@ export function ChampionReveal({
                   <motion.div
                     initial={done ? false : { opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+                    className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-10"
                   >
                     <button
                       type="button"
                       onClick={onReadStory}
-                      className="min-h-[44px] border-b pb-1 text-left font-serif transition"
+                      className="min-h-[44px] border-b pb-1 text-center font-serif transition"
                       style={{
                         borderColor: `${theme.palette.accent}66`,
                         color: theme.palette.text,
