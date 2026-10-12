@@ -21,7 +21,7 @@ import {
 import { resolveImageSrcForExport } from "@/lib/sharing/resolveImageSrc";
 import { getVisualFrame } from "@/data/champions/visualProfiles";
 import { shareContextForFormat } from "@/lib/champions/visualTypes";
-import type { ArtworkDisplayMode, UserArtTransform } from "@/lib/champions/visualTypes";
+import type { UserArtTransform } from "@/lib/champions/visualTypes";
 import { DEFAULT_USER_TRANSFORM } from "@/lib/champions/visualTypes";
 import { sanitizeNickname } from "@/lib/champions/nickname";
 
@@ -65,7 +65,7 @@ export function ShareStudio({
 
   const template: ShareTemplateId = "cinematic";
   const format: ShareFormatId = "story";
-  const [artworkMode, setArtworkMode] = useState<ArtworkDisplayMode>("full");
+  const artworkMode = "artisticCrop" as const;
   const [imageSrc, setImageSrc] = useState(data.imageUrl);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -129,7 +129,7 @@ export function ShareStudio({
 
   const { width, height } = getShareFormat(format);
   const previewScale = Math.min(1, 240 / width, 425 / height);
-  const cropEnabled = artworkMode === "artisticCrop";
+  const cropEnabled = true;
 
   const buildUrl = useCallback((): string | null => {
     try {
@@ -359,37 +359,6 @@ export function ShareStudio({
           </div>
 
           <div className="mt-4 min-w-0 lg:mt-0 lg:w-[min(100%,22rem)] lg:shrink-0 lg:overflow-y-auto">
-          <div className="space-y-2">
-            <p className="text-xs uppercase tracking-widest text-white/40">Artwork</p>
-            <div className="flex flex-wrap gap-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setArtworkMode("full");
-                  resetTransform();
-                }}
-                className={`min-h-[44px] rounded-full px-4 py-2 text-sm ${
-                  artworkMode === "full"
-                    ? "bg-amber-500/20 text-amber-100 ring-1 ring-amber-500/40"
-                    : "border border-white/15 text-white/70"
-                }`}
-              >
-                Full artwork
-              </button>
-              <button
-                type="button"
-                onClick={() => setArtworkMode("artisticCrop")}
-                className={`min-h-[44px] rounded-full px-4 py-2 text-sm ${
-                  artworkMode === "artisticCrop"
-                    ? "bg-amber-500/20 text-amber-100 ring-1 ring-amber-500/40"
-                    : "border border-white/15 text-white/70"
-                }`}
-              >
-                Artistic crop
-              </button>
-            </div>
-          </div>
-
           <div className="mt-4 space-y-2">
             <label className="flex items-center gap-2 text-sm text-white/70">
               <input
