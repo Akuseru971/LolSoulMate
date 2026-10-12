@@ -56,7 +56,7 @@ export function ResultCardPreview({
               region={data.region}
               imageSrc={data.imageUrl}
               artFrame={artFrame}
-              artworkMode="full"
+              artworkMode="artisticCrop"
               compatibility={data.compatibility}
               traits={data.traits}
               quote={data.quote}
